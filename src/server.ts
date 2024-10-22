@@ -1,6 +1,6 @@
 import app from "./app";
 import indexRouter from "./route/index";
-import signupRouter from "./route/signup"
+import signupRouter from "./route/signup";
 
 const port: number = 3000;
 
