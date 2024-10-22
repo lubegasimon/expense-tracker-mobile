@@ -1,5 +1,5 @@
 import app from "./app";
-import indexRouter from "./index";
+import indexRouter from "./route/index";
 
 const port: number = 3000;
 

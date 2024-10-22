@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "noImplicitAny": true,
+    "outDir": "output",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}
