@@ -1,4 +1,5 @@
-const express = require('express')
+import * as express from 'express'
+
 const app = express()
 
-module.exports =  app
+export default app

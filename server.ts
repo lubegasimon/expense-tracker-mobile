@@ -1,11 +1,10 @@
+import app from "./app";
+import indexRouter from "./index";
 
-const port: number = 3000
-const app_instance = require('./app')
+const port: number = 3000;
 
-app_instance.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use("/", indexRouter);
 
-app_instance.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
