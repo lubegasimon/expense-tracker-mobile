@@ -1,21 +1,12 @@
-import { Text, View, TextInput, StyleSheet } from "react-native";
-import { useState } from "react";
+import { Text, View, StyleSheet } from "react-native";
 
-import inputStyle from "./styles";
+import UsernameField from "./UsernameField";
 
-export default function SignupForm() {
-  const [username, setUsername] = useState("");
-
+function SignupForm() {
   return (
     <View style={styles.view}>
       <Text> Create account </Text>
-      <TextInput
-        style={inputStyle.input}
-        onChangeText={setUsername}
-        value={username}
-        placeholder="Enter Your Username"
-        placeholderTextColor="gray"
-      />
+      <UsernameField />
     </View>
   );
 }
@@ -33,3 +24,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default SignupForm;
