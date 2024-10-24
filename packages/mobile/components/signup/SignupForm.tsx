@@ -4,6 +4,7 @@ import UsernameField from "./UsernameField";
 import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
 import ConfirmPasswordField from "./ConfirmPasswordField";
+import SignupButton from "./SignupButton";
 
 function SignupForm() {
   return (
@@ -13,6 +14,7 @@ function SignupForm() {
       <EmailField />
       <PasswordField />
       <ConfirmPasswordField />
+      <SignupButton />
     </View>
   );
 }
