@@ -6,6 +6,7 @@ export default function SignupForm() {
 
   return (
     <View style={styles.view}>
+      <Text> Create account </Text>
       <TextInput
         style={styles.input}
         onChangeText={setUsername}
