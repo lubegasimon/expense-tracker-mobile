@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 import UsernameField from "./UsernameField";
 import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
+import ConfirmPasswordField from "./ConfirmPasswordField";
 
 function SignupForm() {
   return (
@@ -11,6 +12,7 @@ function SignupForm() {
       <UsernameField />
       <EmailField />
       <PasswordField />
+      <ConfirmPasswordField />
     </View>
   );
 }
