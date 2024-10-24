@@ -2,6 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 
 import UsernameField from "./UsernameField";
 import EmailField from "./EmailField";
+import PasswordField from "./PasswordField";
 
 function SignupForm() {
   return (
@@ -9,6 +10,7 @@ function SignupForm() {
       <Text> Create account </Text>
       <UsernameField />
       <EmailField />
+      <PasswordField />
     </View>
   );
 }
