@@ -2,7 +2,7 @@ import React from "react";
 import { Button, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default function SignupButton() {
+export default function CreateAccount() {
   const navigation = useNavigation();
   return (
     <View>

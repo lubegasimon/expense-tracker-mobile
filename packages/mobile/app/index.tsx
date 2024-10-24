@@ -1,14 +1,14 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 
-import SignupButton from "@/components/SignupButton";
+import CreateAccountButton from "@/components/CreateAccButton";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.appName}>Welcome to Expense tracker</Text>
       <Link href="/signup">
-        <SignupButton />
+        <CreateAccountButton />
       </Link>
     </View>
   );
