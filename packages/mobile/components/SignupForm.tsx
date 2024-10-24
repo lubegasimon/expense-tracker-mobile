@@ -2,7 +2,7 @@ import { Text, View, TextInput, StyleSheet } from "react-native";
 import { useState } from "react";
 
 export default function SignupForm() {
-  const [username, setUsername] = useState("Username");
+  const [username, setUsername] = useState("");
 
   return (
     <View style={styles.view}>
@@ -11,6 +11,7 @@ export default function SignupForm() {
         onChangeText={setUsername}
         value={username}
         placeholder="Enter Your Username"
+        placeholderTextColor="gray"
       />
     </View>
   );
