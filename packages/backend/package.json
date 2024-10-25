@@ -12,11 +12,17 @@
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/express-session": "^1.18.0",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.7.7",
     "express": "^4.21.1",
     "morgan": "^1.10.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "connect-redis": "^7.1.1",
+    "express-session": "^1.18.1",
+    "redis": "^4.7.0"
   }
 }
