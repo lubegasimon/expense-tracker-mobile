@@ -1,12 +1,5 @@
-import app from "./app";
-import indexRouter from "./route/index";
-import signupRouter from "./route/signup";
+import express from "express";
 
-const port: number = 3000;
+const app = express();
 
-app.use("/", indexRouter);
-app.use("/signup", signupRouter);
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+export default app;
