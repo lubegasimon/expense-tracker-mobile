@@ -1,4 +1,3 @@
-import morgan from "morgan";
 import session from "express-session";
 
 import app from "./server";
@@ -9,7 +8,6 @@ import { secret } from "./config";
 
 const port: number = 3000;
 
-app.use(morgan("tiny"));
 app.use(
   session({
     store: redisStore,
