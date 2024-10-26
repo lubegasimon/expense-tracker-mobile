@@ -14,7 +14,7 @@ app.use(
   session({
     store: redisStore,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     secret,
   }),
 );
