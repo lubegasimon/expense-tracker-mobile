@@ -8,6 +8,7 @@ export const logger = (req: Request, res: Response, next: NextFunction) => {
   res.send = function (body) {
     console.log("Response status code:", res.statusCode);
     console.log("Response Body:", body);
+    console.log("Response headers", res.getHeaders());
     console.log("Session Data:", req.session);
     console.log("Session ID:", req.sessionID);
     console.log("Session Cookie:", req.cookies["session-id-mobile"]);
