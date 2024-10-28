@@ -2,6 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 
 import CreateAccountButton from "@/components/CreateAccButton";
+import Home from "@/api/index";
 
 export default function HomeScreen() {
   return (
@@ -10,6 +11,7 @@ export default function HomeScreen() {
       <Link href="/signup">
         <CreateAccountButton />
       </Link>
+      <Home />
     </View>
   );
 }
