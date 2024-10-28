@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 
 import CreateAccountButton from "@/components/CreateAccButton";
-import Home from "@/api/index";
+import { Home } from "@/api/index";
 
 export default function HomeScreen() {
   return (

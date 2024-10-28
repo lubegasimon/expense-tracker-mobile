@@ -1,30 +1,28 @@
+import axios, { AxiosResponse } from "axios";
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
+
 import { BACK_END_URL } from "@env";
 
-const Home = () => {
+export const Home = () => {
   const [message, setMessage] = useState("");
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(BACK_END_URL);
-      const data = await response.json();
+  const fetchData = axios({
+    method: "get",
+    url: BACK_END_URL,
+    responseType: "json",
+  })
+    .then(function (response: AxiosResponse) {
+      const data = response.data;
       setMessage(data.message);
-      console.log("Response from the backend:", data);
-    } catch (error) {
+    })
+    .catch(function (error) {
       console.error("Error fetching data:", error);
-    }
-  };
+    });
 
   useEffect(() => {
-    fetchData();
+    fetchData;
   }, []);
 
-  return (
-    <View>
-      <Text> {message}</Text>
-    </View>
-  );
+  return <Text>{message}</Text>;
 };
-
-export default Home;
