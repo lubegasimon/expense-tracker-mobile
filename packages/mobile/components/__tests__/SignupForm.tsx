@@ -12,5 +12,8 @@ describe("<SignupForm/>", () => {
     );
 
     screen.getByPlaceholderText("Enter Your Username");
+    screen.getByPlaceholderText("Enter Your Email");
+    screen.getByPlaceholderText("Enter Your Password");
+    screen.getByPlaceholderText("Confirm Password");
   });
 });
