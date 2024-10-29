@@ -1,15 +1,22 @@
 import React from "react";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+import { RouteNavigationStack } from "@/types";
+
+type UserDashboardNavigationProp = StackNavigationProp<
+  RouteNavigationStack,
+  "userDashboard"
+>;
 
 function SignupButton() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<UserDashboardNavigationProp>();
   return (
     <View>
       <Pressable
         style={styles.button}
-        // TODO: fix ts-error
-        onPress={() => navigation.navigate("dashboard")}
+        onPress={() => navigation.navigate("userDashboard")}
       >
         <Text style={styles.buttonText}>Signup</Text>
       </Pressable>
