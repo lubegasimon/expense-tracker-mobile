@@ -1,3 +1,1 @@
-import { BACK_END_URL } from "@env";
-
-export const backend_url = BACK_END_URL;
+export const backend_url = process.env.EXPO_PUBLIC_BACK_END_URL;
