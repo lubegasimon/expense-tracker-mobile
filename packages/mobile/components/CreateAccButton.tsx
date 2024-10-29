@@ -8,6 +8,7 @@ export default function CreateAccount() {
     <View>
       <Button
         title="Create account"
+        // TODO: fix ts-error
         onPress={() => navigation.navigate("signup")}
       />
     </View>

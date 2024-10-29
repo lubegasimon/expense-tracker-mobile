@@ -8,7 +8,8 @@ function SignupButton() {
     <View>
       <Pressable
         style={styles.button}
-        onPress={() => navigation.navigate("userDashboard")}
+        // TODO: fix ts-error
+        onPress={() => navigation.navigate("dashboard")}
       >
         <Text style={styles.buttonText}>Signup</Text>
       </Pressable>
