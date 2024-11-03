@@ -4,6 +4,11 @@
   "description": "Track your expenditure",
   "main": "app.js",
   "scripts": {
+    "clean": "rm -rf ./build",
+    "compile": "tsc --project tsconfig.json",
+    "migrate": "npx sequelize-cli db:migrate",
+    "rollback": "npx sequelize-cli db:migrate:undo",
+    "seeder:create": "npx sequelize-cli seed:generate",
     "start": "npx ts-node ./src/app.ts",
     "fmt": "npx prettier . --write",
     "test": "jest"
