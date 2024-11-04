@@ -11,8 +11,11 @@
     "rollback": "npx sequelize-cli db:migrate:undo",
     "migration:create": "npx sequelize-cli migration:generate",
     "post:migration:create": "ls ./build/migrations/*.js | xargs -I {} sh -c 'mv $1 ./migrations/`basename $1 .js`.ts' - {}",
-    "seed:create": "npx sequelize-cli seed:generate",
-    "post:seeders:create": "ls ./build/seeders/*.js | xargs -I {} sh -c 'mv $1 ./seeders/`basename $1 .js`.ts' - {}",
+    "seeder:create": "npx sequelize-cli seed:generate",
+    "post:seeder:create": "ls ./build/seeders/*.js | xargs -I {} sh -c 'mv $1 ./seeders/`basename $1 .js`.ts' - {}",
+    "pre:seed": "npm run compile",
+    "seed": "npx sequelize-cli db:seed:all",
+    "undo:most:recent:seed": "npx sequelize-cli db:seed:undo",
     "start": "npx ts-node ./src/app.ts",
     "fmt": "npx prettier . --write",
     "test": "jest"
