@@ -37,6 +37,7 @@
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.7",
+    "@types/supertest": "^6.0.2",
     "@types/uuid": "^10.0.0",
     "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
@@ -50,6 +51,7 @@
     "pg-hstore": "^2.3.4",
     "redis": "^4.7.0",
     "sequelize": "^6.37.5",
+    "supertest": "^7.0.0",
     "uuid": "^10.0.0"
   }
 }
