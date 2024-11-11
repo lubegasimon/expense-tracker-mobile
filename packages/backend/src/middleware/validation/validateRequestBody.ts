@@ -19,8 +19,8 @@ ajv.addFormat("username", /^[0-9a-zA-Z_]{5,10}$/);
 */
 ajv.addSchema(userSchema, "user");
 
-/* validate is a middleware to validate request bodies. */
-const validate = (schema: string) => {
+/* validateRequestBody is a middleware to validate request bodies. */
+const validateRequestBody = (schema: string) => {
   /*
     ajv.getSchema returns compiled function that we later use to
     validate the request body.
@@ -45,4 +45,4 @@ const validate = (schema: string) => {
   };
 };
 
-export default validate;
+export default validateRequestBody;
