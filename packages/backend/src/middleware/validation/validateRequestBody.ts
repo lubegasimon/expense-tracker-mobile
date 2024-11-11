@@ -34,11 +34,12 @@ const validateRequestBody = (schema: string) => {
     compiled validation function from the ajv instance cache.
   */
   const validate = ajv.getSchema(schema);
-  return (req: Request, res: Response, next: NextFunction) => {
-    const valid = validate && validate(req.body);
-    if (!valid) {
+  return (request: Request, response: Response, next: NextFunction) => {
+    const data = request.body;
+    const valid = validate && validate(data);
+    if (!valid || data.password !== data.confirmPassword) {
       const errors = validate?.errors;
-      res.status(400).json({ error: errors });
+      response.status(400).json({ error: errors });
       return;
     }
     next();
