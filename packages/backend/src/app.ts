@@ -1,8 +1,8 @@
 import cookieParser from "cookie-parser";
 
 import app from "./server";
-import indexRouter from "./route/index";
-import signupRouter from "./route/signup";
+import indexRouter from "./router/user/index";
+import signupRouter from "./router/user/signup";
 import { sessionManager } from "./middleware/session";
 import { logger } from "./middleware/logger";
 
