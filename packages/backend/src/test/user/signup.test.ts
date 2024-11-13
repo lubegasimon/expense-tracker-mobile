@@ -82,7 +82,7 @@ describe("POST /signup", () => {
     });
   });
 
-  describe("", () => {
+  describe("password edge case", () => {
     it("should return 400 if password contains fewer than 5 characters", async () => {
       const response = await request(app).post("/signup").send({
         username: "johndoe",
@@ -97,7 +97,18 @@ describe("POST /signup", () => {
     });
   });
 
-  /* TODO:
-  add test to fail with passwords don't match;
-  blocked: see -- https://stackoverflow.com/questions/79159863/typescript-seems-to-not-fully-support-data-option-for-const-validation */
+  /* TODO: Could be improved, but blocked:
+   see -- https://stackoverflow.com/questions/79159863/typescript-seems-to-not-fully-support-data-option-for-const-validation */
+  describe("cross password edge case", () => {
+    it("should return 400 if passwords do not match", async () => {
+      const response = await request(app).post("/signup").send({
+        username: "johndoe",
+        email: "johnn@doe.com",
+        password: "johndoe",
+        confirmPassword: "johndo",
+      });
+      expect(response.status).toBe(400);
+      expect(response.body.error[0].message).toBe("Passwords do not match");
+    });
+  });
 });
