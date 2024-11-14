@@ -10,24 +10,20 @@ const user = {
   password: "johndoe",
 };
 
-describe.only("Find by email", () => {
+describe("Find by email", () => {
   beforeEach(() => sequelize.truncate());
 
   afterAll(() => sequelize.close());
 
-  it("should return user if email exists", () => {
-    return create(user).then((_result) =>
-      findUserByEmail("john@doe.com").then((result) =>
-        expect(result).toHaveProperty("email", "john@doe.com"),
-      ),
-    );
+  it("should return user if email exists", async () => {
+    await create(user);
+    const result = await findUserByEmail("john@doe.com");
+    expect(result).toHaveProperty("email", "john@doe.com");
   });
 
-  it("should return null if email does not exist or is empty", () => {
-    return create(user).then((_result) =>
-      findUserByEmail("john@doe.net").then((result) => {
-        expect(result).toBeNull();
-      }),
-    );
+  it("should return null if email does not exist or is empty", async () => {
+    await create(user);
+    const result = await findUserByEmail("john@doe.net");
+    expect(result).toBeNull();
   });
 });
