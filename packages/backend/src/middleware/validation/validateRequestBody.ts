@@ -3,6 +3,7 @@ import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";
 import userSchema from "./schemas/userSchema";
+import { findUserByEmail } from "../../user/find";
 
 const ajv = new Ajv({ allErrors: true, $data: true });
 addFormats(ajv);
@@ -34,12 +35,18 @@ const validateRequestBody = (schema: string) => {
     compiled validation function from the ajv instance cache.
   */
   const validate = ajv.getSchema(schema);
-  return (request: Request, response: Response, next: NextFunction) => {
+  return async (request: Request, response: Response, next: NextFunction) => {
     const data = request.body;
     const valid = validate && validate(data);
     if (!valid || data.password !== data.confirmPassword) {
       const errors = validate?.errors;
       response.status(400).json({ error: errors });
+      return;
+    }
+    const rows = await findUserByEmail(data.email);
+    if (!!rows) {
+      const error = "Email already exists";
+      response.status(409).json({ error });
       return;
     }
     next();
