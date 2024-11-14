@@ -18,7 +18,7 @@
     "undo:most:recent:seed": "npx sequelize-cli db:seed:undo",
     "start": "npx ts-node ./src/app.ts",
     "fmt": "npx prettier . --write",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "author": "",
   "license": "ISC",
