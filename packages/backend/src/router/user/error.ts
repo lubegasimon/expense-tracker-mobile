@@ -1,6 +1,4 @@
-export const redisError = (error: string) => {
-  console.error(
-    `An error '${error}' occured while saving candidate data in Redis`,
-  );
+export const redisError = (error: any) => {
+  console.error(error);
   throw new Error("Internal server error");
 };
