@@ -2,15 +2,16 @@ import RedisStore from "connect-redis";
 import { createClient } from "redis";
 import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
-
 import { secret } from "../config";
+import { redisError } from "../router/user/error";
 
-let redisClient = createClient();
-redisClient.connect().catch(console.error);
+export const redisClient = createClient();
 
-const redisStore = new RedisStore({
+redisClient.connect().catch((error) => redisError(error));
+
+export const redisStore = new RedisStore({
   client: redisClient,
-  prefix: "myapp:",
+  prefix: "expense-tracker:",
 });
 
 export const sessionManager = session({
