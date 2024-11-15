@@ -1,9 +1,14 @@
 import { Router, Request, Response } from "express";
 import RedisStore from "connect-redis";
 import { randomInt } from "crypto";
+import sgMail from "@sendgrid/mail";
+import dotenv from "dotenv";
 import validate from "../../middleware/validation/validateRequestBody";
 import { redisClient, redisStore } from "../../middleware/session";
 import { redisError } from "./error";
+
+// TODO:
+dotenv.config({ path: ".env.test" });
 
 const router = Router();
 
@@ -32,6 +37,25 @@ async function saveCandidateData(
     .catch((error) => redisError(error));
 }
 
+async function sendVerificationEmail(email: string) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY || "api-key");
+  const message = {
+    to: email,
+    from: process.env.EXPENSE_TRACKER_EMAIL || "email@example.com",
+    subject: "Expense-tracker: Verify your Email",
+    text: `Verify email`,
+    html: `Click the link to verify your email http://expense-tracker-<some token>. Expires in 5 minutes`,
+  };
+
+  return await sgMail
+    .send(message)
+    .then((response) => {
+      //TODO: Use event webhooks -- https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook
+      if (!!response[0].statusCode) return "Email sent";
+    })
+    .catch((error) => console.error(error));
+}
+
 router.post(
   "/",
   validate("user"),
@@ -41,6 +65,7 @@ router.post(
 
     await saveCandidateData(username, email, password, redisStore);
     await associateCodeToEmail(data.email);
+    const sendEmailStatus = await sendVerificationEmail(data.email);
 
     const savedCandidateData = await redisClient
       .get(`signup:${data.email}`)
