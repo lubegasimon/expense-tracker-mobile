@@ -1,22 +1,22 @@
 import { Router, Request, Response } from "express";
 import RedisStore from "connect-redis";
-import { randomBytes } from "crypto";
+import { randomInt } from "crypto";
 import validate from "../../middleware/validation/validateRequestBody";
 import { redisClient, redisStore } from "../../middleware/session";
 import { redisError } from "./error";
 
 const router = Router();
 
-const token = () => {
-  randomBytes(10, (error, buffer) => {
+const verificationCode = () => {
+  randomInt(1000, 9999, (error, code) => {
     if (error) throw error;
-    buffer.toString("hex");
+    code.toString();
   });
 };
 
-async function associateTokenToEmail(email: string) {
+async function associateCodeToEmail(email: string) {
   await redisStore.client
-    .set(`verification:${token}`, email, 300)
+    .set(`verification:${verificationCode}`, email, 300)
     .catch((error) => redisError(error));
 }
 
@@ -40,19 +40,23 @@ router.post(
     const { username, email, password } = data;
 
     await saveCandidateData(username, email, password, redisStore);
-    await associateTokenToEmail(data.email);
+    await associateCodeToEmail(data.email);
 
     const savedCandidateData = await redisClient
       .get(`signup:${data.email}`)
       .catch((error) => redisError(error));
 
-    const savedToken = await redisClient
-      .get(`verification:${token}`)
+    const savedVerificationCode = await redisClient
+      .get(`verification:${verificationCode}`)
       .catch((error) => redisError(error));
 
     response
       .status(200)
-      .send({ message: "Valid user data", savedCandidateData, savedToken });
+      .send({
+        message: "Valid user data",
+        savedCandidateData,
+        savedVerificationCode,
+      });
   },
 );
 
