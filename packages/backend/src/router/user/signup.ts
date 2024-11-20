@@ -13,9 +13,11 @@ dotenv.config({ path: ".env.test" });
 const router = Router();
 
 const verificationCode = () => {
-  randomInt(1000, 9999, (error, code) => {
-    if (error) throw error;
-    code.toString();
+  return new Promise((resolve, reject) => {
+    randomInt(1000, 10000, (error, code) => {
+      if (error) return reject(error);
+      resolve(code.toString());
+    });
   });
 };
 
@@ -39,12 +41,14 @@ async function saveCandidateData(
 
 async function sendVerificationEmail(email: string) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY || "api-key");
+  let code = await verificationCode();
+
   const message = {
     to: email,
     from: process.env.EXPENSE_TRACKER_EMAIL || "email@example.com",
-    subject: "Expense-tracker: Verify your Email",
-    text: `Verify email`,
-    html: `Click the link to verify your email http://expense-tracker-<some token>. Expires in 5 minutes`,
+    subject: "Expense-tracker: Verification code",
+    text: `Verification code`,
+    html: `Code <strong>${code}</strong> expires in 5 minutes.`,
   };
 
   return await sgMail
@@ -75,13 +79,12 @@ router.post(
       .get(`verification:${verificationCode}`)
       .catch((error) => redisError(error));
 
-    response
-      .status(200)
-      .send({
-        message: "Valid user data",
-        savedCandidateData,
-        savedVerificationCode,
-      });
+    response.status(200).send({
+      message: "Valid user data",
+      savedCandidateData,
+      savedVerificationCode,
+      sendEmailStatus,
+    });
   },
 );
 
