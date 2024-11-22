@@ -20,10 +20,12 @@ const verificationCode = () => {
     });
   });
 };
+let verificationKey = `verification:${verificationCode}`;
 
 async function associateCodeToEmail(email: string) {
   await redisStore.client
-    .set(`verification:${verificationCode}`, email, 300)
+    .set(verificationKey, email)
+    .then((_) => redisStore.client.expire(verificationKey, 300))
     .catch((error) => redisError(error));
 }
 
@@ -34,8 +36,10 @@ async function saveCandidateData(
   redisStore: RedisStore,
 ) {
   const candidateData = JSON.stringify({ username, email, password });
+  let signupKey = `signup:${email}`;
   await redisStore.client
-    .set(`signup:${email}`, candidateData, 86400)
+    .set(signupKey, candidateData)
+    .then((_) => redisStore.client.expire(signupKey, 86400))
     .catch((error) => redisError(error));
 }
 
@@ -76,7 +80,7 @@ router.post(
       .catch((error) => redisError(error));
 
     const savedVerificationCode = await redisClient
-      .get(`verification:${verificationCode}`)
+      .get(verificationKey)
       .catch((error) => redisError(error));
 
     response.status(200).send({
