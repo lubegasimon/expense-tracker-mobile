@@ -48,6 +48,23 @@ describe("Redis operations", () => {
     );
   });
 
+  it("should set verification:<email> key in Redis", async () => {
+    const data = JSON.stringify(user);
+    const response = await redisStore.client
+      .set(`verification:${user.email}`, user.email)
+      .catch((error) => redisError(error));
+
+    expect(response).toBe("OK");
+  });
+
+  it("should retrieve email associated to verification:<email> key in Redis", async () => {
+    const response = await redisStore.client
+      .get(`verification:${user.email}`)
+      .catch((error) => redisError(error));
+
+    expect(response).toBe("john@doe.com");
+  });
+
   it("should set verification:<email> key and expiry in Redis", async () => {
     const data = JSON.stringify(user);
     const response = await redisStore.client
