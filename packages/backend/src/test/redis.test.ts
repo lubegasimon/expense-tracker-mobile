@@ -8,7 +8,6 @@ redisClient.connect().catch((error) => redisError(error));
 
 const redisStore = new RedisStore({
   client: redisClient,
-  prefix: "expense-tracker:",
 });
 
 const user = {
@@ -18,12 +17,17 @@ const user = {
 };
 
 describe("Redis operations", () => {
+  afterAll(() =>
+    redisStore.client
+      .del([`signup:${user.email}`, `verification:${user.email}`])
+      .catch((error) => redisError(error)),
+  );
   afterAll(() => redisClient.disconnect().catch((error) => redisError(error)));
 
-  it("should add data in Redis", async () => {
+  it("should save user data in Redis", async () => {
     const data = JSON.stringify(user);
     const response = await redisStore.client
-      .set(`signup:${user.email}`, data, 1)
+      .set(`signup:${user.email}`, data)
       .catch((error) => redisError(error));
 
     expect(response).toBe("OK");
@@ -42,7 +46,6 @@ describe("Redis operations", () => {
       .get(`signup:${user.email}`)
       .catch((error) => redisError(error));
 
-    console.log("Response", response);
     expect(response).toBe(
       '{"username":"johndoe","email":"john@doe.com","password":"johndoe"}',
     );
