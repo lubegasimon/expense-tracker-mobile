@@ -27,4 +27,15 @@ describe("Check if candidate data and verification code are saved in Redis", () 
     const response = await request(app).post("/signup").send(data);
     expect(response.body.savedVerificationCode).toBe("johnn@doe.com");
   });
+
+  // TODO: Use stubs because an email is sent whenever this test runs.
+  it("should send email to candidate's email", async () => {
+    const response = await request(app).post("/signup").send({
+      username: "johndoe",
+      email: "lubegasimon73@gmail.com",
+      password: "johndoe",
+      confirmPassword: "johndoe",
+    });
+    expect(response.body.sendEmailStatus).toBe("Email sent");
+  });
 });
