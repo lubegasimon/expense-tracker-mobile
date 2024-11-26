@@ -17,6 +17,7 @@
     "seed": "npx sequelize-cli db:seed:all",
     "undo:most:recent:seed": "npx sequelize-cli db:seed:undo",
     "start": "npx ts-node ./src/app.ts",
+    "redis": "redis-server",
     "fmt": "npx prettier . --write",
     "test": "jest --runInBand"
   },
