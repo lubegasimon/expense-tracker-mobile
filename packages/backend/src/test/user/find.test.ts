@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { create } from "../../user/create";
+import create from "../../user/create";
 import { sequelize } from "../../db/db";
-import { findUserByEmail } from "../../user/find";
+import findUserByEmail from "../../user/find";
 
 const user = {
   id: uuidv4(),

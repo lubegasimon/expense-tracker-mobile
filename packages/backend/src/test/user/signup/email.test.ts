@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../app";
-import { create } from "../../../user/create";
+import create from "../../../user/create";
 import { sequelize } from "../../../db/db";
 
 describe("email edge cases", () => {

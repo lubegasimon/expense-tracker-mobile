@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import app from "./server";
 import indexRouter from "./router/user/index";
 import signupRouter from "./router/user/signup";
+import verifyCode from "./router/user/verifyCode";
 import { sessionManager } from "./middleware/session";
 import { logger } from "./middleware/logger";
 
@@ -14,6 +15,7 @@ app.use(logger);
 
 app.use("/", indexRouter);
 app.use("/signup", signupRouter);
+app.use("/signup/verify-code", verifyCode);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port} \n`);

@@ -3,7 +3,7 @@ import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";
 import userSchema from "./schemas/userSchema";
-import { findUserByEmail } from "../../user/find";
+import findUserByEmail from "../../user/find";
 
 const ajv = new Ajv({ allErrors: true, $data: true });
 addFormats(ajv);

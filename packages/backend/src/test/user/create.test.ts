@@ -1,4 +1,4 @@
-import { create } from "../../user/create";
+import create from "../../user/create";
 import { sequelize } from "../../db/db";
 import { v4 as uuidv4 } from "uuid";
 
