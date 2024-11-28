@@ -73,9 +73,7 @@ describe("Redis operations", () => {
       code: CODE,
     });
     expect(response.statusCode).toBe(201);
-    expect(response.body.message).toBe(
-      "Account successfully created, welcome johndoe!",
-    );
+    expect(response.body.message).toBe("Successfully signed in");
   });
 
   // FIXME:

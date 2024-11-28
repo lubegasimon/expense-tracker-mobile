@@ -4,6 +4,7 @@ import { redisError } from "./error";
 import create from "../../user/create";
 import { UserAttrs } from "../../user/model";
 import findUserByEmail from "../../user/find";
+import initializeSession from "./auth";
 
 const router = Router();
 
@@ -17,11 +18,7 @@ function createUser(user: UserAttrs, response: Response) {
           email: user.email,
           password: user.password,
         })
-          .then((user) =>
-            response.status(201).json({
-              message: `Account successfully created, welcome ${user.username}!`,
-            }),
-          )
+          .then((user) => initializeSession(user.email, response))
           .catch((error) => {
             // TODO: How can a user recover from this error?
             console.error(error);
