@@ -30,7 +30,6 @@ describe("email edge cases", () => {
     );
   });
 
-  beforeEach(() => sequelize.truncate());
   afterEach(() => sequelize.truncate());
   afterAll(() => sequelize.close());
 

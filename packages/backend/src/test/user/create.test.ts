@@ -10,8 +10,7 @@ const user = {
 };
 
 describe("User CRUD operation", () => {
-  beforeEach(() => sequelize.truncate());
-
+  afterEach(() => sequelize.truncate());
   afterAll(() => sequelize.close());
 
   it("create user", () => {
