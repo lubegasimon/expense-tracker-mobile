@@ -11,9 +11,10 @@ const router = Router();
 function createUser(user: UserAttrs, response: Response) {
   findUserByEmail(user.email)
     .then((rows) => {
-      if (rows) response.status(409).json({ error: "Email already exists" });
+      if (rows)
+        return response.status(409).json({ error: "Email already exists" });
       else
-        create({
+        return create({
           username: user.username,
           email: user.email,
           password: user.password,
@@ -25,7 +26,7 @@ function createUser(user: UserAttrs, response: Response) {
             response.status(500).send({ error: "Internal server error" });
           });
     })
-    .catch((error) => console.error(error));
+    .catch(console.error);
 }
 
 function saveCandidateByEmail(email: string, response: Response) {
@@ -34,9 +35,9 @@ function saveCandidateByEmail(email: string, response: Response) {
     .then((data) => {
       if (data) {
         let { username, email, password } = JSON.parse(data);
-        createUser({ username, email, password }, response);
+        return createUser({ username, email, password }, response);
       } else
-        response.status(401).json({
+        return response.status(401).json({
           error: "Your session has expired. Please start new signup process",
         });
     })
@@ -45,11 +46,19 @@ function saveCandidateByEmail(email: string, response: Response) {
 
 function verifyCode(request: Request, response: Response) {
   const data = request.body;
+  console.log(data);
+
   redisStore.client
-    .get(`verification:${data.code}`)
+    .get(`verification:${data.email}`)
     .then((result) => {
-      if (!result) response.status(400).json({ error: "Invalid code" });
-      else saveCandidateByEmail(result, response);
+      if (!result)
+        return response.status(400).json({
+          error:
+            "Verification code expired or invalid email. Please request new code",
+        });
+      if (result !== data.code)
+        return response.status(400).json({ error: "Invalid code" });
+      else return saveCandidateByEmail(data.email, response);
     })
     .catch((error) => redisError(error));
 }

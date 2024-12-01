@@ -11,8 +11,7 @@ const user = {
 };
 
 describe("Find by email", () => {
-  beforeEach(() => sequelize.truncate());
-
+  afterEach(() => sequelize.truncate());
   afterAll(() => sequelize.close());
 
   it("should return user if email exists", async () => {

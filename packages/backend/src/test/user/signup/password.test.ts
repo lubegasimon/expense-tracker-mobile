@@ -14,11 +14,9 @@ describe("password edge case", () => {
       "Password must NOT have fewer than 5 characters",
     );
   });
-});
 
-/* TODO: Could be improved, but blocked:
+  /* TODO: Could be improved, but blocked:
    see -- https://stackoverflow.com/questions/79159863/typescript-seems-to-not-fully-support-data-option-for-const-validation */
-describe("cross password edge case", () => {
   it("should return 400 if passwords do not match", async () => {
     const response = await request(app).post("/signup").send({
       username: "johndoe",

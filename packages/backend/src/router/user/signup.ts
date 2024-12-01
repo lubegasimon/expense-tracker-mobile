@@ -12,7 +12,7 @@ dotenv.config({ path: ".env.test" });
 
 const router = Router();
 
-const verificationCode = () => {
+const verificationCode = (): Promise<string> => {
   return new Promise((resolve, reject) => {
     randomInt(1000, 10000, (error, code) => {
       if (error) return reject(error);
@@ -20,14 +20,6 @@ const verificationCode = () => {
     });
   });
 };
-let verificationKey = `verification:${verificationCode}`;
-
-async function associateCodeToEmail(email: string) {
-  await redisStore.client
-    .set(verificationKey, email)
-    .then((_) => redisStore.client.expire(verificationKey, 300))
-    .catch((error) => redisError(error));
-}
 
 async function saveCandidateData(
   username: string,
@@ -39,13 +31,20 @@ async function saveCandidateData(
   let signupKey = `signup:${email}`;
   await redisStore.client
     .set(signupKey, candidateData)
-    .then((_) => redisStore.client.expire(signupKey, 86400))
+    .then(() => redisStore.client.expire(signupKey, 86400))
     .catch((error) => redisError(error));
 }
 
 async function sendVerificationEmail(email: string) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY || "api-key");
   let code = await verificationCode();
+
+  // associate code to email
+  await redisStore.client
+    .set(`verification:${email}`, code)
+    .then(() => redisStore.client.expire(`verification:${email}`, 300))
+    .catch((error) => redisError(error));
+
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY || "api-key");
 
   const message = {
     to: email,
@@ -61,7 +60,7 @@ async function sendVerificationEmail(email: string) {
       //TODO: Use event webhooks -- https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook
       if (!!response[0].statusCode) return "Email sent";
     })
-    .catch((error) => console.error(error));
+    .catch(console.error);
 }
 
 router.post(
@@ -72,18 +71,17 @@ router.post(
     const { username, email, password } = data;
 
     await saveCandidateData(username, email, password, redisStore);
-    await associateCodeToEmail(data.email);
-    const sendEmailStatus = await sendVerificationEmail(data.email);
+    const sendEmailStatus = await sendVerificationEmail(email);
 
     const savedCandidateData = await redisClient
-      .get(`signup:${data.email}`)
+      .get(`signup:${email}`)
       .catch((error) => redisError(error));
 
     const savedVerificationCode = await redisClient
-      .get(verificationKey)
+      .get(`verification:${email}`)
       .catch((error) => redisError(error));
 
-    response.status(200).send({
+    response.status(200).json({
       message: "Valid user data",
       savedCandidateData,
       savedVerificationCode,
