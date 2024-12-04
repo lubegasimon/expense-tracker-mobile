@@ -39,14 +39,19 @@ const validateRequestBody = (schema: string) => {
     const data = request.body;
     const valid = validate && validate(data);
     if (!valid || data.password !== data.confirmPassword) {
-      const errors = validate?.errors;
+      let errors: { [key: string]: string | undefined } = {};
+      if (validate?.errors) {
+        for (const error of validate?.errors) {
+          const errorName = error.instancePath.slice(1);
+          errors[errorName] = error.message;
+        }
+      }
       response.status(400).json({ error: errors });
       return;
     }
     const rows = await findUserByEmail(data.email);
     if (!!rows) {
-      const error = "Email already exists";
-      response.status(409).json({ error });
+      response.status(409).json({ error: { email: "Email already exists" } });
       return;
     }
     next();
