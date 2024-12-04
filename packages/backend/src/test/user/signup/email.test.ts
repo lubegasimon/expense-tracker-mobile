@@ -12,9 +12,7 @@ describe("email edge cases", () => {
       confirmPassword: "johndoe",
     });
     expect(response.status).toBe(400);
-    expect(response.body.error[0].message).toContain(
-      'must match format "email"',
-    );
+    expect(response.body.error.email).toContain("Invalid email format");
   });
 
   it("should return 400 for invalid email format", async () => {
@@ -25,9 +23,7 @@ describe("email edge cases", () => {
       confirmPassword: "johndoe",
     });
     expect(response.status).toBe(400);
-    expect(response.body.error[0].message).toContain(
-      'must match format "email"',
-    );
+    expect(response.body.error.email).toContain("Invalid email format");
   });
 
   afterEach(() => sequelize.truncate());
@@ -43,6 +39,6 @@ describe("email edge cases", () => {
     await create(user);
     const response = await request(app).post("/signup").send(user);
     expect(response.status).toBe(409);
-    expect(response.body.error).toBe("Email already exists");
+    expect(response.body.error.email).toBe("Email already exists");
   });
 });

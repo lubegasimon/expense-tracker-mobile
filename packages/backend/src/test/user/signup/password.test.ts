@@ -10,7 +10,7 @@ describe("password edge case", () => {
       confirmPassword: "john",
     });
     expect(response.status).toBe(400);
-    expect(response.body.error[0].message).toBe(
+    expect(response.body.error.password).toBe(
       "Password must NOT have fewer than 5 characters",
     );
   });
@@ -25,6 +25,6 @@ describe("password edge case", () => {
       confirmPassword: "johndo",
     });
     expect(response.status).toBe(400);
-    expect(response.body.error[0].message).toBe("Passwords do not match");
+    expect(response.body.error.confirmPassword).toBe("Passwords do not match");
   });
 });
