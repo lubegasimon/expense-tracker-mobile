@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { baseURL } from "../config";
 
-export const axiosInstance = axios.create({
+export const axiosInstance: AxiosInstance = axios.create({
   baseURL,
-  timeout: 1000,
+  timeout: 2000,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
