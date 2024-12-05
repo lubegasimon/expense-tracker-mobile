@@ -21,7 +21,8 @@ describe("username edge cases", () => {
       confirmPassword: "johndoe",
     });
     expect(response.status).toBe(400);
-    expect(response.body.error[0].message).toContain(
+    console.log("Response", response.body.error);
+    expect(response.body.error.username).toContain(
       "Username must be 5-10 characters long and can only contain letters, numbers, and underscores",
     );
   });
@@ -34,7 +35,7 @@ describe("username edge cases", () => {
       confirmPassword: "johndoe",
     });
     expect(response.status).toBe(400);
-    expect(response.body.error[0].message).toContain(
+    expect(response.body.error.username).toContain(
       "Username must be 5-10 characters long and can only contain letters, numbers, and underscores",
     );
   });
@@ -47,7 +48,7 @@ describe("username edge cases", () => {
       confirmPassword: "johndoe",
     });
     expect(response.status).toBe(400);
-    expect(response.body.error[0].message).toContain(
+    expect(response.body.error.username).toContain(
       "Username must be 5-10 characters long and can only contain letters, numbers, and underscores",
     );
   });
@@ -60,7 +61,7 @@ describe("username edge cases", () => {
       confirmPassword: "johndoe",
     });
     expect(response.status).toBe(400);
-    expect(response.body.error[0].message).toContain(
+    expect(response.body.error.username).toContain(
       "Username must be 5-10 characters long and can only contain letters, numbers, and underscores",
     );
   });

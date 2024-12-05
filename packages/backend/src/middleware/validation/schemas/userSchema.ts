@@ -25,6 +25,7 @@ const userSchema: JSONSchemaType<User> = {
     properties: {
       username:
         "Username must be 5-10 characters long and can only contain letters, numbers, and underscores",
+      email: "Invalid email format",
       password: "Password must NOT have fewer than 5 characters",
       confirmPassword: "Passwords do not match",
     },
