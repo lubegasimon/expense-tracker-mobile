@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
-import SignupForm from "../signup/SignupForm";
+import SignupForm from "../SignupScreen";
 
 describe("<SignupForm/>", () => {
   test("Signup form contains username text input", () => {
@@ -11,9 +11,9 @@ describe("<SignupForm/>", () => {
       </NavigationContainer>,
     );
     expect(tree).toMatchSnapshot();
-    screen.getByPlaceholderText("Enter Your Username");
-    screen.getByPlaceholderText("Enter Your Email");
-    screen.getByPlaceholderText("Enter Your Password");
+    screen.getByPlaceholderText("Username");
+    screen.getByPlaceholderText("Email");
+    screen.getByPlaceholderText("Password");
     screen.getByPlaceholderText("Confirm Password");
   });
 });

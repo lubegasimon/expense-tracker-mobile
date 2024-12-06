@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignupForm/> Signup form contains username text input 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+      {
+        "paddingBottom": 0,
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      {
+        "fontSize": 30,
+        "fontWeight": "bold",
+      }
+    }
+  >
+     
+    Create your account
+     
+  </Text>
+  <View
+    style={
+      {
+        "marginBottom": 10,
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Username"
+      placeholderTextColor="gray"
+      style={
+        {
+          "borderColor": "gray",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "fontSize": 20,
+          "height": 50,
+          "justifyContent": "center",
+          "margin": 5,
+          "padding": 10,
+          "width": 300,
+        }
+      }
+      value=""
+    />
+  </View>
+  <View
+    style={
+      {
+        "marginBottom": 10,
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Email"
+      placeholderTextColor="gray"
+      style={
+        {
+          "borderColor": "gray",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "fontSize": 20,
+          "height": 50,
+          "justifyContent": "center",
+          "margin": 5,
+          "padding": 10,
+          "width": 300,
+        }
+      }
+      value=""
+    />
+  </View>
+  <View
+    style={
+      {
+        "marginBottom": 10,
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Password"
+      placeholderTextColor="gray"
+      secureTextEntry={true}
+      style={
+        {
+          "borderColor": "gray",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "fontSize": 20,
+          "height": 50,
+          "justifyContent": "center",
+          "margin": 5,
+          "padding": 10,
+          "width": 300,
+        }
+      }
+      value=""
+    />
+  </View>
+  <View
+    style={
+      {
+        "marginBottom": 10,
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Confirm Password"
+      placeholderTextColor="gray"
+      secureTextEntry={true}
+      style={
+        {
+          "borderColor": "gray",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "fontSize": 20,
+          "height": 50,
+          "justifyContent": "center",
+          "margin": 5,
+          "padding": 10,
+          "width": 300,
+        }
+      }
+      value=""
+    />
+  </View>
+  <View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#34b4eb",
+          "borderColor": "white",
+          "borderRadius": 10,
+          "padding": 10,
+          "width": 300,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "white",
+            "fontSize": 20,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        Signup
+      </Text>
+    </View>
+  </View>
+</View>
+`;
