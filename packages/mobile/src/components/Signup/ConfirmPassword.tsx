@@ -1,8 +1,22 @@
 import { Text, TextInput, View } from "react-native";
-import { FieldProps } from "./types";
 import { inputStyle, errorStyle, inputAndErrorStyle } from "./styles";
+import { FieldProps } from "./types";
+import EyeIcon from "../EyeIcon";
 
-function ConfirmPassword({ value, onChange, error }: FieldProps) {
+export interface ConfirmPasswordProps extends FieldProps, ShowPasswordProps {}
+
+interface ShowPasswordProps {
+  isShowConfirmPassword: boolean;
+  setShowConfirmPassword: () => void;
+}
+
+function ConfirmPassword({
+  value,
+  onChange,
+  error,
+  isShowConfirmPassword,
+  setShowConfirmPassword,
+}: ConfirmPasswordProps) {
   return (
     <View style={inputAndErrorStyle.view}>
       <TextInput
@@ -11,7 +25,11 @@ function ConfirmPassword({ value, onChange, error }: FieldProps) {
         value={value}
         placeholder="Confirm Password"
         placeholderTextColor="gray"
-        secureTextEntry={true}
+        secureTextEntry={isShowConfirmPassword}
+      />
+      <EyeIcon
+        isShowPassword={isShowConfirmPassword}
+        setShowPassword={setShowConfirmPassword}
       />
       {error && <Text style={errorStyle.error}>{error}</Text>}
     </View>

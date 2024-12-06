@@ -18,6 +18,8 @@ function SignupForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
+  const [showConfirmPassword, setConfirmShowPassword] = useState(true);
 
   function handleSubmit() {
     setLoading(true);
@@ -42,7 +44,15 @@ function SignupForm() {
   else
     return (
       <ErrorBoundary
-        fallback={<Text style={{ color: "red" }}>Something went wrong</Text>}
+        fallback={
+          <Text
+            style={{
+              color: "red",
+            }}
+          >
+            Something went wrong
+          </Text>
+        }
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -62,11 +72,17 @@ function SignupForm() {
             value={password}
             onChange={setPassword}
             error={errors.password}
+            isShowPassword={showPassword}
+            setShowPassword={() => setShowPassword(!showPassword)}
           />
           <ConfirmPassword
             value={confirmPassword}
             onChange={setConfirmPassword}
             error={errors.confirmPassword}
+            isShowConfirmPassword={showConfirmPassword}
+            setShowConfirmPassword={() =>
+              setConfirmShowPassword(!showConfirmPassword)
+            }
           />
           <SignupButton onPress={handleSubmit} disabled={loading} />
         </KeyboardAvoidingView>
