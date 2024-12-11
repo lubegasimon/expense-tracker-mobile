@@ -96,11 +96,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
-  appName: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
 });
 
 export default SignupForm;
