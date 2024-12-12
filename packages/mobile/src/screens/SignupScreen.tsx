@@ -1,6 +1,9 @@
 import { Text, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { useState } from "react";
 import { AxiosResponse } from "axios";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteNavigationStack } from "@/src/types";
 import { axiosInstance } from "../api/axios";
 import { signupApi } from "../api/endpoints";
 import Username from "../components/Signup/Username";
@@ -11,6 +14,11 @@ import SignupButton from "../components/Signup/SignupButton";
 import Loader from "../components/Loader/loader";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
+type VerifyCodeNavigationProp = StackNavigationProp<
+  RouteNavigationStack,
+  "verifyCode"
+>;
+
 function SignupForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +28,7 @@ function SignupForm() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setConfirmShowPassword] = useState(true);
+  const navigation = useNavigation<VerifyCodeNavigationProp>();
 
   function handleSubmit() {
     setLoading(true);
@@ -31,6 +40,7 @@ function SignupForm() {
         confirmPassword,
       })
       .then((_response: AxiosResponse) => {
+        navigation.navigate("verifyCode");
         setLoading(false);
         setErrors({});
       })
