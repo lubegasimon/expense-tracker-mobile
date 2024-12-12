@@ -1,12 +1,13 @@
 import { View, Text, Pressable } from "react-native";
+import { ButtonProps } from "./types";
 
-function ResendCode() {
+function ResendCode({ onPress, disabled }: ButtonProps) {
   return (
     <View
-      style={{ flexDirection: "row", paddingLeft: "10%", paddingTop: "5%" }}
+      style={{ flexDirection: "row", paddingLeft: "10%", paddingTop: "3%" }}
     >
       <Text style={{ fontSize: 18 }}>Didn't receive code?</Text>
-      <Pressable>
+      <Pressable onPress={onPress} disabled={disabled}>
         <Text style={{ color: "#34b4eb", paddingLeft: "2%", fontSize: 18 }}>
           Resend code
         </Text>
