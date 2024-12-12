@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/signup", signupRouter);
 app.use("/signup/verify-code", verifyCodeRouter);
 app.use("/dashboard", dashboardRouter);
-app.use("/resend-code", resendCodeRouter);
+app.use("/signup/resend-code", resendCodeRouter);
 
 /* exports express app for the tests */
 export default app;

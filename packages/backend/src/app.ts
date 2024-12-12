@@ -21,7 +21,7 @@ app.use("/", indexRouter);
 app.use("/signup", signupRouter);
 app.use("/signup/verify-code", verifyCode);
 app.use("/dashboard", dashboardRouter);
-app.use("/resend-code", resendCodeRouter);
+app.use("/signup/resend-code", resendCodeRouter);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port} \n`);

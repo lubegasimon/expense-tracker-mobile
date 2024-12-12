@@ -46,7 +46,6 @@ function saveCandidateByEmail(email: string, response: Response) {
 
 function verifyCode(request: Request, response: Response) {
   const data = request.body;
-  console.log(data);
 
   redisStore.client
     .get(`verification:${data.email}`)
