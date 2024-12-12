@@ -1,6 +1,7 @@
-import { Text, TextInput, View } from "react-native";
-import { inputStyle, errorStyle, inputAndErrorStyle } from "./styles";
+import { TextInput, View } from "react-native";
+import { inputStyle, inputAndErrorStyle } from "./styles";
 import { FieldProps } from "./types";
+import Error from "../Error/Error";
 
 function Username({ value, onChange, error }: FieldProps) {
   return (
@@ -12,7 +13,7 @@ function Username({ value, onChange, error }: FieldProps) {
         placeholder="Username"
         placeholderTextColor="gray"
       />
-      {error && <Text style={errorStyle.error}>{error}</Text>}
+      <Error error={error} />
     </View>
   );
 }

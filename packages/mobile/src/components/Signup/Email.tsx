@@ -1,6 +1,7 @@
-import { TextInput, Text, View } from "react-native";
+import { TextInput, View } from "react-native";
 import { FieldProps } from "./types";
-import { inputStyle, errorStyle, inputAndErrorStyle } from "./styles";
+import { inputStyle, inputAndErrorStyle } from "./styles";
+import Error from "../Error/Error";
 
 function Email({ value, onChange, error }: FieldProps) {
   return (
@@ -12,7 +13,7 @@ function Email({ value, onChange, error }: FieldProps) {
         placeholder="Email"
         placeholderTextColor="gray"
       />
-      {error && <Text style={errorStyle.error}>{error}</Text>}
+      <Error error={error} />
     </View>
   );
 }

@@ -1,7 +1,8 @@
-import { Text, TextInput, View } from "react-native";
-import { inputStyle, errorStyle, inputAndErrorStyle } from "./styles";
+import { TextInput, View } from "react-native";
+import { inputStyle, inputAndErrorStyle } from "./styles";
 import { FieldProps } from "./types";
 import EyeIcon from "../EyeIcon";
+import Error from "../Error/Error";
 
 export interface ConfirmPasswordProps extends FieldProps, ShowPasswordProps {}
 
@@ -31,7 +32,7 @@ function ConfirmPassword({
         isShowPassword={isShowConfirmPassword}
         setShowPassword={setShowConfirmPassword}
       />
-      {error && <Text style={errorStyle.error}>{error}</Text>}
+      <Error error={error} />
     </View>
   );
 }
