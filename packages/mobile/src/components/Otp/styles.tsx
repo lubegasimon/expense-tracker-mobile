@@ -5,17 +5,17 @@ const styles = StyleSheet.create({
     paddingLeft: "10%",
     paddingRight: "10%",
   },
-  heading: {
+  title: {
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
     paddingTop: "10%",
     paddingBottom: "3%",
   },
-  subHeading: {
+  subTitle: {
     fontSize: 15,
     paddingLeft: "10%",
-    paddingBottom: "10%",
+    paddingBottom: "5%",
   },
   error: {
     color: "red",
