@@ -9,7 +9,7 @@ import Password from "../components/Signup/Password";
 import ConfirmPassword from "../components/Signup/ConfirmPassword";
 import SignupButton from "../components/Signup/SignupButton";
 import Loader from "../components/Loader/loader";
-import { ErrorBoundary } from "react-error-boundary";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
 function SignupForm() {
   const [username, setUsername] = useState("");
@@ -43,17 +43,7 @@ function SignupForm() {
   if (loading) return <Loader />;
   else
     return (
-      <ErrorBoundary
-        fallback={
-          <Text
-            style={{
-              color: "red",
-            }}
-          >
-            Something went wrong
-          </Text>
-        }
-      >
+      <ErrorBoundary>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.container}

@@ -1,8 +1,9 @@
-import { TextInput, Text, View } from "react-native";
+import { TextInput, View } from "react-native";
 import { FieldProps } from "./types";
-import { inputStyle, errorStyle, inputAndErrorStyle } from "./styles";
+import { inputStyle, inputAndErrorStyle } from "./styles";
 import EyeIcon, { ShowPasswordProps } from "../EyeIcon";
 export interface PasswordProps extends FieldProps, ShowPasswordProps {}
+import Error from "../Error/Error";
 
 function Password({
   value,
@@ -25,7 +26,7 @@ function Password({
         isShowPassword={isShowPassword}
         setShowPassword={setShowPassword}
       />
-      {error && <Text style={errorStyle.error}>{error}</Text>}
+      <Error error={error} />
     </View>
   );
 }

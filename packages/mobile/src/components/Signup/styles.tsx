@@ -14,16 +14,6 @@ export const inputStyle = StyleSheet.create({
   },
 });
 
-export const errorStyle = StyleSheet.create({
-  error: {
-    textAlign: "left",
-    width: 300,
-    margin: 5,
-    color: "red",
-    marginTop: -5,
-  },
-});
-
 export const inputAndErrorStyle = StyleSheet.create({
   view: { marginBottom: 10 },
 });
