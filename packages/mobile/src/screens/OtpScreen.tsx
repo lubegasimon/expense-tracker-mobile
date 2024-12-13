@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import { useRoute } from "@react-navigation/native";
 import { axiosInstance } from "@/src/api/axios";
 import { resendCode, verifyCode } from "@/src/api/endpoints";
 import Otp from "../components/Otp/Otp";
@@ -16,10 +17,17 @@ function OtpScreen() {
   const [error, setError] = useState("");
   const [resentCode, setResentCode] = useState(false);
 
+  interface EmailParam {
+    email: string;
+  }
+
+  const route = useRoute();
+  const { email } = route.params as EmailParam;
+
   function handleSubmit(code: string) {
     setLoading(true);
     axiosInstance
-      .post(verifyCode, { code })
+      .post(verifyCode, { code, email })
       .then(() => {
         setLoading(false);
         setError("");
