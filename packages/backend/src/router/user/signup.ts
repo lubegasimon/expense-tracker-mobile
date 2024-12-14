@@ -23,7 +23,7 @@ async function saveCandidateData(
 
 router.post(
   "/",
-  validate("user"),
+  validate("signupBodySchema"),
   async (request: Request, response: Response) => {
     const data = request.body;
     const { username, email, password } = data;

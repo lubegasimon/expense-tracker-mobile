@@ -1,13 +1,13 @@
 import { JSONSchemaType } from "ajv";
 
-interface User {
+interface SignupBody {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-const userSchema: JSONSchemaType<User> = {
+const signupBodySchema: JSONSchemaType<SignupBody> = {
   type: "object",
   properties: {
     /* Note: "username" is a custom format, see ../validate */
@@ -32,4 +32,4 @@ const userSchema: JSONSchemaType<User> = {
   },
 };
 
-export default userSchema;
+export default signupBodySchema;
