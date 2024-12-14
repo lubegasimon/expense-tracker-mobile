@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";
-import userSchema from "./schemas/userSchema";
+import signupBodySchema from "./schemas/user/signupSchema";
 import findUserByEmail from "../../user/find";
 
 const ajv = new Ajv({ allErrors: true, $data: true });
@@ -16,9 +16,9 @@ ajv.addFormat("username", /^[0-9a-zA-Z_]{5,10}$/);
   but validations happen multiple times, this is best for performance
   The compiled validation functions are available, for example via ajv.getSchema.
 
-  For example key "user" passed to addSchema is used to retrieve schemas.
+  For example key "signupBodySchema" passed to addSchema is used to retrieve schemas.
 */
-ajv.addSchema(userSchema, "user");
+ajv.addSchema(signupBodySchema, "signupBodySchema");
 
 /* validateRequestBody is a middleware to validate request bodies. */
 const validateRequestBody = (schema: string) => {
