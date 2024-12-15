@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import RedisStore from "connect-redis";
-import validate from "../../middleware/validation/validateRequestBody";
+import validate from "../../middleware/validation/signup/validate";
 import { redisClient, redisStore } from "../../middleware/session";
 import { redisError } from "./error";
 import sendCodeToEmail from "./sendCode";

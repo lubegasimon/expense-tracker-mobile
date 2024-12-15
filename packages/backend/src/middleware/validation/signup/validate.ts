@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";
-import signupBodySchema from "./schemas/user/signupSchema";
-import findUserByEmail from "../../user/find";
+import signupBodySchema from "../schemas/user/signupSchema";
+import findUserByEmail from "../../../user/find";
 
 const ajv = new Ajv({ allErrors: true, $data: true });
 addFormats(ajv);
@@ -20,8 +20,8 @@ ajv.addFormat("username", /^[0-9a-zA-Z_]{5,10}$/);
 */
 ajv.addSchema(signupBodySchema, "signupBodySchema");
 
-/* validateRequestBody is a middleware to validate request bodies. */
-const validateRequestBody = (schema: string) => {
+/* validateSignupRequestBody is a middleware to validate request bodies. */
+const validateSignupRequestBody = (schema: string) => {
   /*
     ajv.getSchema returns compiled function that we later use to
     validate the request body.
@@ -58,4 +58,4 @@ const validateRequestBody = (schema: string) => {
   };
 };
 
-export default validateRequestBody;
+export default validateSignupRequestBody;
