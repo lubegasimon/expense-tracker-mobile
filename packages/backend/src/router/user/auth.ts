@@ -1,12 +1,21 @@
 import { Response } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import findUserByEmail from "../../user/find";
 
 dotenv.config({ path: ".env.test" });
 
-function initializeSession(email: string, response: Response) {
+async function initializeSession(email: string, response: Response) {
   const JWT_SECRET = process.env.SECRET || "jwt-token";
-  const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "7 days" });
+  const user = await findUserByEmail(email);
+  if (!user) {
+    response.status(500).json({ error: "Internal Server Error" });
+    console.error("Unable to issue token, user ID is missing");
+    return;
+  }
+  const token = jwt.sign({ userID: user.id }, JWT_SECRET, {
+    expiresIn: "7 days",
+  });
   response.append("Authorization", `Bearer ${token}`);
   return response.status(201).json({
     message: `Successfully signed in`,
