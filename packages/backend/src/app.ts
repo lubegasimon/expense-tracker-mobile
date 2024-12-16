@@ -8,6 +8,7 @@ import signupRouter from "./router/user/signup";
 import verifyCode from "./router/user/verifyCode";
 import dashboardRouter from "./router/user/dashboard";
 import resendCodeRouter from "./router/user/resendCode";
+import loginRouter from "./router/user/login";
 
 const port = 3000;
 
@@ -22,6 +23,7 @@ app.use("/signup", signupRouter);
 app.use("/signup/verify-code", verifyCode);
 app.use("/dashboard", dashboardRouter);
 app.use("/signup/resend-code", resendCodeRouter);
+app.use("/login", loginRouter);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port} \n`);
