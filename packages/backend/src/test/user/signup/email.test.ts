@@ -5,24 +5,30 @@ import { sequelize } from "../../../db/db";
 
 describe("email edge cases", () => {
   it("should return 400 for invalid email format", async () => {
-    const response = await request(app).post("/signup").send({
-      username: "johndoe",
-      email: "john.doe",
-      password: "johndoe",
-      confirmPassword: "johndoe",
-    });
-    expect(response.status).toBe(400);
+    const response = await request(app)
+      .post("/signup")
+      .send({
+        username: "johndoe",
+        email: "john.doe",
+        password: "johndoe",
+        confirmPassword: "johndoe",
+      })
+      .expect(400);
+
     expect(response.body.error.email).toContain("Invalid email format");
   });
 
   it("should return 400 for invalid email format", async () => {
-    const response = await request(app).post("/signup").send({
-      username: "johndoe",
-      email: "",
-      password: "johndoe",
-      confirmPassword: "johndoe",
-    });
-    expect(response.status).toBe(400);
+    const response = await request(app)
+      .post("/signup")
+      .send({
+        username: "johndoe",
+        email: "",
+        password: "johndoe",
+        confirmPassword: "johndoe",
+      })
+      .expect(400);
+
     expect(response.body.error.email).toContain("Invalid email format");
   });
 
@@ -37,8 +43,8 @@ describe("email edge cases", () => {
       confirmPassword: "johndoe",
     };
     await create(user);
-    const response = await request(app).post("/signup").send(user);
-    expect(response.status).toBe(409);
-    expect(response.body.error.email).toBe("Email already exists");
+    const response = await request(app).post("/signup").send(user).expect(409);
+
+    expect(response.body.error).toBe("Email already exists");
   });
 });

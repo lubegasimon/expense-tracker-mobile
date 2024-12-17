@@ -39,11 +39,14 @@ describe("Redis operations", () => {
       .then(() => redisStore.client.set(`verification:${user.email}`, CODE))
       .catch(console.error);
 
-    const response = await request(app).post("/signup/verify-code").send({
-      email: user.email,
-      code: CODE,
-    });
-    expect(response.statusCode).toBe(201);
+    const response = await request(app)
+      .post("/signup/verify-code")
+      .send({
+        email: user.email,
+        code: CODE,
+      })
+      .expect(201);
+
     expect(response.body.message).toBe("Successfully signed in");
   });
 
@@ -55,11 +58,14 @@ describe("Redis operations", () => {
       .then(() => redisStore.client.set(`verification:${user.email}`, CODE))
       .catch(console.error);
 
-    const response = await request(app).post("/signup/verify-code").send({
-      email: user.email,
-      code: CODE,
-    });
-    expect(response.statusCode).toBe(409);
+    const response = await request(app)
+      .post("/signup/verify-code")
+      .send({
+        email: user.email,
+        code: CODE,
+      })
+      .expect(409);
+
     expect(response.body.error).toBe("Email already exists");
   });
 
@@ -74,7 +80,8 @@ describe("Redis operations", () => {
       email: user.email,
       code: "0000",
     });
-    expect(response.statusCode).toBe(400);
+    expect(400);
+
     expect(response.body.error).toBe("Invalid code");
   });
 
@@ -86,7 +93,8 @@ describe("Redis operations", () => {
       .catch(console.error);
 
     const response = await request(app).post("/signup/verify-code").send({});
-    expect(response.statusCode).toBe(400);
+    expect(400);
+
     expect(response.body.error).toBe(
       "Verification code expired or invalid email. Please request new code",
     );
@@ -106,9 +114,9 @@ describe("Redis operations", () => {
 
     const response = await request(app)
       .post("/signup/verify-code")
-      .send({ email: user.email, code: CODE });
+      .send({ email: user.email, code: CODE })
+      .expect(401);
 
-    expect(response.statusCode).toBe(401);
     expect(response.body.error).toBe(
       "Your session has expired. Please start new signup process",
     );
@@ -130,9 +138,9 @@ describe("Redis operations", () => {
 
     const response = await request(app)
       .post("/signup/verify-code")
-      .send({ email: user.email, code: CODE });
+      .send({ email: user.email, code: CODE })
+      .expect(400);
 
-    expect(response.statusCode).toBe(400);
     expect(response.body.error).toBe(
       "Verification code expired or invalid email. Please request new code",
     );
