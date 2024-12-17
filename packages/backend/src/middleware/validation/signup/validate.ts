@@ -36,9 +36,9 @@ const validateSignupRequestBody = (schema: string) => {
   */
   const validate = ajv.getSchema(schema);
   return async (request: Request, response: Response, next: NextFunction) => {
-    const data = request.body;
-    const valid = validate && validate(data);
-    if (!valid || data.password !== data.confirmPassword) {
+    const { email, password, confirmPassword } = request.body;
+    const valid = validate && validate(request.body);
+    if (!valid || password !== confirmPassword) {
       let errors: { [key: string]: string | undefined } = {};
       if (validate?.errors) {
         for (const error of validate?.errors) {
@@ -49,9 +49,9 @@ const validateSignupRequestBody = (schema: string) => {
       response.status(400).json({ error: errors });
       return;
     }
-    const rows = await findUserByEmail(data.email);
-    if (!!rows) {
-      response.status(409).json({ error: { email: "Email already exists" } });
+    const rows = await findUserByEmail(email);
+    if (rows) {
+      response.status(409).json({ error: "Email already exists" });
       return;
     }
     next();

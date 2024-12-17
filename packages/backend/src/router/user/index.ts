@@ -1,11 +1,11 @@
 import { Router, Request, Response } from "express";
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  res.set({
+router.get("/", (_request: Request, response: Response) => {
+  response.set({
     "Content-Type": "application/json",
   });
-  res.json({ message: "Welcome, please create account / login" });
+  response.json({ message: "Welcome, please create account / login" });
 });
 
 export default router;

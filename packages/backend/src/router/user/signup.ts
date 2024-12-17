@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import RedisStore from "connect-redis";
 import validate from "../../middleware/validation/signup/validate";
-import { redisClient, redisStore } from "../../middleware/session";
+import { redisStore } from "../../middleware/session";
 import { redisError } from "./error";
 import sendCodeToEmail from "./sendCode";
 
@@ -25,25 +25,13 @@ router.post(
   "/",
   validate("signupBodySchema"),
   async (request: Request, response: Response) => {
-    const data = request.body;
-    const { username, email, password } = data;
+    const { username, email, password } = request.body;
 
     await saveCandidateData(username, email, password, redisStore);
-    const sendEmailStatus = await sendCodeToEmail(email);
-
-    const savedCandidateData = await redisClient
-      .get(`signup:${email}`)
-      .catch((error) => redisError(error));
-
-    const savedVerificationCode = await redisClient
-      .get(`verification:${email}`)
-      .catch((error) => redisError(error));
+    await sendCodeToEmail(email);
 
     response.status(200).json({
       message: "Valid user data",
-      savedCandidateData,
-      savedVerificationCode,
-      sendEmailStatus,
     });
   },
 );

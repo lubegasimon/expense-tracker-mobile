@@ -45,19 +45,19 @@ function saveCandidateByEmail(email: string, response: Response) {
 }
 
 function verifyCode(request: Request, response: Response) {
-  const data = request.body;
+  const { email, code } = request.body;
 
   redisStore.client
-    .get(`verification:${data.email}`)
+    .get(`verification:${email}`)
     .then((result) => {
       if (!result)
         return response.status(400).json({
           error:
             "Verification code expired or invalid email. Please request new code",
         });
-      if (result !== data.code)
+      if (result !== code)
         return response.status(400).json({ error: "Invalid code" });
-      else return saveCandidateByEmail(data.email, response);
+      else return saveCandidateByEmail(email, response);
     })
     .catch((error) => redisError(error));
 }

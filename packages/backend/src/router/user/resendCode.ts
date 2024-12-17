@@ -3,8 +3,8 @@ import sendCodeToEmail from "./sendCode";
 const router = Router();
 
 router.post("/", async (request: Request, response: Response) => {
-  const data = request.body;
-  await sendCodeToEmail(data.email);
+  const { email } = request.body;
+  await sendCodeToEmail(email);
 
   response
     .status(200)
