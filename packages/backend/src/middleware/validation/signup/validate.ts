@@ -20,8 +20,8 @@ ajv.addFormat("username", /^[0-9a-zA-Z_]{5,10}$/);
 */
 ajv.addSchema(signupBodySchema, "signupBodySchema");
 
-/* validateSignupRequestBody is a middleware to validate request bodies. */
-const validateSignupRequestBody = (schema: string) => {
+/* validateSignupRequest is a middleware to validate request bodies. */
+const validateSignupRequest = (schema: string) => {
   /*
     ajv.getSchema returns compiled function that we later use to
     validate the request body.
@@ -58,4 +58,4 @@ const validateSignupRequestBody = (schema: string) => {
   };
 };
 
-export default validateSignupRequestBody;
+export default validateSignupRequest;
