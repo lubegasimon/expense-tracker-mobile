@@ -39,7 +39,7 @@ async function sendCodeToEmail(email: string) {
       //TODO: Use event webhooks -- https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook
       if (response[0].statusCode) return "Email sent";
     })
-    .catch((error) => console.error(error));
+    .catch(console.error);
 }
 
 export default sendCodeToEmail;
