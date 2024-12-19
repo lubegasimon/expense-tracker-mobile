@@ -1,4 +1,4 @@
 export type RouteNavigationStack = {
   signup: undefined;
-  verifyCode: undefined;
+  verifyCode: { email: string };
 };
