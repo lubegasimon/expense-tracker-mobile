@@ -1,5 +1,5 @@
 import { Ajv } from "ajv";
-import { Request, Response } from "express";
+import { NextFunction, Request } from "express";
 import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";
 import loginBodySchema from "./schemas/user/loginSchema";
@@ -25,7 +25,7 @@ ajv.addSchema(signupBodySchema, "signupBodySchema");
 const validateRequest = (
   schema: string,
   request: Request,
-  response: Response,
+  next: NextFunction,
 ) => {
   /*
     ajv.getSchema returns compiled function that we later use to
@@ -48,9 +48,9 @@ const validateRequest = (
         const errorName = error.instancePath.slice(1);
         errors[errorName] = error.message;
       }
+      return next({ status: 400, message: errors });
     }
-    response.status(400).json({ error: errors });
-    return;
+    return next();
   }
 };
 

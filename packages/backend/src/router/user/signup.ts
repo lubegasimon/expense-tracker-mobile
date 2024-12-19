@@ -4,6 +4,7 @@ import validate from "../../middleware/validation/signup/validate";
 import { redisStore } from "../../middleware/session";
 import { redisError } from "./error";
 import sendCodeToEmail from "./sendCode";
+import handleError from "../../middleware/errorHandler";
 
 const router = Router();
 
@@ -18,12 +19,13 @@ async function saveCandidateData(
   await redisStore.client
     .set(signupKey, candidateData)
     .then(() => redisStore.client.expire(signupKey, 86400))
-    .catch((error) => redisError(error));
+    .catch(redisError);
 }
 
 router.post(
   "/",
-  validate("signupBodySchema"),
+  validate(),
+  handleError,
   async (request: Request, response: Response) => {
     const { username, email, password } = request.body;
 

@@ -4,23 +4,25 @@ import findUserByEmail from "../../../user/find";
 import validateRequest from "../validateRequest";
 
 const validateLoginRequest = () => {
-  return async (request: Request, response: Response, next: NextFunction) => {
-    validateRequest("loginBodySchema", request, response);
+  return async (request: Request, _response: Response, next: NextFunction) => {
+    validateRequest("loginBodySchema", request, next);
     const { email, password } = request.body;
 
     const isPassword = (savedPassword: string) =>
       bcrypt.compare(password, savedPassword);
 
-    const user = await findUserByEmail(email);
-    if (!user) {
-      response.status(409).json({ error: "No account found with this email" });
-      return;
-    }
-    if (user.email !== email || !(await isPassword(user.password))) {
-      response.status(409).json({ error: "Invalid email or password" });
-      return;
-    }
-    next();
+    findUserByEmail(email)
+      .then(async (user) => {
+        if (!user)
+          return next({
+            status: 409,
+            message: "No account found with this email",
+          });
+        if (user.email !== email || !(await isPassword(user.password)))
+          return next({ status: 409, message: "Invalid email or password" });
+        return next();
+      })
+      .catch(next);
   };
 };
 

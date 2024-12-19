@@ -2,17 +2,16 @@ import { NextFunction, Request, Response } from "express";
 import findUserByEmail from "../../../user/find";
 import validateRequest from "../validateRequest";
 
-const validateSignupRequest = (schema: string) => {
-  return async (request: Request, response: Response, next: NextFunction) => {
-    validateRequest(schema, request, response);
+const validateSignupRequest = () => {
+  return async (request: Request, _response: Response, next: NextFunction) => {
+    validateRequest("signupBodySchema", request, next);
     const { email } = request.body;
-
-    const rows = await findUserByEmail(email);
-    if (rows) {
-      response.status(409).json({ error: "Email already exists" });
-      return;
-    }
-    next();
+    findUserByEmail(email)
+      .then((user) => {
+        if (user) return next({ status: 409, message: "Email already exists" });
+        return next();
+      })
+      .catch(next);
   };
 };
 

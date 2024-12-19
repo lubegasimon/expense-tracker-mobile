@@ -23,10 +23,15 @@ function createUser(user: UserAttrs, response: Response) {
           .catch((error) => {
             // TODO: How can a user recover from this error?
             console.error(error);
-            response.status(500).send({ error: "Internal server error" });
+            return response
+              .status(500)
+              .json({ error: "Internal server error" });
           });
     })
-    .catch(console.error);
+    .catch((error) => {
+      console.error(error);
+      throw new Error("Something while creating an account");
+    });
 }
 
 function saveCandidateByEmail(email: string, response: Response) {
@@ -41,7 +46,7 @@ function saveCandidateByEmail(email: string, response: Response) {
           error: "Your session has expired. Please start new signup process",
         });
     })
-    .catch((error) => redisError(error));
+    .catch(redisError);
 }
 
 function verifyCode(request: Request, response: Response) {
@@ -50,16 +55,17 @@ function verifyCode(request: Request, response: Response) {
   redisStore.client
     .get(`verification:${email}`)
     .then((result) => {
-      if (!result)
+      if (!result) {
         return response.status(400).json({
           error:
             "Verification code expired or invalid email. Please request new code",
         });
+      }
       if (result !== code)
         return response.status(400).json({ error: "Invalid code" });
       else return saveCandidateByEmail(email, response);
     })
-    .catch((error) => redisError(error));
+    .catch(redisError);
 }
 
 router.post("/", verifyCode);
