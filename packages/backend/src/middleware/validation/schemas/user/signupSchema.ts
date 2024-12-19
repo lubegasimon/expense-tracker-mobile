@@ -10,7 +10,7 @@ interface SignupBody {
 const signupBodySchema: JSONSchemaType<SignupBody> = {
   type: "object",
   properties: {
-    /* Note: "username" is a custom format, see ../validate */
+    /* Note: "username" is a custom format, see ../validateRequest.ts */
     username: { type: "string", format: "username" },
     email: { type: "string", format: "email" },
     password: { type: "string", minLength: 5, maxLength: 256 },
