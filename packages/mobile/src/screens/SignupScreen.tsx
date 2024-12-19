@@ -40,7 +40,11 @@ function SignupForm() {
         confirmPassword,
       })
       .then((_response: AxiosResponse) => {
-        navigation.navigate("verifyCode");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        navigation.navigate("verifyCode", { email });
         setLoading(false);
         setErrors({});
       })
