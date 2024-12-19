@@ -7,7 +7,7 @@ import { redisError } from "../router/user/error";
 
 export const redisClient = createClient();
 
-redisClient.connect().catch((error) => redisError(error));
+redisClient.connect().catch(redisError);
 
 export const redisStore = new RedisStore({
   client: redisClient,

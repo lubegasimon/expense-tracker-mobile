@@ -1,13 +1,17 @@
 import request from "supertest";
 import app from "../app";
+import findUserByEmail from "../../../user/find";
 
 describe("password edge case", () => {
   it("should return 400 if password contains fewer than 5 characters", async () => {
+    const email = "johnn@doe.com";
+    await findUserByEmail(email);
+
     const response = await request(app)
       .post("/signup")
       .send({
         username: "johndoe",
-        email: "johnn@doe.com",
+        email,
         password: "john",
         confirmPassword: "john",
       })

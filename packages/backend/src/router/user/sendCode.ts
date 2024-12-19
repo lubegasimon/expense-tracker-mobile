@@ -21,7 +21,7 @@ async function sendCodeToEmail(email: string) {
   await redisStore.client
     .set(`verification:${email}`, code)
     .then(() => redisStore.client.expire(`verification:${email}`, 300))
-    .catch((error) => redisError(error));
+    .catch(redisError);
 
   sgMail.setApiKey(process.env.SENDGRID_API_KEY || "api-key");
 
@@ -39,7 +39,10 @@ async function sendCodeToEmail(email: string) {
       //TODO: Use event webhooks -- https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook
       if (response[0].statusCode) return "Email sent";
     })
-    .catch(console.error);
+    .catch((error) => {
+      console.error(error);
+      throw new Error("Something went wrong while sending code to the email");
+    });
 }
 
 export default sendCodeToEmail;
