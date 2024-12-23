@@ -8,10 +8,12 @@ const handleError = (
   error: ApplicationError,
   _request: Request,
   response: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
-  response.status(error.status).json({ error: error.message });
-  next(error);
+  const status = error.status || 500;
+  const errorMessage =
+    error.message || "Something went wrong. Please try again";
+  response.status(status).json({ error: errorMessage });
 };
 
 export default handleError;
