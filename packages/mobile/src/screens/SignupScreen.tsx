@@ -50,6 +50,14 @@ function SignupForm() {
       })
       .catch((error) => {
         setLoading(false);
+        if (!error.response || !error.response.data) {
+          console.error("No response data received from the server:", error);
+          setErrors({
+            ServerConnectionError:
+              "Failed to connect to the server. Confirm that you are connected to the internet and try again",
+          });
+          return;
+        }
         setErrors(error.response.data.error);
       });
   }
