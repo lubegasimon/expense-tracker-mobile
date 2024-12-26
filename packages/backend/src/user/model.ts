@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import bcrypt from "bcrypt";
 import { sequelize } from "../db/db";
 
-const INVALID_USERANME_FORMAT =
+const INVALID_USERNAME_FORMAT =
   "Username must be 5-10 characters long and can only contain letters, numbers, and underscores";
 
 export interface UserInstance extends Model<UserAttrs>, UserAttrs {}
@@ -34,7 +34,7 @@ export const UserModel = sequelize.define<UserInstance>(
         isValid(username: string) {
           const regex = /^[0-9a-zA-Z_]{5,10}$/;
           if (!regex.test(username)) {
-            throw new Error(INVALID_USERANME_FORMAT);
+            throw new Error(INVALID_USERNAME_FORMAT);
           }
         },
       },
