@@ -1,11 +1,7 @@
 import { randomInt } from "crypto";
 import sgMail from "@sendgrid/mail";
-import dotenv from "dotenv";
 import { redisStore } from "../../middleware/session";
 import { redisError } from "./error";
-
-// TODO:
-dotenv.config({ path: ".env.test" });
 
 const verificationCode = (): Promise<string> => {
   return new Promise((resolve, reject) => {

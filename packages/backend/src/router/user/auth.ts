@@ -1,9 +1,6 @@
 import { Response } from "express";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import findUserByEmail from "../../user/find";
-
-dotenv.config({ path: ".env.test" });
 
 async function initializeSession(email: string, response: Response) {
   const JWT_SECRET = process.env.SECRET || "jwt-token";
