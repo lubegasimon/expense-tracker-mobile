@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import create from "../../user/create";
 import { sequelize } from "../../db/db";
 import findUserByEmail from "../../user/find";
+import models from "../../models";
 
 const user = {
   id: uuidv4(),
@@ -11,7 +12,7 @@ const user = {
 };
 
 describe("Find by email", () => {
-  afterEach(() => sequelize.truncate());
+  afterEach(async () => await models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
 
   it("should return user if email exists", async () => {

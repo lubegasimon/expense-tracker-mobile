@@ -4,6 +4,7 @@ import { createClient } from "redis";
 import app from "../app";
 import { sequelize } from "../../../db/db";
 import create from "../../../user/create";
+import models from "../../../models";
 
 const redisClient = createClient();
 
@@ -22,7 +23,7 @@ const user = {
 const CODE = "1234";
 
 describe("Redis operations", () => {
-  afterEach(() => sequelize.truncate());
+  afterEach(async () => await models.User.destroy({ truncate: true }));
   afterEach(() =>
     redisStore.client
       .del([`signup:${user.email}`, `verification:${user.email}`])

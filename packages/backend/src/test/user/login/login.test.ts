@@ -3,6 +3,7 @@ import app from "../app";
 import create from "../../../user/create";
 import { sequelize } from "../../../db/db";
 import { v4 as uuidv4 } from "uuid";
+import models from "../../../models";
 
 const user = {
   id: uuidv4(),
@@ -12,7 +13,7 @@ const user = {
 };
 
 describe("POST /login", () => {
-  afterAll(() => sequelize.truncate());
+  afterAll(async () => await models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
 
   it("should return 200 if email and password are correct", async () => {

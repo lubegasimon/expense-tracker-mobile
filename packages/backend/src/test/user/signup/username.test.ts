@@ -1,7 +1,12 @@
 import request from "supertest";
 import app from "../app";
+import { redisStore } from "../../../middleware/session";
 
 describe("username edge cases", () => {
+  afterAll(() =>
+    redisStore.client.del([`signup:john@example.com`]).catch(console.error),
+  );
+
   it("should return 200 for valid user data", async () => {
     const response = await request(app)
       .post("/signup")
