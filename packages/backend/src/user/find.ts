@@ -1,4 +1,4 @@
-import { UserModel } from "./model";
+import models from "../models";
 
 /**
  * We call this [findUserByEmail] twice during the signup process;
@@ -22,8 +22,8 @@ import { UserModel } from "./model";
  * before the other. So we don't want to endup with duplicate emails.
  */
 
-const findUserByEmail = (email: string) => {
-  return UserModel.findOne({
+const findUserByEmail = async (email: string) => {
+  return await models.User.findOne({
     where: { email },
     attributes: { exclude: ["createdAt", "updatedAt"] },
   });

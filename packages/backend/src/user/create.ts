@@ -1,7 +1,8 @@
-import { UserAttrs, UserInstance, UserModel } from "./model";
+import { UserAttrs, UserInstance } from "./model";
+import models from "../models";
 
-const create = (user: UserAttrs): Promise<UserInstance> => {
-  return UserModel.create(user);
+const create = async (user: UserAttrs): Promise<UserInstance> => {
+  return await models.User.create(user);
 };
 
 export default create;
