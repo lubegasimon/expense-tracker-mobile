@@ -16,10 +16,11 @@
     "pre:seed": "npm run compile",
     "seed": "npx sequelize-cli db:seed:all",
     "undo:most:recent:seed": "npx sequelize-cli db:seed:undo",
-    "start": "npx ts-node ./src/app.ts",
+    "start": "NODE_ENV=development ts-node ./src/app.ts",
     "redis": "redis-server",
     "fmt": "npx prettier . --write",
-    "test": "jest --runInBand"
+    "pretest": "npm run compile",
+    "test": "NODE_ENV=test jest --runInBand ./build/src/test"
   },
   "author": "",
   "license": "ISC",
@@ -54,6 +55,7 @@
     "redis": "^4.7.0",
     "sequelize": "^6.37.5",
     "supertest": "^7.0.0",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "walk-sync": "^3.0.0"
   }
 }

@@ -1,6 +1,7 @@
 import create from "../../user/create";
 import { sequelize } from "../../db/db";
 import { v4 as uuidv4 } from "uuid";
+import models from "../../models";
 
 const user = {
   id: uuidv4(),
@@ -10,7 +11,7 @@ const user = {
 };
 
 describe("User CRUD operation", () => {
-  afterEach(() => sequelize.truncate());
+  afterEach(async () => await models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
 
   it("create user", () => {

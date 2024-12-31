@@ -1,8 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config({ path: ".env.test" });
 
 const JWT_SECRET = process.env.SECRET || "jwt-secret";
 
