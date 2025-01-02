@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import validateCreateCategoryRequest from "../../middleware/validation/category/validate";
 import create from "../../category/create";
-import findCategoryName from "../../category/find";
+import findCategory from "../../category/find";
 
 const router = Router();
 
@@ -10,7 +10,7 @@ router.post(
   validateCreateCategoryRequest(),
   async (request: Request, response: Response) => {
     const { name, details } = request.body;
-    if (await findCategoryName(name)) {
+    if (await findCategory(name)) {
       response.status(409).json({ error: "Category already exists" });
     } else {
       await create({ name, details })

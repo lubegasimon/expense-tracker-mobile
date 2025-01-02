@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import create from "../../category/create";
 import { sequelize } from "../../db/db";
-import findCategoryName from "../../category/find";
+import findCategory from "../../category/find";
 import models from "../../models";
 
 const category = {
@@ -16,13 +16,13 @@ describe("find category name", () => {
 
   it("should return category name if it exists", async () => {
     await create(category);
-    const result = await findCategoryName("Water");
+    const result = await findCategory("Water");
     expect(result).toHaveProperty("name", "Water");
   });
 
   it("should return null if category name does not exist or is empty", async () => {
     await create(category);
-    const result = await findCategoryName("Electricity");
+    const result = await findCategory("Electricity");
     expect(result).toBeNull();
   });
 });
