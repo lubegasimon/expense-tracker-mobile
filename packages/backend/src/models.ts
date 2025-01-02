@@ -2,8 +2,9 @@ import path from "path";
 import walkSync from "walk-sync";
 import { ModelStatic, Sequelize, Model } from "sequelize";
 import databaseConfig from "../config/database.json";
-import { UserInstance } from "./user/model";
 import { safeEnvironment } from "./config";
+import { UserInstance } from "./user/model";
+import { CategoryInstance } from "./category/model";
 
 const config = databaseConfig[safeEnvironment()];
 
@@ -22,6 +23,7 @@ const sequelize = createSequelizeInstance(config);
 
 interface Models {
   User: ModelStatic<UserInstance>;
+  Category: ModelStatic<CategoryInstance>;
   [key: string]: ModelStatic<Model>;
 }
 
