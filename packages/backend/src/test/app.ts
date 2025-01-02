@@ -1,10 +1,10 @@
 import express from "express";
-import signupRouter from "../../router/user/signup";
-import verifyCodeRouter from "../../router/user/verifyCode";
-import dashboardRouter from "../../router/user/dashboard";
-import resendCodeRouter from "../../router/user/resendCode";
-import loginRouter from "../../router/user/login";
-import handleError from "../../middleware/errorHandler";
+import signupRouter from "../router/user/signup";
+import verifyCodeRouter from "../router/user/verifyCode";
+import dashboardRouter from "../router/user/dashboard";
+import resendCodeRouter from "../router/user/resendCode";
+import loginRouter from "../router/user/login";
+import handleError from "../middleware/errorHandler";
 
 const app = express();
 

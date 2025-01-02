@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../app";
+import app from "../../app";
 import { redisStore } from "../../../middleware/session";
 
 describe("username edge cases", () => {

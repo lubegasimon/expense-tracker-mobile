@@ -1,7 +1,7 @@
 import request from "supertest";
 import RedisStore from "connect-redis";
 import { createClient } from "redis";
-import app from "../app";
+import app from "../../app";
 import { sequelize } from "../../../db/db";
 import create from "../../../user/create";
 import models from "../../../models";

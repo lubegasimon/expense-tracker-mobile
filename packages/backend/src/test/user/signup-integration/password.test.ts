@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../app";
+import app from "../../app";
 import findUserByEmail from "../../../user/find";
 
 describe("password edge case", () => {

@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "./app";
+import app from "../../app";
 
 jest.mock("jsonwebtoken", () => ({
   sign: jest.fn(() => "json.web.token"),
