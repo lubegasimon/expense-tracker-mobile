@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
-import create from "../../category/create";
-import { sequelize } from "../../db/db";
-import findCategory from "../../category/find";
-import models from "../../models";
+import create from "../../../category/create";
+import { sequelize } from "../../../db/db";
+import findCategory from "../../../category/find";
+import models from "../../../models";
 
 const category = {
   id: uuidv4(),
