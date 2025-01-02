@@ -9,6 +9,7 @@ import verifyCode from "./router/user/verifyCode";
 import dashboardRouter from "./router/user/dashboard";
 import resendCodeRouter from "./router/user/resendCode";
 import loginRouter from "./router/user/login";
+import categoryRouter from "./router/category/index";
 import handleError from "./middleware/errorHandler";
 
 const port = 3000;
@@ -25,6 +26,7 @@ app.use("/signup/verify-code", verifyCode);
 app.use("/dashboard", dashboardRouter);
 app.use("/signup/resend-code", resendCodeRouter);
 app.use("/login", loginRouter);
+app.use("/category", categoryRouter);
 app.use(handleError);
 
 app.listen(port, () => {
