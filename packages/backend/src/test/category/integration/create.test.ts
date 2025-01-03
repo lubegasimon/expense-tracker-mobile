@@ -7,7 +7,7 @@ describe("POST /category/create", () => {
   afterAll(async () => await models.Category.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
 
-  it("should return 200 when category creation is successful", async () => {
+  it("should return 200 when category is created", async () => {
     const response = await request(app)
       .post("/category/create")
       .send({
@@ -15,9 +15,7 @@ describe("POST /category/create", () => {
         details: "Water bill",
       })
       .expect(201);
-    expect(response.body.message).toBe(
-      "Category Water is successfully created",
-    );
+    expect(response.body.message).toBe("Category Water successfully created");
     expect(response.body.category).toHaveProperty("name", "Water");
     expect(response.body.category).toHaveProperty("details", "Water bill");
     expect(response.body.category).toHaveProperty("id");
@@ -32,6 +30,6 @@ describe("POST /category/create", () => {
       .post("/category/create")
       .send(category)
       .expect(409);
-    expect(response.body.error).toBe("Category already exists");
+    expect(response.body.message).toBe("Category already exists");
   });
 });

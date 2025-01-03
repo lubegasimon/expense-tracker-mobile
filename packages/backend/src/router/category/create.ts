@@ -10,28 +10,28 @@ router.post(
   validateCreateCategoryRequest(),
   async (request: Request, response: Response) => {
     const { name, details } = request.body;
-    if (await findCategory(name)) {
-      response.status(409).json({ error: "Category already exists" });
-    } else {
+    const category = await findCategory(name);
+    if (category)
+      response.status(409).json({ message: "Category already exists" });
+    else
       await create({ name, details })
-        .then(async (category) =>
-          response.status(201).json({
-            message: `Category ${name} is successfully created`,
+        .then((category) => {
+          return response.status(201).json({
+            message: `Category ${name} successfully created`,
             category: {
               id: category.id,
               name,
               details,
             },
-          }),
-        )
+          });
+        })
         .catch((error) => {
           console.error(`An error occurred while creating category: ${error}`);
-          response.status(500).json({
+          return response.status(500).json({
             message:
               "An error occurred while creating category. Please try again",
           });
         });
-    }
   },
 );
 
