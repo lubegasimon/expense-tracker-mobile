@@ -7,6 +7,7 @@ import loginRouter from "../router/user/login";
 import categoryRouter from "../router/category/index";
 import createCategoryRouter from "../router/category/create";
 import editCategoryRouter from "../router/category/edit";
+import deleteCategoryRouter from "../router/category/delete";
 import handleError from "../middleware/errorHandler";
 
 const app = express();
@@ -20,6 +21,7 @@ app.use("/login", loginRouter);
 app.use("/category", categoryRouter);
 app.use("/category/create", createCategoryRouter);
 app.use("/category", editCategoryRouter);
+app.use("/category", deleteCategoryRouter);
 app.use(handleError);
 
 /* exports express app for the tests */
