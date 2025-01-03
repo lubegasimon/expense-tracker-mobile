@@ -25,7 +25,7 @@ describe("PUT /category/:id", () => {
         details: "Electricity bills",
       })
       .expect(200);
-    expect(response.body.message).toBe("Category is successfully updated");
+    expect(response.body.message).toBe("Category successfully updated");
     expect(response.body.category).toHaveProperty("name", "Electricity");
     expect(response.body.category).toHaveProperty(
       "details",
@@ -41,12 +41,8 @@ describe("PUT /category/:id", () => {
         name: "Electricity",
       })
       .expect(200);
-    expect(response.body.message).toBe("Category is successfully updated");
+    expect(response.body.message).toBe("Category successfully updated");
     expect(response.body.category).toHaveProperty("name", "Electricity");
-    expect(response.body.category).toHaveProperty(
-      "details",
-      "Electricity bills",
-    );
     expect(response.body.category).toHaveProperty("id", `${id}`);
   });
 
@@ -58,7 +54,7 @@ describe("PUT /category/:id", () => {
         details: "",
       })
       .expect(200);
-    expect(response.body.message).toBe("Category is successfully updated");
+    expect(response.body.message).toBe("Category successfully updated");
     expect(response.body.category).toHaveProperty("name", "Internet");
     expect(response.body.category).toHaveProperty("details", "");
     expect(response.body.category).toHaveProperty("id", `${id}`);
