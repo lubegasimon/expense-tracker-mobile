@@ -26,7 +26,11 @@ describe("Update category", () => {
   });
 
   it("should update category name and details", async () => {
-    const [result] = await updateCategory(id, "Electricity", "Electricity bills");
+    const [result] = await updateCategory(
+      id,
+      "Electricity",
+      "Electricity bills",
+    );
     const updatedCategory = await findCategoryById(id);
     expect(result).toEqual(1);
     expect(updatedCategory).toHaveProperty("name", "Electricity");
