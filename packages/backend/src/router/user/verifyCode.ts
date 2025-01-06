@@ -8,8 +8,8 @@ import initializeSession from "./auth";
 
 const router = Router();
 
-function createUser(user: UserAttrs, response: Response) {
-  findUserByEmail(user.email)
+async function createUser(user: UserAttrs, response: Response) {
+  await findUserByEmail(user.email)
     .then((rows) => {
       if (rows)
         return response.status(409).json({ error: "Email already exists" });
@@ -34,13 +34,13 @@ function createUser(user: UserAttrs, response: Response) {
     });
 }
 
-function saveCandidateByEmail(email: string, response: Response) {
-  redisStore.client
+async function saveCandidateByEmail(email: string, response: Response) {
+  await redisStore.client
     .get(`signup:${email}`)
-    .then((data) => {
+    .then(async (data) => {
       if (data) {
         let { username, email, password } = JSON.parse(data);
-        return createUser({ username, email, password }, response);
+        return await createUser({ username, email, password }, response);
       } else
         return response.status(401).json({
           error: "Your session has expired. Please start new signup process",
@@ -49,12 +49,12 @@ function saveCandidateByEmail(email: string, response: Response) {
     .catch(redisError);
 }
 
-function verifyCode(request: Request, response: Response) {
+async function verifyCode(request: Request, response: Response) {
   const { email, code } = request.body;
 
-  redisStore.client
+  await redisStore.client
     .get(`verification:${email}`)
-    .then((result) => {
+    .then(async (result) => {
       if (!result) {
         return response.status(400).json({
           error:
@@ -63,7 +63,7 @@ function verifyCode(request: Request, response: Response) {
       }
       if (result !== code)
         return response.status(400).json({ error: "Invalid code" });
-      else return saveCandidateByEmail(email, response);
+      else return await saveCandidateByEmail(email, response);
     })
     .catch(redisError);
 }
