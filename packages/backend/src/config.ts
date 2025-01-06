@@ -16,5 +16,13 @@ export const safeEnvironment = (): environment => {
   return "development";
 };
 
-export const secret = process.env.SECRET || "secret";
-export const dbUrl = process.env.DATABASE_URI || "postgres://";
+function getEnvVariable(name: string): string {
+  const value = process.env[name];
+  if (!value) throw new Error(`Environment variable ${name} is required`);
+  return value;
+}
+
+export const databaseUrl = getEnvVariable("DATABASE_URI");
+export const sendGridApiKey = getEnvVariable("SENDGRID_API_KEY");
+export const senderEmail = getEnvVariable("SENDER_EMAIL");
+export const secret = getEnvVariable("SECRET");

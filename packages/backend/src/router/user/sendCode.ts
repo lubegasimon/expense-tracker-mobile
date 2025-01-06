@@ -2,6 +2,7 @@ import { randomInt } from "crypto";
 import sgMail from "@sendgrid/mail";
 import { redisStore } from "../../middleware/session";
 import { redisError } from "./error";
+import { sendGridApiKey, senderEmail } from "../../config";
 
 const verificationCode = (): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -19,11 +20,11 @@ async function sendCodeToEmail(email: string) {
     .then(() => redisStore.client.expire(`verification:${email}`, 300))
     .catch(redisError);
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY || "api-key");
+  sgMail.setApiKey(sendGridApiKey);
 
   const message = {
     to: email,
-    from: process.env.EXPENSE_TRACKER_EMAIL || "email@example.com",
+    from: senderEmail,
     subject: "Expense-tracker: Verification code",
     text: `Verification code`,
     html: `Code <strong>${code}</strong> expires in 5 minutes.`,

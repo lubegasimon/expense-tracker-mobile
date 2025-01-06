@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-
-const JWT_SECRET = process.env.SECRET || "jwt-secret";
+import { secret } from "../config";
 
 function autheticateJwt(
   request: Request,
@@ -17,7 +16,7 @@ function autheticateJwt(
       message: "Please login to access this resource.",
     });
   else
-    jwt.verify(token, JWT_SECRET, (error, _decoded) => {
+    jwt.verify(token, secret, (error, _decoded) => {
       if (error) {
         switch (error.name) {
           case "JsonWebTokenError":
