@@ -1,0 +1,69 @@
+name: Expense Tracker CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/backend
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USERNAME: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install dependencies
+      # `npm ci` ensures a clean install based on the lock file and avoids modifying package-lock.json
+        run: npm ci
+
+      - name: Run database migrations
+        run: npm run migrate
+        env:
+          DATABASE_URI: postgresql://postgres:postgres@localhost:5432/postgres
+
+      - name: Start redis server
+        uses: supercharge/redis-github-action@1.7.0
+        with:
+          redis-version: 7
+
+      - name: Run backend tests
+        run: npm test
+        env:
+          DATABASE_URI: postgresql://postgres:postgres@localhost:5432/postgres
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          SECRET: ${{ secrets.SECRET}}
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
