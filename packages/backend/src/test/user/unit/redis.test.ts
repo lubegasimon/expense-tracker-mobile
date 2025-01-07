@@ -1,13 +1,8 @@
-import RedisStore from "connect-redis";
-import { createClient } from "redis";
-
-const redisClient = createClient();
-
-redisClient.connect().catch(console.error);
-
-const redisStore = new RedisStore({
-  client: redisClient,
-});
+import {
+  redisStore,
+  closeRedisClient,
+  redisClient,
+} from "../../../middleware/session";
 
 const user = {
   username: "johndoe",
@@ -23,6 +18,9 @@ describe("Redis operations", () => {
       .catch(console.error),
   );
   afterAll(() => redisClient.disconnect().catch(console.error));
+  // afterAll(async () => {
+  //   await closeRedisClient();
+  // });
 
   it("should save user data in Redis", async () => {
     const data = JSON.stringify(user);

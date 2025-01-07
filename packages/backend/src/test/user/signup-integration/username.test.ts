@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../../app";
-import { redisStore } from "../../../middleware/session";
+import { redisStore, closeRedisClient } from "../../../middleware/session";
 
 describe("username edge cases", () => {
   afterAll(
@@ -9,6 +9,9 @@ describe("username edge cases", () => {
         .del(["signup:john@example.com", "verification:john@example.com"])
         .catch(console.error),
   );
+  afterAll(async () => {
+    await closeRedisClient();
+  });
 
   it("should return 200 for valid user data", async () => {
     const response = await request(app)

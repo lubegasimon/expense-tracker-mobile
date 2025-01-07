@@ -1,8 +1,13 @@
 import request from "supertest";
 import app from "../../app";
 import findUserByEmail from "../../../user/find";
+import { closeRedisClient } from "../../../middleware/session";
 
 describe("password edge case", () => {
+  afterAll(async () => {
+    await closeRedisClient();
+  });
+
   it("should return 400 if password contains fewer than 5 characters", async () => {
     const email = "johnn@doe.com";
     await findUserByEmail(email);

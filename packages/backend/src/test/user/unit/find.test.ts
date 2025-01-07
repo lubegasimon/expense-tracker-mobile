@@ -3,6 +3,7 @@ import create from "../../../user/create";
 import { sequelize } from "../../../db/db";
 import findUserByEmail from "../../../user/find";
 import models from "../../../models";
+import { closeRedisClient } from "../../../middleware/session";
 
 const user = {
   id: uuidv4(),
@@ -14,6 +15,9 @@ const user = {
 describe("Find by email", () => {
   afterEach(async () => await models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
+  afterAll(async () => {
+    await closeRedisClient();
+  });
 
   it("should return user if email exists", async () => {
     await create(user);
