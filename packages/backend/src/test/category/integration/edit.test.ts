@@ -4,6 +4,7 @@ import app from "../../app";
 import { sequelize } from "../../../db/db";
 import models from "../../../models";
 import create from "../../../category/create";
+import { closeRedisClient } from "../../../middleware/session";
 
 const id = uuidv4();
 const category = {
@@ -15,6 +16,9 @@ const category = {
 describe("PUT /category/:id", () => {
   afterAll(async () => await models.Category.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
+  afterAll(async () => {
+    await closeRedisClient();
+  });
 
   it("should return 200 when category update is successful", async () => {
     await create(category);

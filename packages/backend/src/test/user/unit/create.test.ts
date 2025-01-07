@@ -2,6 +2,7 @@ import create from "../../../user/create";
 import { sequelize } from "../../../db/db";
 import { v4 as uuidv4 } from "uuid";
 import models from "../../../models";
+import { closeRedisClient } from "../../../middleware/session";
 
 const user = {
   id: uuidv4(),
@@ -12,10 +13,13 @@ const user = {
 
 describe("User CRUD operation", () => {
   afterEach(async () => await models.User.destroy({ truncate: true }));
-  afterAll(() => sequelize.close());
+  afterAll(async () => await sequelize.close());
+  afterAll(async () => {
+    await closeRedisClient();
+  });
 
-  it("create user", () => {
-    return create(user).then((user) =>
+  it("create user", async () => {
+    return await create(user).then((user) =>
       expect(user).toHaveProperty("username", "john_"),
     );
   });

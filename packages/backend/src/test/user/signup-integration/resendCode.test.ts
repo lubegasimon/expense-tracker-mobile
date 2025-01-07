@@ -1,11 +1,15 @@
 import request from "supertest";
 import app from "../../app";
-import { redisStore } from "../../../middleware/session";
+import { redisStore, closeRedisClient } from "../../../middleware/session";
 
 describe("POST /signup/resend-code", () => {
   afterEach(() =>
     redisStore.client.del([`verification:john@doe.com`]).catch(console.error),
   );
+  afterAll(async () => {
+    await closeRedisClient();
+  });
+
   it("should return 200 if code is sent to email", async () => {
     const response = await request(app)
       .post("/signup/resend-code")

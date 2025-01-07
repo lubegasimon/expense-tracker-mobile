@@ -29,3 +29,7 @@ export const sessionManager = session({
   },
   name: "session-id-mobile",
 });
+
+export const closeRedisClient = async () => {
+  await redisClient.quit();
+};

@@ -2,10 +2,14 @@ import request from "supertest";
 import app from "../../app";
 import { sequelize } from "../../../db/db";
 import models from "../../../models";
+import { closeRedisClient } from "../../../middleware/session";
 
 describe("POST /category/create", () => {
   afterAll(async () => await models.Category.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
+  afterAll(async () => {
+    await closeRedisClient();
+  });
 
   it("should return 200 when category is created", async () => {
     const response = await request(app)

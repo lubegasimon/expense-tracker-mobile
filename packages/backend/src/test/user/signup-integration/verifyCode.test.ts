@@ -1,18 +1,9 @@
 import request from "supertest";
-import RedisStore from "connect-redis";
-import { createClient } from "redis";
 import app from "../../app";
 import { sequelize } from "../../../db/db";
 import create from "../../../user/create";
 import models from "../../../models";
-
-const redisClient = createClient();
-
-redisClient.connect().catch(console.error);
-
-const redisStore = new RedisStore({
-  client: redisClient,
-});
+import { redisStore, closeRedisClient } from "../../../middleware/session";
 
 const user = {
   username: "johndoe",
@@ -29,8 +20,11 @@ describe("Redis operations", () => {
       .del([`signup:${user.email}`, `verification:${user.email}`])
       .catch(console.error),
   );
-  afterAll(() => sequelize.close());
-  afterAll(() => redisClient.disconnect().catch(console.error));
+  afterAll(async () => await sequelize.close());
+  // afterAll(async () => await redisClient.disconnect().catch(console.error));
+  afterAll(async () => {
+    await closeRedisClient();
+  });
 
   it("should return 201 and create user account if code is valid and email is not taken", async () => {
     const data = JSON.stringify(user);

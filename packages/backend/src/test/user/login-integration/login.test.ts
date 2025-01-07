@@ -4,6 +4,7 @@ import create from "../../../user/create";
 import { sequelize } from "../../../db/db";
 import { v4 as uuidv4 } from "uuid";
 import models from "../../../models";
+import { closeRedisClient } from "../../../middleware/session";
 
 const user = {
   id: uuidv4(),
@@ -15,6 +16,9 @@ const user = {
 describe("POST /login", () => {
   afterAll(async () => await models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
+  afterAll(async () => {
+    await closeRedisClient();
+  });
 
   it("should return 200 if email and password are correct", async () => {
     await create(user);

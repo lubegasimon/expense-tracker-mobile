@@ -3,8 +3,13 @@ import app from "../../app";
 import create from "../../../user/create";
 import { sequelize } from "../../../db/db";
 import models from "../../../models";
+import { closeRedisClient } from "../../../middleware/session";
 
 describe("email edge cases", () => {
+  afterAll(async () => {
+    await closeRedisClient();
+  });
+
   it("should return 400 for invalid email format", async () => {
     const response = await request(app)
       .post("/signup")
