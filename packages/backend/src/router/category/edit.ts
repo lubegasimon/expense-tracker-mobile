@@ -8,7 +8,7 @@ router.put("/:id", async (request: Request, response: Response) => {
   const { name, details } = request.body;
   if (!name) response.status(400).json({ message: "Name is required" });
   else
-    await updateCategory(id, name, details)
+    await updateCategory({ id, name, details })
       .then(([result]) => {
         if (result !== 1)
           return response.status(404).json({ message: "Category not found" });
