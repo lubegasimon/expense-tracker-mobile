@@ -7,7 +7,10 @@ import deleteCategory from "../../../category/delete";
 const id = uuidv4();
 
 describe("DELETE category", () => {
-  afterAll(async () => await models.Category.destroy({ truncate: true }));
+  afterAll(
+    async () =>
+      await models.Category.destroy({ truncate: true, cascade: true }),
+  );
   afterAll(() => sequelize.close());
 
   it("should delete category", async () => {
