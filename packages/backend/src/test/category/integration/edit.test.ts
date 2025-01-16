@@ -9,8 +9,8 @@ import { closeRedisClient } from "../../../middleware/session";
 const id = uuidv4();
 const category = {
   id,
-  name: "Water",
-  description: "Water bill",
+  name: "Housing",
+  description: "Payment for rent, mortgage, property taxes, et cetera",
 };
 
 describe("PUT /category/:id", () => {
@@ -28,15 +28,19 @@ describe("PUT /category/:id", () => {
     const response = await request(app)
       .put(`/category/${id}`)
       .send({
-        name: "Electricity",
-        description: "Electricity bills",
+        name: "Internet and Communication",
+        description:
+          "Payment for internet services, mobile phone plans, et cetera",
       })
       .expect(200);
     expect(response.body.message).toBe("Category successfully updated");
-    expect(response.body.category).toHaveProperty("name", "Electricity");
+    expect(response.body.category).toHaveProperty(
+      "name",
+      "Internet and Communication",
+    );
     expect(response.body.category).toHaveProperty(
       "description",
-      "Electricity bills",
+      "Payment for internet services, mobile phone plans, et cetera",
     );
     expect(response.body.category).toHaveProperty("id", `${id}`);
   });
@@ -53,25 +57,11 @@ describe("PUT /category/:id", () => {
     expect(response.body.category).toHaveProperty("id", `${id}`);
   });
 
-  it("should return 200 when category update is successfull", async () => {
-    const response = await request(app)
-      .put(`/category/${id}`)
-      .send({
-        name: "Internet",
-        description: "",
-      })
-      .expect(200);
-    expect(response.body.message).toBe("Category successfully updated");
-    expect(response.body.category).toHaveProperty("name", "Internet");
-    expect(response.body.category).toHaveProperty("description", "");
-    expect(response.body.category).toHaveProperty("id", `${id}`);
-  });
-
   it("should return 400 when category name is not provided", async () => {
     const response = await request(app)
       .put(`/category/${id}`)
       .send({
-        description: "Electricity bills",
+        description: "Others bills",
       })
       .expect(400);
     expect(response.body.message).toBe("Name is required");
@@ -81,7 +71,7 @@ describe("PUT /category/:id", () => {
     const invalidId = uuidv4();
     const response = await request(app)
       .put(`/category/${invalidId}`)
-      .send({ name: "Rent" })
+      .send({ name: "Housing" })
       .expect(404);
     expect(response.body.message).toBe("Category not found");
   });

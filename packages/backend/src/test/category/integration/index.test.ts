@@ -9,8 +9,8 @@ import { closeRedisClient } from "../../../middleware/session";
 const id = uuidv4();
 
 const category = {
-  name: "Water",
-  description: "Water bill",
+  name: "Groceries",
+  description: "Payment for food and household supplies for consumption",
   id,
 };
 

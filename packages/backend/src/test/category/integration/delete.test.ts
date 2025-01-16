@@ -9,8 +9,8 @@ import { closeRedisClient } from "../../../middleware/session";
 const id = uuidv4();
 const category = {
   id,
-  name: "Water",
-  description: "Water bill",
+  name: "Housing",
+  description: "Payment for rent, mortgage, property taxes, et cetera",
 };
 
 describe("DELETE /category/:id", () => {
@@ -26,7 +26,7 @@ describe("DELETE /category/:id", () => {
   it("should return 200 when category is successfully deleted", async () => {
     await create(category);
     const response = await request(app).delete(`/category/${id}`).expect(200);
-    expect(response.body.message).toBe("Category successfully deleted");
+    expect(response.body.message).toBe(`${category.name} successfully deleted`);
   });
 
   it("should return 404 if a category ID is invalid", async () => {

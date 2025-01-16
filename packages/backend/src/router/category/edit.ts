@@ -19,9 +19,10 @@ router.put("/:id", async (request: Request, response: Response) => {
       })
       .catch((error) => {
         console.error(`An error occured while updating category: ${error}`);
-        return response
-          .status(500)
-          .json({ message: "Something went wrong. Please try again" });
+        return response.status(500).json({
+          message:
+            "An error occurred while updating category. Please try again",
+        });
       });
 });
 

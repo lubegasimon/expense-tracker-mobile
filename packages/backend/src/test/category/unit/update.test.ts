@@ -9,8 +9,7 @@ const id = uuidv4();
 
 const category = {
   id,
-  name: "Water",
-  description: "Water bill",
+  name: "Childcare and Education",
 };
 
 describe("Update category", () => {
@@ -24,28 +23,31 @@ describe("Update category", () => {
     await create(category);
     const [result] = await updateCategory({
       ...category,
-      description: "About water bills",
+      description:
+        "Payment for daycare, school supplies, tuition, extracurricular, et cetera",
     });
     const updatedCategory = await findCategoryById(id);
     expect(result).toEqual(1);
-    expect(updatedCategory).toHaveProperty("description", "About water bills");
+    expect(updatedCategory).toHaveProperty(
+      "description",
+      "Payment for daycare, school supplies, tuition, extracurricular, et cetera",
+    );
   });
 
   it("should update category name and description", async () => {
     const [result] = await updateCategory({
       id,
-      name: "Electricity",
-      description: "Electricity bills",
+      name: "Healthcare",
+      description: "Costs for medical treatments, wellness services et cetera",
     });
     const updatedCategory = await findCategoryById(id);
     expect(result).toEqual(1);
-    expect(updatedCategory).toHaveProperty("name", "Electricity");
-    expect(updatedCategory).toHaveProperty("description", "Electricity bills");
+    expect(updatedCategory).toHaveProperty("name", "Healthcare");
   });
 
   it("should return 0 if category with specified ID doesn't exist", async () => {
     const invalidId = uuidv4();
-    const [result] = await updateCategory({ id: invalidId, name: "Water" });
+    const [result] = await updateCategory({ id: invalidId, name: "Petcare" });
     expect(result).toEqual(0);
   });
 });

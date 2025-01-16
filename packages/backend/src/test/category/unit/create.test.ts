@@ -5,8 +5,8 @@ import models from "../../../models";
 
 const category = {
   id: uuidv4(),
-  name: "Water",
-  description: "Water bill",
+  name: "Furnishings and Appliances",
+  description: "Purchases for furniture, appliances, and decorations",
 };
 
 describe("Create category", () => {
@@ -18,7 +18,7 @@ describe("Create category", () => {
 
   it("create category if name doesn't exist", async () => {
     return await create(category).then((category) =>
-      expect(category).toHaveProperty("name", "Water"),
+      expect(category).toHaveProperty("name", "Furnishings and Appliances"),
     );
   });
 });

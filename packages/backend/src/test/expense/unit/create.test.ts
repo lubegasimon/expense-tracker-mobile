@@ -6,7 +6,7 @@ import models from "../../../models";
 const expense = {
   id: uuidv4(),
   name: "Water bill",
-  details: "For January",
+  details: "Water bill for January",
   amount: 20,
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -19,7 +19,7 @@ describe("Create expense", () => {
   it("create expense", async () => {
     return await create(expense).then(async (expense) => {
       expect(expense).toHaveProperty("name", "Water bill");
-      expect(expense).toHaveProperty("amount");
+      expect(expense).toHaveProperty("amount", 20);
     });
   });
 });

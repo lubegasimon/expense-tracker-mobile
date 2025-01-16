@@ -12,12 +12,12 @@ router.post(
     const { name, description } = request.body;
     const category = await findCategory(name);
     if (category)
-      response.status(409).json({ message: "Category already exists" });
+      response.status(409).json({ message: `${name} already exists` });
     else
       await create({ name, description })
         .then((category) => {
           return response.status(201).json({
-            message: `Category ${name} successfully created`,
+            message: `${name} successfully created`,
             category: {
               id: category.id,
               name,
