@@ -10,7 +10,7 @@ const id = uuidv4();
 const category = {
   id,
   name: "Water",
-  details: "Water bill",
+  description: "Water bill",
 };
 
 describe("PUT /category/:id", () => {
@@ -29,19 +29,19 @@ describe("PUT /category/:id", () => {
       .put(`/category/${id}`)
       .send({
         name: "Electricity",
-        details: "Electricity bills",
+        description: "Electricity bills",
       })
       .expect(200);
     expect(response.body.message).toBe("Category successfully updated");
     expect(response.body.category).toHaveProperty("name", "Electricity");
     expect(response.body.category).toHaveProperty(
-      "details",
+      "description",
       "Electricity bills",
     );
     expect(response.body.category).toHaveProperty("id", `${id}`);
   });
 
-  it("should return 200 when category details is not provided", async () => {
+  it("should return 200 when category description is not provided", async () => {
     const response = await request(app)
       .put(`/category/${id}`)
       .send({
@@ -58,12 +58,12 @@ describe("PUT /category/:id", () => {
       .put(`/category/${id}`)
       .send({
         name: "Internet",
-        details: "",
+        description: "",
       })
       .expect(200);
     expect(response.body.message).toBe("Category successfully updated");
     expect(response.body.category).toHaveProperty("name", "Internet");
-    expect(response.body.category).toHaveProperty("details", "");
+    expect(response.body.category).toHaveProperty("description", "");
     expect(response.body.category).toHaveProperty("id", `${id}`);
   });
 
@@ -71,7 +71,7 @@ describe("PUT /category/:id", () => {
     const response = await request(app)
       .put(`/category/${id}`)
       .send({
-        details: "Electricity bills",
+        description: "Electricity bills",
       })
       .expect(400);
     expect(response.body.message).toBe("Name is required");

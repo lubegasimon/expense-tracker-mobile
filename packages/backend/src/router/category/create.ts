@@ -9,19 +9,19 @@ router.post(
   "/",
   validateCreateCategoryRequest(),
   async (request: Request, response: Response) => {
-    const { name, details } = request.body;
+    const { name, description } = request.body;
     const category = await findCategory(name);
     if (category)
       response.status(409).json({ message: "Category already exists" });
     else
-      await create({ name, details })
+      await create({ name, description })
         .then((category) => {
           return response.status(201).json({
             message: `Category ${name} successfully created`,
             category: {
               id: category.id,
               name,
-              details,
+              description,
             },
           });
         })

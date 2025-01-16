@@ -6,7 +6,7 @@ import models from "../../../models";
 const category = {
   id: uuidv4(),
   name: "Water",
-  details: "Water bill",
+  description: "Water bill",
 };
 
 describe("Create category", () => {

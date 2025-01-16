@@ -10,7 +10,7 @@ const id = uuidv4();
 const category = {
   id,
   name: "Water",
-  details: "Water bill",
+  description: "Water bill",
 };
 
 describe("Update category", () => {
@@ -20,27 +20,27 @@ describe("Update category", () => {
   );
   afterAll(() => sequelize.close());
 
-  it("should update category details", async () => {
+  it("should update category description", async () => {
     await create(category);
     const [result] = await updateCategory({
       ...category,
-      details: "About water bills",
+      description: "About water bills",
     });
     const updatedCategory = await findCategoryById(id);
     expect(result).toEqual(1);
-    expect(updatedCategory).toHaveProperty("details", "About water bills");
+    expect(updatedCategory).toHaveProperty("description", "About water bills");
   });
 
-  it("should update category name and details", async () => {
+  it("should update category name and description", async () => {
     const [result] = await updateCategory({
       id,
       name: "Electricity",
-      details: "Electricity bills",
+      description: "Electricity bills",
     });
     const updatedCategory = await findCategoryById(id);
     expect(result).toEqual(1);
     expect(updatedCategory).toHaveProperty("name", "Electricity");
-    expect(updatedCategory).toHaveProperty("details", "Electricity bills");
+    expect(updatedCategory).toHaveProperty("description", "Electricity bills");
   });
 
   it("should return 0 if category with specified ID doesn't exist", async () => {

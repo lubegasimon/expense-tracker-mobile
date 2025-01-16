@@ -10,7 +10,7 @@ const id = uuidv4();
 
 const category = {
   name: "Water",
-  details: "Water bill",
+  description: "Water bill",
   id,
 };
 

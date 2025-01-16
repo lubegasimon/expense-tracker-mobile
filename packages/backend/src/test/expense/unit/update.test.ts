@@ -53,7 +53,7 @@ describe("Update expense", () => {
     const category = await createCategory({
       id: categoryId,
       name: "Internet",
-      details: "Internet for January",
+      description: "Internet for January",
     });
     const [result] = await updateExpense({
       ...expense,

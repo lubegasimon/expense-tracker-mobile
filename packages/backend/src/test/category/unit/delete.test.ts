@@ -17,7 +17,7 @@ describe("DELETE category", () => {
     const createdCategory = await create({
       id,
       name: "Water",
-      details: "Water bill",
+      description: "Water bill",
     });
     expect(createdCategory).toHaveProperty("name", "Water");
 

@@ -19,19 +19,19 @@ describe("POST /category/create", () => {
       .post("/category/create")
       .send({
         name: "Water",
-        details: "Water bill",
+        description: "Water bill",
       })
       .expect(201);
     expect(response.body.message).toBe("Category Water successfully created");
     expect(response.body.category).toHaveProperty("name", "Water");
-    expect(response.body.category).toHaveProperty("details", "Water bill");
+    expect(response.body.category).toHaveProperty("description", "Water bill");
     expect(response.body.category).toHaveProperty("id");
   });
 
   it("should return 409 for a category name that exists", async () => {
     const category = {
       name: "Water",
-      details: "Water bills",
+      description: "Water bills",
     };
     const response = await request(app)
       .post("/category/create")

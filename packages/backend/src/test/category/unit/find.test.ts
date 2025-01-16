@@ -9,7 +9,7 @@ const id = uuidv4();
 const category = {
   id,
   name: "Water",
-  details: "Water bill",
+  description: "Water bill",
 };
 
 describe("find category name", () => {
