@@ -4,7 +4,8 @@ import { ModelStatic, Sequelize, Model } from "sequelize";
 import databaseConfig from "../config/database.json";
 import { safeEnvironment } from "./config";
 import { UserInstance } from "./user/model";
-import { CategoryInstance } from "./category/model";
+import { CategoryModel } from "./category/model";
+import { ExpenseModel } from "./expense/model";
 
 const config = databaseConfig[safeEnvironment()];
 
@@ -21,10 +22,15 @@ function createSequelizeInstance(config: {
 
 const sequelize = createSequelizeInstance(config);
 
+interface CustomModel extends ModelStatic<Model> {
+  associate?: (models: { [key: string]: ModelStatic<Model> }) => void;
+}
+
 interface Models {
   User: ModelStatic<UserInstance>;
-  Category: ModelStatic<CategoryInstance>;
-  [key: string]: ModelStatic<Model>;
+  Category: CategoryModel;
+  Expense: ExpenseModel;
+  [key: string]: CustomModel;
 }
 
 const models: Partial<Models> = {};
@@ -39,4 +45,17 @@ const loadModels = (sequelize: Sequelize): Models => {
   return models as Models;
 };
 
-export default loadModels(sequelize);
+const associateModels = (models: Models) => {
+  Object.keys(models).forEach((name) => {
+    const model = models[name];
+    if (model.associate) model.associate(models);
+  });
+};
+
+const getModels = () => {
+  const models = loadModels(sequelize);
+  associateModels(models);
+  return models;
+};
+
+export default getModels();
