@@ -3,11 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 
 module.exports = {
   async up(queryInterface: QueryInterface) {
-    await queryInterface.bulkInsert("Categories", [
+    await queryInterface.bulkInsert("Expenses", [
       {
         id: uuidv4(),
-        name: "Water",
-        details: "Water bills",
+        name: "Water bill",
+        details: "For January",
+        amount: 20,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -15,6 +16,6 @@ module.exports = {
   },
 
   async down(queryInterface: QueryInterface) {
-    await queryInterface.bulkDelete("Categories", {}, {});
+    await queryInterface.bulkDelete("Expenses", {}, {});
   },
 };

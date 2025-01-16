@@ -1,5 +1,5 @@
 import { QueryInterface } from "sequelize";
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 
 module.exports = {
   async up(queryInterface: QueryInterface) {
@@ -8,6 +8,7 @@ module.exports = {
         id: uuidv4(),
         username: "John",
         email: "john@doe.com",
+        password: "johndoe",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

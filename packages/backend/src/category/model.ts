@@ -1,6 +1,10 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
 
 export interface CategoryInstance extends Model<CategoryAttrs>, CategoryAttrs {}
+
+export interface CategoryModel extends ModelStatic<CategoryInstance> {
+  associate?: (models: { [key: string]: ModelStatic<Model> }) => void;
+}
 
 type UUID = string;
 
@@ -13,24 +17,31 @@ export interface CategoryAttrs {
 }
 
 export default (sequelize: Sequelize) => {
-  const CategoryModel = sequelize.define<CategoryInstance>("Category", {
-    id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4(),
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    details: {
-      type: DataTypes.TEXT,
-      validate: {
-        len: [0, 256],
+  const Category: CategoryModel = sequelize.define<CategoryInstance>(
+    "Category",
+    {
+      id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4(),
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      details: {
+        type: DataTypes.TEXT,
+        validate: {
+          len: [0, 256],
+        },
       },
     },
-  });
+  );
 
-  return CategoryModel;
+  Category.associate = (models) => {
+    Category.hasMany(models.Expense, { foreignKey: "categoryId" });
+  };
+
+  return Category;
 };
