@@ -5,7 +5,10 @@ import models from "../../../models";
 import { closeRedisClient } from "../../../middleware/session";
 
 describe("POST /category/create", () => {
-  afterAll(async () => await models.Category.destroy({ truncate: true }));
+  afterAll(
+    async () =>
+      await models.Category.destroy({ truncate: true, cascade: true }),
+  );
   afterAll(() => sequelize.close());
   afterAll(async () => {
     await closeRedisClient();

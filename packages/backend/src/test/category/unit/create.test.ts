@@ -10,7 +10,10 @@ const category = {
 };
 
 describe("Create category", () => {
-  afterAll(async () => await models.Category.destroy({ truncate: true }));
+  afterAll(
+    async () =>
+      await models.Category.destroy({ truncate: true, cascade: true }),
+  );
   afterAll(() => sequelize.close());
 
   it("create category if name doesn't exist", async () => {

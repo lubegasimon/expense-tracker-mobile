@@ -7,7 +7,7 @@ type UUID = string;
 export interface CategoryAttrs {
   id?: UUID;
   name: string;
-  details: string;
+  details?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

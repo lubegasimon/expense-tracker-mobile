@@ -14,7 +14,10 @@ const category = {
 };
 
 describe("PUT /category/:id", () => {
-  afterAll(async () => await models.Category.destroy({ truncate: true }));
+  afterAll(
+    async () =>
+      await models.Category.destroy({ truncate: true, cascade: true }),
+  );
   afterAll(() => sequelize.close());
   afterAll(async () => {
     await closeRedisClient();

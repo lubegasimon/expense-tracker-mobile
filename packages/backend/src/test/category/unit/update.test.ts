@@ -14,23 +14,29 @@ const category = {
 };
 
 describe("Update category", () => {
-  afterAll(async () => await models.Category.destroy({ truncate: true }));
+  afterAll(
+    async () =>
+      await models.Category.destroy({ truncate: true, cascade: true }),
+  );
   afterAll(() => sequelize.close());
 
   it("should update category details", async () => {
     await create(category);
-    const [result] = await updateCategory(id, "Water", "About water bills");
+    const [result] = await updateCategory({
+      ...category,
+      details: "About water bills",
+    });
     const updatedCategory = await findCategoryById(id);
     expect(result).toEqual(1);
     expect(updatedCategory).toHaveProperty("details", "About water bills");
   });
 
   it("should update category name and details", async () => {
-    const [result] = await updateCategory(
+    const [result] = await updateCategory({
       id,
-      "Electricity",
-      "Electricity bills",
-    );
+      name: "Electricity",
+      details: "Electricity bills",
+    });
     const updatedCategory = await findCategoryById(id);
     expect(result).toEqual(1);
     expect(updatedCategory).toHaveProperty("name", "Electricity");
@@ -39,7 +45,7 @@ describe("Update category", () => {
 
   it("should return 0 if category with specified ID doesn't exist", async () => {
     const invalidId = uuidv4();
-    const [result] = await updateCategory(invalidId, "Water", "Water bills");
+    const [result] = await updateCategory({ id: invalidId, name: "Water" });
     expect(result).toEqual(0);
   });
 });
