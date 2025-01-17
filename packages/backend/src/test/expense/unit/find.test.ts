@@ -8,8 +8,7 @@ const id = uuidv4();
 
 const expense = {
   id,
-  name: "Water bill",
-  details: "For January",
+  name: "Personal loan",
   amount: 20,
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -22,8 +21,7 @@ describe("find expense", () => {
   it("should return expense if it exists", async () => {
     await create(expense);
     const result = await findExpenseById(id);
-    expect(result).toHaveProperty("name", "Water bill");
-    expect(result).toHaveProperty("amount");
+    expect(result).toHaveProperty("name", "Personal loan");
   });
 
   it("should return null if expense does not exist or is empty", async () => {

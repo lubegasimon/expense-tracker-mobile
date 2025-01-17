@@ -8,8 +8,8 @@ const id = uuidv4();
 
 const category = {
   id,
-  name: "Water",
-  details: "Water bill",
+  name: "Insurance",
+  description: "Costs for home, healthy, life, and asset insurance policies",
 };
 
 describe("find category name", () => {
@@ -22,7 +22,7 @@ describe("find category name", () => {
   it("should return category if it exists", async () => {
     await create(category);
     const result = await findCategoryById(id);
-    expect(result).toHaveProperty("name", "Water");
+    expect(result).toHaveProperty("name", "Insurance");
     expect(result).toHaveProperty("id", id);
   });
 

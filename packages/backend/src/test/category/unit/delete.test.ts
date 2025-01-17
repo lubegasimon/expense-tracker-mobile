@@ -16,10 +16,11 @@ describe("DELETE category", () => {
   it("should delete category", async () => {
     const createdCategory = await create({
       id,
-      name: "Water",
-      details: "Water bill",
+      name: "Transportation",
+      description:
+        "Costs for fuel, car maintenance, public transportation, car registration et cetera",
     });
-    expect(createdCategory).toHaveProperty("name", "Water");
+    expect(createdCategory).toHaveProperty("name", "Transportation");
 
     const result = await deleteCategory(id);
     expect(result).toEqual(1);

@@ -13,17 +13,18 @@ router.delete("/:id", async (request: Request, response: Response) => {
       .then((result) => {
         if (result !== 1)
           return response.status(500).json({
-            message: `Failed to delete the category. Please try again`,
+            message: `Failed to delete the ${category.name}. Please try again`,
           });
         return response
           .status(200)
-          .json({ message: "Category successfully deleted" });
+          .json({ message: `${category.name} successfully deleted` });
       })
       .catch((error) => {
         console.error(`An error occured while deleting category: ${error}`);
-        return response
-          .status(500)
-          .json({ message: "Something went wrong. Please try again" });
+        return response.status(500).json({
+          message:
+            "An error occurred while deleting category. Please try again",
+        });
       });
   }
 });

@@ -11,7 +11,7 @@ type UUID = string;
 export interface CategoryAttrs {
   id?: UUID;
   name: string;
-  details?: string;
+  description?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -30,7 +30,7 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      details: {
+      description: {
         type: DataTypes.TEXT,
         validate: {
           len: [0, 256],

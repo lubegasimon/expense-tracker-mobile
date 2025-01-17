@@ -8,8 +8,8 @@ const id = uuidv4();
 
 const expense = {
   id,
-  name: "Water bill",
-  details: "For January",
+  name: "Gym membership",
+  details: "Gym membership for January",
   amount: 20,
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -21,8 +21,8 @@ describe("DELETE expense", () => {
 
   it("should delete expense", async () => {
     const createdExpense = await create(expense);
-    expect(createdExpense).toHaveProperty("name", "Water bill");
-    expect(createdExpense).toHaveProperty("amount");
+    expect(createdExpense).toHaveProperty("name", "Gym membership");
+    expect(createdExpense).toHaveProperty("amount", 20);
 
     const result = await deleteExpense(id);
     expect(result).toEqual(1);

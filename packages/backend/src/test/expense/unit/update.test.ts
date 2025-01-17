@@ -10,7 +10,7 @@ const id = uuidv4();
 
 const expense = {
   id,
-  name: "Water bill",
+  name: "Birthday gift",
   amount: 20,
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -28,32 +28,40 @@ describe("Update expense", () => {
     await create(expense);
     const [result] = await updateExpense({
       ...expense,
-      details: "For January",
+      details: "Doe's 26th birthday gift",
     });
     const updatedExpense = await findExpenseById(id);
     expect(result).toEqual(1);
-    expect(updatedExpense).toHaveProperty("details", "For January");
+    expect(updatedExpense).toHaveProperty(
+      "details",
+      "Doe's 26th birthday gift",
+    );
   });
 
   it("should update expense name, amount, and details ", async () => {
     const [result] = await updateExpense({
       id,
-      name: "Electricity",
+      name: "Wedding pledge",
       amount: 30,
-      details: "For February",
+      details: "Pledge fullfulment for Doe's wedding",
     });
     const updatedExpense = await findExpenseById(id);
     expect(result).toEqual(1);
-    expect(updatedExpense).toHaveProperty("name", "Electricity");
-    expect(updatedExpense).toHaveProperty("details", "For February");
+    expect(updatedExpense).toHaveProperty("name", "Wedding pledge");
+    expect(updatedExpense).toHaveProperty(
+      "details",
+      "Pledge fullfulment for Doe's wedding",
+    );
+    expect(updatedExpense).toHaveProperty("amount", 30);
   });
 
   it("should change expense category", async () => {
     const categoryId = uuidv4();
     const category = await createCategory({
       id: categoryId,
-      name: "Internet",
-      details: "Internet for January",
+      name: "Miscellaneous",
+      description:
+        "Any unclassified expenses, such as gifts, donations, personal indulgences",
     });
     const [result] = await updateExpense({
       ...expense,
