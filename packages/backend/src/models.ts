@@ -3,7 +3,7 @@ import walkSync from "walk-sync";
 import { ModelStatic, Sequelize, Model } from "sequelize";
 import databaseConfig from "../config/database.json";
 import { safeEnvironment } from "./config";
-import { UserInstance } from "./user/model";
+import { UserModel } from "./user/model";
 import { CategoryModel } from "./category/model";
 import { ExpenseModel } from "./expense/model";
 
@@ -27,7 +27,7 @@ interface CustomModel extends ModelStatic<Model> {
 }
 
 interface Models {
-  User: ModelStatic<UserInstance>;
+  User: UserModel;
   Category: CategoryModel;
   Expense: ExpenseModel;
   [key: string]: CustomModel;

@@ -1,10 +1,14 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
 import bcrypt from "bcrypt";
 
 const INVALID_USERNAME_FORMAT =
   "Username must be 5-10 characters long and can only contain letters, numbers, and underscores";
 
 export interface UserInstance extends Model<UserAttrs>, UserAttrs {}
+
+export interface UserModel extends ModelStatic<UserInstance> {
+  associate?: (models: { [key: string]: ModelStatic<Model> }) => void;
+}
 
 type UUID = string;
 
@@ -18,7 +22,7 @@ export interface UserAttrs {
 }
 
 export default (sequelize: Sequelize) => {
-  const UserModel = sequelize.define<UserInstance>(
+  const User: UserModel = sequelize.define<UserInstance>(
     "User",
     {
       id: {
@@ -64,7 +68,7 @@ export default (sequelize: Sequelize) => {
     },
   );
 
-  return UserModel;
+  return User;
 };
 
 function hashPassword(user: UserAttrs) {
