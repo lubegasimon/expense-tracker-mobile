@@ -8,6 +8,7 @@ import categoryRouter from "../router/category/index";
 import createCategoryRouter from "../router/category/create";
 import editCategoryRouter from "../router/category/edit";
 import deleteCategoryRouter from "../router/category/delete";
+import expenseRouter from "../router/expense/index";
 import createExpenseRouter from "../router/expense/create";
 import handleError from "../middleware/errorHandler";
 
@@ -23,6 +24,7 @@ app.use("/category", categoryRouter);
 app.use("/category/create", createCategoryRouter);
 app.use("/category", editCategoryRouter);
 app.use("/category", deleteCategoryRouter);
+app.use("/expense", expenseRouter);
 app.use("/expense/create", createExpenseRouter);
 app.use(handleError);
 
