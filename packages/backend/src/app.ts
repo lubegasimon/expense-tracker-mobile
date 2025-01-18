@@ -15,6 +15,7 @@ import editCategoryRouter from "./router/category/edit";
 import deleteCategoryRouter from "./router/category/delete";
 import expenseRouter from "./router/expense/index";
 import createExpenseRouter from "./router/expense/create";
+import editExpenseRouter from "./router/expense/edit";
 import handleError from "./middleware/errorHandler";
 
 const port = 3000;
@@ -37,6 +38,7 @@ app.use("/category", editCategoryRouter);
 app.use("/category", deleteCategoryRouter);
 app.use("/expense", expenseRouter);
 app.use("/expense/create", createExpenseRouter);
+app.use("/expense", editExpenseRouter);
 
 app.use(handleError);
 
