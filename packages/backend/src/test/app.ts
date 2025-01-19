@@ -11,6 +11,7 @@ import deleteCategoryRouter from "../router/category/delete";
 import expenseRouter from "../router/expense/index";
 import createExpenseRouter from "../router/expense/create";
 import editExpenseRouter from "../router/expense/edit";
+import deleteExpenseRouter from "../router/expense/delete";
 import handleError from "../middleware/errorHandler";
 
 const app = express();
@@ -28,6 +29,7 @@ app.use("/category", deleteCategoryRouter);
 app.use("/expense", expenseRouter);
 app.use("/expense/create", createExpenseRouter);
 app.use("/expense", editExpenseRouter);
+app.use("/expense", deleteExpenseRouter);
 app.use(handleError);
 
 /* exports express app for the tests */
