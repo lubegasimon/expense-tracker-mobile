@@ -1,4 +1,4 @@
-import models from "../models";
+import models from "../../models";
 
 export const findCategory = async (name: string) => {
   return await models.Category.findOne({

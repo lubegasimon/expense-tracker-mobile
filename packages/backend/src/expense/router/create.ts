@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import create from "../../expense/create";
-import { findCategoryById } from "../../category/find";
+import create from "../operations/create";
+import { findCategoryById } from "../../category/operations/find";
 
 const router = Router();
 

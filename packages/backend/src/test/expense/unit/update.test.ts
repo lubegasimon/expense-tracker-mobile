@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
-import { sequelize } from "../../../db/db";
+import { sequelize } from "../../../../db/db";
 import models from "../../../models";
-import create from "../../../expense/create";
-import createCategory from "../../../category/create";
-import updateExpense from "../../../expense/update";
-import { findExpenseById } from "../../../expense/find";
+import create from "../../../expense/operations/create";
+import createCategory from "../../../category/operations/create";
+import updateExpense from "../../../expense/operations/update";
+import { findExpenseById } from "../../../expense/operations/find";
 
 const id = uuidv4();
 

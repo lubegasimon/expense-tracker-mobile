@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import validateCreateCategoryRequest from "../../middleware/validation/category/validate";
-import create from "../../category/create";
-import { findCategory } from "../../category/find";
+import create from "../operations/create";
+import { findCategory } from "../operations/find";
 
 const router = Router();
 

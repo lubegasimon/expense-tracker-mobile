@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import create from "../../../expense/create";
-import deleteExpense from "../../../expense/delete";
-import { sequelize } from "../../../db/db";
+import create from "../../../expense/operations/create";
+import deleteExpense from "../../../expense/operations/delete";
+import { sequelize } from "../../../../db/db";
 import models from "../../../models";
 
 const id = uuidv4();

@@ -1,4 +1,4 @@
 import { Sequelize } from "sequelize";
-import { databaseUrl } from "../config";
+import { databaseUrl } from "../src/config";
 
 export const sequelize = new Sequelize(databaseUrl);

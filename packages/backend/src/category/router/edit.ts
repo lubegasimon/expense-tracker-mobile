@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import updateCategory from "../../category/update";
+import updateCategory from "../operations/update";
 
 const router = Router();
 

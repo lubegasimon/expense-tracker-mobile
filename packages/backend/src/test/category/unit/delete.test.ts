@@ -1,8 +1,8 @@
-import create from "../../../category/create";
-import { sequelize } from "../../../db/db";
+import create from "../../../category/operations/create";
+import { sequelize } from "../../../../db/db";
 import { v4 as uuidv4 } from "uuid";
 import models from "../../../models";
-import deleteCategory from "../../../category/delete";
+import deleteCategory from "../../../category/operations/delete";
 
 const id = uuidv4();
 

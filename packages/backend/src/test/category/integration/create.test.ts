@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../../app";
-import { sequelize } from "../../../db/db";
+import { sequelize } from "../../../../db/db";
 import models from "../../../models";
 import { closeRedisClient } from "../../../middleware/session";
 

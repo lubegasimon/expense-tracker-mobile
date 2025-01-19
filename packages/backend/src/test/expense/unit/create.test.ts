@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import create from "../../../expense/create";
-import { sequelize } from "../../../db/db";
+import create from "../../../expense/operations/create";
+import { sequelize } from "../../../../db/db";
 import models from "../../../models";
 
 const expense = {

@@ -1,4 +1,4 @@
-import models from "../models";
+import models from "../../models";
 
 /**
  * We call this [findUserByEmail] twice during the signup process;

@@ -1,8 +1,8 @@
 import request from "supertest";
 import app from "../../app";
-import { sequelize } from "../../../db/db";
+import { sequelize } from "../../../../db/db";
 import models from "../../../models";
-import createCategory from "../../../category/create";
+import createCategory from "../../../category/operations/create";
 import { closeRedisClient } from "../../../middleware/session";
 
 describe("POST /expense/create", () => {
