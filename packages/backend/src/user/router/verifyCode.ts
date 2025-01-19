@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express";
 import { redisStore } from "../../middleware/session";
 import { redisError } from "./error";
-import create from "../../user/create";
-import { UserAttrs } from "../../user/model";
-import findUserByEmail from "../../user/find";
+import create from "../operations/create";
+import { UserAttrs } from "../model";
+import findUserByEmail from "../operations/find";
 import initializeSession from "./auth";
 
 const router = Router();

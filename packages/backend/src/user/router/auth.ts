@@ -1,6 +1,6 @@
 import { Response } from "express";
 import jwt from "jsonwebtoken";
-import findUserByEmail from "../../user/find";
+import findUserByEmail from "../operations/find";
 import { secret } from "../../config";
 
 async function initializeSession(email: string, response: Response) {

@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../../app";
-import create from "../../../user/create";
-import { sequelize } from "../../../db/db";
+import create from "../../../user/operations/create";
+import { sequelize } from "../../../../db/db";
 import { v4 as uuidv4 } from "uuid";
 import models from "../../../models";
 import { closeRedisClient } from "../../../middleware/session";

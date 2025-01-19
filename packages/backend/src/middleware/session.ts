@@ -3,7 +3,7 @@ import { createClient } from "redis";
 import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
 import { secret } from "../config";
-import { redisError } from "../router/user/error";
+import { redisError } from "../user/router/error";
 
 export const redisClient = createClient();
 

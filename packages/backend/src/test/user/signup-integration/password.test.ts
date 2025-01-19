@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../../app";
-import findUserByEmail from "../../../user/find";
+import findUserByEmail from "../../../user/operations/find";
 import { closeRedisClient } from "../../../middleware/session";
 
 describe("password edge case", () => {

@@ -1,9 +1,9 @@
 import request from "supertest";
 import { v4 as uuidv4 } from "uuid";
 import app from "../../app";
-import { sequelize } from "../../../db/db";
+import { sequelize } from "../../../../db/db";
 import models from "../../../models";
-import create from "../../../expense/create";
+import create from "../../../expense/operations/create";
 import { closeRedisClient } from "../../../middleware/session";
 
 const id = uuidv4();

@@ -13,8 +13,8 @@ app.use(sessionManager);
 app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(routers);
 
+app.use(routers);
 app.use(handleError);
 
 app.listen(port, () => {

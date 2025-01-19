@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import deleteCategory from "../../category/delete";
-import { findCategoryById } from "../../category/find";
+import deleteCategory from "../operations/delete";
+import { findCategoryById } from "../operations/find";
 
 const router = Router();
 

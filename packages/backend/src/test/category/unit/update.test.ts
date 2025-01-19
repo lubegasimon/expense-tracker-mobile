@@ -1,9 +1,9 @@
-import create from "../../../category/create";
-import { sequelize } from "../../../db/db";
+import create from "../../../category/operations/create";
+import { sequelize } from "../../../../db/db";
 import { v4 as uuidv4 } from "uuid";
 import models from "../../../models";
-import updateCategory from "../../../category/update";
-import { findCategoryById } from "../../../category/find";
+import updateCategory from "../../../category/operations/update";
+import { findCategoryById } from "../../../category/operations/find";
 
 const id = uuidv4();
 

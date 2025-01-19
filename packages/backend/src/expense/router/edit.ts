@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { parse } from "date-fns";
-import updateExpense from "../../expense/update";
+import updateExpense from "../operations/update";
 
 const router = Router();
 

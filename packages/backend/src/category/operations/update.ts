@@ -1,5 +1,5 @@
-import models from "../models";
-import { CategoryAttrs } from "./model";
+import models from "../../models";
+import { CategoryAttrs } from "../model";
 
 const updateCategory = async (category: CategoryAttrs) => {
   const { id, name, description } = category;

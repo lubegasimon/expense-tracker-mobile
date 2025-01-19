@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
-import findUserByEmail from "../../../user/find";
+import findUserByEmail from "../../../user/operations/find";
 import validateRequest from "../validateRequest";
 
 const validateLoginRequest = () => {
