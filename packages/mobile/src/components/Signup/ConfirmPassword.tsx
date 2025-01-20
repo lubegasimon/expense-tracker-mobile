@@ -4,7 +4,7 @@ import { FieldProps } from "./types";
 import EyeIcon from "../EyeIcon";
 import Error from "../Error/Error";
 
-export interface ConfirmPasswordProps extends FieldProps, ShowPasswordProps {}
+interface ConfirmPasswordProps extends FieldProps, ShowPasswordProps {}
 
 interface ShowPasswordProps {
   isShowConfirmPassword: boolean;

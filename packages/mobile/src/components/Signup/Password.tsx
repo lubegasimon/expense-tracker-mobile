@@ -2,8 +2,9 @@ import { TextInput, View } from "react-native";
 import { FieldProps } from "./types";
 import { inputStyle, inputAndErrorStyle } from "./styles";
 import EyeIcon, { ShowPasswordProps } from "../EyeIcon";
-export interface PasswordProps extends FieldProps, ShowPasswordProps {}
 import Error from "../Error/Error";
+
+interface PasswordProps extends FieldProps, ShowPasswordProps {}
 
 function Password({
   value,
