@@ -47,7 +47,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-      # `npm ci` ensures a clean install based on the lock file and avoids modifying package-lock.json
+        # `npm ci` ensures a clean install based on the lock file and avoids modifying package-lock.json
         run: npm ci
 
       - name: Run database migrations
@@ -67,3 +67,30 @@ jobs:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           SECRET: ${{ secrets.SECRET}}
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+  mobile:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/mobile
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install dependencies
+        # `npm ci` ensures a clean install based on the lock file and avoids modifying package-lock.json
+        run: npm ci
+
+      - name: Compile mobile app
+        run: npm run compile
+        working-directory: ./packages/mobile
+
+      - name: Run mobile tests
+        run: npm test
+        env:
+          EXPO_PUBLIC_BASE_URL: ${{ secrets.EXPO_PUBLIC_BASE_URL }}
