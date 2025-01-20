@@ -1,0 +1,466 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OptScreen/> OtpScreen contains resend code and submit button 1`] = `
+<View
+  style={
+    {
+      "paddingTop": "10%",
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "fontSize": 30,
+        "fontWeight": "bold",
+        "paddingBottom": "3%",
+        "paddingTop": "10%",
+        "textAlign": "center",
+      }
+    }
+  >
+     Enter verification code 
+  </Text>
+  <Text
+    style={
+      {
+        "fontSize": 15,
+        "paddingBottom": "5%",
+        "paddingLeft": "10%",
+      }
+    }
+  >
+     
+    Code has been sent to your email
+     
+  </Text>
+  <View>
+    <View
+      style={
+        [
+          {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "width": "100%",
+          },
+          {
+            "paddingLeft": "10%",
+            "paddingRight": "10%",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderColor": "#DFDFDE",
+              "borderRadius": 12,
+              "borderWidth": 1,
+              "height": 60,
+              "justifyContent": "center",
+              "width": 44,
+            },
+            undefined,
+            {
+              "borderColor": "green",
+            },
+          ]
+        }
+        testID="otp-input"
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "backgroundColor": "green",
+                  "height": 30,
+                  "width": 2,
+                },
+                {
+                  "backgroundColor": "green",
+                },
+                undefined,
+              ]
+            }
+            testID="otp-input-stick"
+          />
+        </View>
+      </View>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderColor": "#DFDFDE",
+              "borderRadius": 12,
+              "borderWidth": 1,
+              "height": 60,
+              "justifyContent": "center",
+              "width": 44,
+            },
+            undefined,
+          ]
+        }
+        testID="otp-input"
+      >
+        <Text
+          style={
+            [
+              {
+                "fontSize": 28,
+              },
+              undefined,
+              {
+                "opacity": 1,
+              },
+            ]
+          }
+        />
+      </View>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderColor": "#DFDFDE",
+              "borderRadius": 12,
+              "borderWidth": 1,
+              "height": 60,
+              "justifyContent": "center",
+              "width": 44,
+            },
+            undefined,
+          ]
+        }
+        testID="otp-input"
+      >
+        <Text
+          style={
+            [
+              {
+                "fontSize": 28,
+              },
+              undefined,
+              {
+                "opacity": 1,
+              },
+            ]
+          }
+        />
+      </View>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderColor": "#DFDFDE",
+              "borderRadius": 12,
+              "borderWidth": 1,
+              "height": 60,
+              "justifyContent": "center",
+              "width": 44,
+            },
+            undefined,
+          ]
+        }
+        testID="otp-input"
+      >
+        <Text
+          style={
+            [
+              {
+                "fontSize": 28,
+              },
+              undefined,
+              {
+                "opacity": 1,
+              },
+            ]
+          }
+        />
+      </View>
+      <TextInput
+        accessibilityLabel="One-Time Password"
+        autoComplete="one-time-code"
+        autoFocus={true}
+        editable={true}
+        inputMode="numeric"
+        maxLength={4}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        secureTextEntry={false}
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "opacity": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            undefined,
+          ]
+        }
+        testID="otp-input-hidden"
+        textContentType="oneTimeCode"
+        value=""
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "paddingLeft": "10%",
+        "paddingTop": "3%",
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "fontSize": 18,
+        }
+      }
+    >
+      Didn't receive code?
+    </Text>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Text
+        style={
+          {
+            "color": "#34b4eb",
+            "fontSize": 18,
+            "paddingLeft": "2%",
+          }
+        }
+      >
+        Resend code
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "paddingLeft": "10%",
+        "paddingRight": "10%",
+        "paddingTop": "5%",
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#34b4eb",
+          "borderColor": "white",
+          "borderRadius": 10,
+          "padding": 10,
+          "paddingRight": "10%",
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "white",
+            "fontSize": 25,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        Submit
+      </Text>
+    </View>
+  </View>
+</View>
+`;
