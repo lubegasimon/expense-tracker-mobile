@@ -3,6 +3,8 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
+    "clean": "rm -rf ./build",
+    "compile": "tsc --project tsconfig.json",
     "start": "expo start",
     "fresh-start": "npx expo start -c",
     "android": "expo start --android",
