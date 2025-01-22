@@ -9,7 +9,7 @@ const validateSignupRequest = () => {
     findUserByEmail(email)
       .then((user) => {
         if (user) return next({ status: 409, message: "Email already exists" });
-        return next();
+        else return next();
       })
       .catch(next);
   };
