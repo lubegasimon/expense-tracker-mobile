@@ -1,26 +1,21 @@
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Text } from "react-native";
 
 interface ChildrenProp {
   children: React.JSX.Element;
 }
 
+function fallbackRender({ error }: { error: { [key: string]: string } }) {
+  console.error("Error caught by error boundary: ", error);
+  return (
+    <div role="alert">
+      <p>Something went wrong</p>
+    </div>
+  );
+}
 function ErrorBoundary_({ children }: ChildrenProp) {
   return (
-    <ErrorBoundary
-      fallback={
-        <Text
-          style={{
-            color: "red",
-          }}
-        >
-          Something went wrong
-        </Text>
-      }
-    >
-      {children}
-    </ErrorBoundary>
+    <ErrorBoundary fallbackRender={fallbackRender}>{children}</ErrorBoundary>
   );
 }
 
