@@ -44,14 +44,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: "npm"
+          cache: "yarn"
 
       - name: Install dependencies
-        # `npm ci` ensures a clean install based on the lock file and avoids modifying package-lock.json
-        run: npm ci
+        run: yarn install
 
       - name: Run database migrations
-        run: npm run migrate
+        run: yarn migrate
         env:
           DATABASE_URI: postgresql://postgres:postgres@localhost:5432/postgres
 
@@ -61,7 +60,7 @@ jobs:
           redis-version: 7
 
       - name: Run backend tests
-        run: npm test
+        run: yarn test
         env:
           DATABASE_URI: postgresql://postgres:postgres@localhost:5432/postgres
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
