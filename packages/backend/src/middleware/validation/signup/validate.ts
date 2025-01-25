@@ -8,7 +8,11 @@ const validateSignupRequest = () => {
     const { email } = request.body;
     findUserByEmail(email)
       .then((user) => {
-        if (user) return next({ status: 409, message: "Email already exists" });
+        if (user)
+          return next({
+            status: 409,
+            message: { emailExists: "Email already exists" },
+          });
         else return next();
       })
       .catch(next);
