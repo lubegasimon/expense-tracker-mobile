@@ -41,7 +41,7 @@ function OtpScreen() {
   function handleResendCode() {
     setLoading(true);
     axiosInstance
-      .post(resendCode)
+      .post(resendCode, { email })
       .then(() => {
         setResentCode(true);
         setLoading(false);
