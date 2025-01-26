@@ -13,6 +13,7 @@ import ConfirmPassword from "../components/Signup/ConfirmPassword";
 import SignupButton from "../components/Signup/SignupButton";
 import Loader from "../components/Loader/loader";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
+import Error from "../components/Error/Error";
 
 type VerifyCodeNavigationProp = StackNavigationProp<
   RouteNavigationStack,
@@ -74,6 +75,7 @@ function SignupForm() {
             {" "}
             Create your account{" "}
           </Text>
+          <Error error={errors.emailExists} />
           <Username
             value={username}
             onChange={setUsername}
