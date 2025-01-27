@@ -51,6 +51,6 @@ describe("email edge cases", () => {
     await create(user);
     const response = await request(app).post("/signup").send(user).expect(409);
 
-    expect(response.body.error).toBe("Email already exists");
+    expect(response.body.error.emailExists).toBe("Email already exists");
   });
 });

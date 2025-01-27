@@ -21,7 +21,6 @@ describe("Redis operations", () => {
       .catch(console.error),
   );
   afterAll(async () => await sequelize.close());
-  // afterAll(async () => await redisClient.disconnect().catch(console.error));
   afterAll(async () => {
     await closeRedisClient();
   });
