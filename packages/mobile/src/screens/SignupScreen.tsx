@@ -14,6 +14,8 @@ import SignupButton from "../components/Signup/SignupButton";
 import Loader from "../components/Loader/loader";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Error from "../components/Error/Error";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { clearEmail, selectEmail, storedEmail } from "../redux/userSlice";
 
 type VerifyCodeNavigationProp = StackNavigationProp<
   RouteNavigationStack,
@@ -22,7 +24,6 @@ type VerifyCodeNavigationProp = StackNavigationProp<
 
 function SignupForm() {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -30,6 +31,8 @@ function SignupForm() {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setConfirmShowPassword] = useState(true);
   const navigation = useNavigation<VerifyCodeNavigationProp>();
+  const dispatch = useAppDispatch();
+  const email = useAppSelector(selectEmail);
 
   function handleSubmit() {
     setLoading(true);
@@ -41,8 +44,9 @@ function SignupForm() {
         confirmPassword,
       })
       .then((_response: AxiosResponse) => {
+        dispatch(storedEmail(email));
+        dispatch(clearEmail());
         setUsername("");
-        setEmail("");
         setPassword("");
         setConfirmPassword("");
         navigation.navigate("verifyCode", { email });
@@ -81,7 +85,11 @@ function SignupForm() {
             onChange={setUsername}
             error={errors.username}
           />
-          <Email value={email} onChange={setEmail} error={errors.email} />
+          <Email
+            value={email}
+            onChange={(text) => dispatch(storedEmail(text))}
+            error={errors.email}
+          />
           <Password
             value={password}
             onChange={setPassword}
