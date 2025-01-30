@@ -16,9 +16,10 @@ describe("<OptScreen/>", () => {
       <NavigationContainer>
         <OtpScreen />
       </NavigationContainer>,
-    );
+    ).toJSON();
+
     expect(tree).toMatchSnapshot();
-    screen.getByText("Resend code");
-    screen.getByText("Submit");
+    expect(screen.getByText("Resend code")).toBeTruthy();
+    expect(screen.getByText("Submit")).toBeTruthy();
   });
 });
