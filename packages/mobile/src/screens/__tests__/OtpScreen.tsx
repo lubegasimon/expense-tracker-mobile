@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import OtpScreen from "../OtpScreen";
+import { Provider } from "react-redux";
+import { store } from "@/src/redux/store";
 
 jest.mock("@react-navigation/native", () => ({
   ...jest.requireActual("@react-navigation/native"),
@@ -13,9 +15,11 @@ jest.mock("@react-navigation/native", () => ({
 describe("<OptScreen/>", () => {
   test("OtpScreen contains resend code and submit button", () => {
     const tree = render(
-      <NavigationContainer>
-        <OtpScreen />
-      </NavigationContainer>,
+      <Provider store={store}>
+        <NavigationContainer>
+          <OtpScreen />
+        </NavigationContainer>
+      </Provider>,
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
