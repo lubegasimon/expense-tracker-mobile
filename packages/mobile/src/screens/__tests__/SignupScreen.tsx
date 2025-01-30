@@ -9,11 +9,12 @@ describe("<SignupForm/>", () => {
       <NavigationContainer>
         <SignupForm />
       </NavigationContainer>,
-    );
+    ).toJSON();
+
     expect(tree).toMatchSnapshot();
-    screen.getByPlaceholderText("Username");
-    screen.getByPlaceholderText("Email");
-    screen.getByPlaceholderText("Password");
-    screen.getByPlaceholderText("Confirm Password");
+    expect(screen.getByPlaceholderText("Username")).toBeTruthy();
+    expect(screen.getByPlaceholderText("Email")).toBeTruthy();
+    expect(screen.getByPlaceholderText("Password")).toBeTruthy();
+    expect(screen.getByPlaceholderText("Confirm Password")).toBeTruthy();
   });
 });

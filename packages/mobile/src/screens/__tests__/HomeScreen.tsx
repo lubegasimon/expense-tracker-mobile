@@ -9,8 +9,11 @@ describe("<HomeScreen/>", () => {
       <NavigationContainer>
         <HomeScreen />
       </NavigationContainer>,
-    );
+    ).toJSON();
+
     expect(tree).toMatchSnapshot();
-    screen.getByRole("button", { name: "Create your account" });
+    expect(
+      screen.getByRole("button", { name: "Create your account" }),
+    ).toBeTruthy();
   });
 });
