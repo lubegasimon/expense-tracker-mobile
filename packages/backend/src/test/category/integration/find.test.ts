@@ -14,13 +14,10 @@ const category = {
 };
 
 describe("GET /category/:id", () => {
-  afterAll(
-    async () =>
-      await models.Category.destroy({ truncate: true, cascade: true }),
-  );
+  afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 200 when category is found", async () => {

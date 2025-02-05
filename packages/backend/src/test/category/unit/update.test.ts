@@ -13,10 +13,7 @@ const category = {
 };
 
 describe("Update category", () => {
-  afterAll(
-    async () =>
-      await models.Category.destroy({ truncate: true, cascade: true }),
-  );
+  afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
 
   it("should update category description", async () => {

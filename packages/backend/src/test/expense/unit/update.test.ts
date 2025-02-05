@@ -17,11 +17,8 @@ const expense = {
 };
 
 describe("Update expense", () => {
-  afterAll(async () => await models.Expense.destroy({ truncate: true }));
-  afterAll(
-    async () =>
-      await models.Category.destroy({ truncate: true, cascade: true }),
-  );
+  afterAll(() => models.Expense.destroy({ truncate: true }));
+  afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
 
   it("should update expense details", async () => {

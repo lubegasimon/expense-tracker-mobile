@@ -14,10 +14,10 @@ const user = {
 };
 
 describe("POST /login", () => {
-  afterAll(async () => await models.User.destroy({ truncate: true }));
+  afterAll(() => models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 200 if email and password are correct", async () => {

@@ -3,12 +3,12 @@ import updateCategory from "../operations/update";
 
 const router = Router();
 
-router.put("/:id", async (request: Request, response: Response) => {
+router.put("/:id", (request: Request, response: Response) => {
   const id = request.params.id;
   const { name, description } = request.body;
   if (!name) response.status(400).json({ message: "Name is required" });
   else
-    await updateCategory({ id, name, description })
+    updateCategory({ id, name, description })
       .then(([result]) => {
         if (result !== 1)
           return response.status(404).json({ message: "Category not found" });

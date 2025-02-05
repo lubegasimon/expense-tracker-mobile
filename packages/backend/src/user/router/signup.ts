@@ -7,7 +7,7 @@ import sendCodeToEmail from "./sendCode";
 
 const router = Router();
 
-async function saveCandidateData(
+function saveCandidateData(
   username: string,
   email: string,
   password: string,
@@ -15,7 +15,7 @@ async function saveCandidateData(
 ) {
   const candidateData = JSON.stringify({ username, email, password });
   let signupKey = `signup:${email}`;
-  await redisStore.client
+  redisStore.client
     .set(signupKey, candidateData)
     .then(() => redisStore.client.expire(signupKey, 86400))
     .catch(redisError);
@@ -25,7 +25,7 @@ router.post("/", validate(), async (request: Request, response: Response) => {
   const { username, email, password } = request.body;
 
   await saveCandidateData(username, email, password, redisStore);
-  await sendCodeToEmail(email);
+  sendCodeToEmail(email);
 
   response.status(200).json({
     message: "Valid user data",

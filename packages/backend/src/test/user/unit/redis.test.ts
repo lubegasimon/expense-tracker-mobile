@@ -1,8 +1,4 @@
-import {
-  redisStore,
-  closeRedisClient,
-  redisClient,
-} from "../../../middleware/session";
+import { redisStore, redisClient } from "../../../middleware/session";
 
 const user = {
   username: "johndoe",
@@ -18,9 +14,6 @@ describe("Redis operations", () => {
       .catch(console.error),
   );
   afterAll(() => redisClient.disconnect().catch(console.error));
-  // afterAll(async () => {
-  //   await closeRedisClient();
-  // });
 
   it("should save user data in Redis", async () => {
     const data = JSON.stringify(user);

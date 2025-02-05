@@ -13,10 +13,7 @@ const category = {
 };
 
 describe("find category name", () => {
-  afterEach(
-    async () =>
-      await models.Category.destroy({ truncate: true, cascade: true }),
-  );
+  afterEach(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
 
   it("should return category if it exists", async () => {

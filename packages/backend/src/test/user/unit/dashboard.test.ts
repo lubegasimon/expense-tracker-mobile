@@ -7,8 +7,8 @@ jest.mock("jsonwebtoken", () => ({
 }));
 
 describe("GET /dashboard", () => {
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
   it("should return 401 and deny access dashboard", async () => {
     const response = await request(app).get("/dashboard").expect(401);

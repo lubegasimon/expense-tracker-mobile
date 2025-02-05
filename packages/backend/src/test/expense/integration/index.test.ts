@@ -15,10 +15,10 @@ const expense = {
 };
 
 describe("GET /expense", () => {
-  afterAll(async () => await models.Expense.destroy({ truncate: true }));
+  afterAll(() => models.Expense.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 200 and fetch categories", async () => {

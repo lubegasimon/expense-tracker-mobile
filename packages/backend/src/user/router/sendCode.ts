@@ -15,7 +15,7 @@ const verificationCode = (): Promise<string> => {
 
 async function sendCodeToEmail(email: string) {
   let code = await verificationCode();
-  await redisStore.client
+  redisStore.client
     .set(`verification:${email}`, code)
     .then(() => redisStore.client.expire(`verification:${email}`, 300))
     .catch(redisError);
@@ -30,7 +30,7 @@ async function sendCodeToEmail(email: string) {
     html: `Code <strong>${code}</strong> expires in 5 minutes.`,
   };
 
-  return await sgMail
+  return sgMail
     .send(message)
     .then((response) => {
       //TODO: Use event webhooks -- https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook

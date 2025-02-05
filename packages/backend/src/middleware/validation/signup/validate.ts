@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import findUserByEmail from "../../../user/operations/find";
 import validateRequest from "../validateRequest";
 
-const validateSignupRequest = () => {
-  return async (request: Request, _response: Response, next: NextFunction) => {
+const validateSignupRequest =
+  () => (request: Request, _response: Response, next: NextFunction) => {
     validateRequest("signupBodySchema", request, next);
     const { email } = request.body;
     findUserByEmail(email)
@@ -17,6 +17,4 @@ const validateSignupRequest = () => {
       })
       .catch(next);
   };
-};
-
 export default validateSignupRequest;

@@ -4,7 +4,7 @@ import updateExpense from "../operations/update";
 
 const router = Router();
 
-router.put("/:id", async (request: Request, response: Response) => {
+router.put("/:id", (request: Request, response: Response) => {
   const id = request.params.id;
   const { name, amount, details, categoryId, createdAt } = request.body;
   const parsedDate = createdAt
@@ -24,7 +24,7 @@ router.put("/:id", async (request: Request, response: Response) => {
   else if (!amount)
     response.status(400).json({ message: "Amount is required" });
   else
-    await updateExpense(expense)
+    updateExpense(expense)
       .then(([result]) => {
         if (result !== 1)
           return response.status(404).json({

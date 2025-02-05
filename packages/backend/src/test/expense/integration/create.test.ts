@@ -6,14 +6,11 @@ import createCategory from "../../../category/operations/create";
 import { closeRedisClient } from "../../../middleware/session";
 
 describe("POST /expense/create", () => {
-  afterAll(async () => await models.Expense.destroy({ truncate: true }));
-  afterAll(
-    async () =>
-      await models.Category.destroy({ truncate: true, cascade: true }),
-  );
+  afterAll(() => models.Expense.destroy({ truncate: true }));
+  afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 201 when expense is created", async () => {

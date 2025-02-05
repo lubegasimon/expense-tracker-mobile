@@ -1,5 +1,3 @@
 import models from "../../models";
 
-export const findExpenseById = async (id: string) => {
-  return await models.Expense.findByPk(id);
-};
+export const findExpenseById = (id: string) => models.Expense.findByPk(id);

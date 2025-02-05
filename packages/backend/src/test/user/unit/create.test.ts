@@ -12,15 +12,14 @@ const user = {
 };
 
 describe("User CRUD operation", () => {
-  afterEach(async () => await models.User.destroy({ truncate: true }));
-  afterAll(async () => await sequelize.close());
-  afterAll(async () => {
-    await closeRedisClient();
+  afterEach(() => models.User.destroy({ truncate: true }));
+  afterAll(() => sequelize.close());
+  afterAll(() => {
+    closeRedisClient();
   });
 
-  it("create user", async () => {
-    return await create(user).then((user) =>
+  it("create user", () =>
+    create(user).then((user) =>
       expect(user).toHaveProperty("username", "john_"),
-    );
-  });
+    ));
 });

@@ -4,7 +4,7 @@ import findUserByEmail from "../../../user/operations/find";
 import validateRequest from "../validateRequest";
 
 const validateLoginRequest = () => {
-  return async (request: Request, _response: Response, next: NextFunction) => {
+  return (request: Request, _response: Response, next: NextFunction) => {
     validateRequest("loginBodySchema", request, next);
     const { email, password } = request.body;
 

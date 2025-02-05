@@ -1,7 +1,6 @@
 import models from "../../models";
 
-const deleteCategory = async (id: string) => {
-  return await models.Category.destroy({ where: { id } });
-};
+const deleteCategory = (id: string) =>
+  models.Category.destroy({ where: { id } });
 
 export default deleteCategory;

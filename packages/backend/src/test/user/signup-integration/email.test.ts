@@ -6,8 +6,8 @@ import models from "../../../models";
 import { closeRedisClient } from "../../../middleware/session";
 
 describe("email edge cases", () => {
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 400 for invalid email format", async () => {
@@ -38,7 +38,7 @@ describe("email edge cases", () => {
     expect(response.body.error.email).toContain("Invalid email format");
   });
 
-  afterEach(async () => await models.User.destroy({ truncate: true }));
+  afterEach(() => models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
 
   it("should return 409 for an email that exists", async () => {

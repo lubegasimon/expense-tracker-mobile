@@ -14,15 +14,15 @@ const user = {
 const CODE = "1234";
 
 describe("Redis operations", () => {
-  afterEach(async () => await models.User.destroy({ truncate: true }));
+  afterEach(() => models.User.destroy({ truncate: true }));
   afterEach(() =>
     redisStore.client
       .del([`signup:${user.email}`, `verification:${user.email}`])
       .catch(console.error),
   );
-  afterAll(async () => await sequelize.close());
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => sequelize.close());
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 201 and create user account if code is valid and email is not taken", async () => {

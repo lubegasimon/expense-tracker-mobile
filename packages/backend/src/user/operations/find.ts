@@ -22,11 +22,10 @@ import models from "../../models";
  * before the other. So we don't want to endup with duplicate emails.
  */
 
-const findUserByEmail = async (email: string) => {
-  return await models.User.findOne({
+const findUserByEmail = (email: string) =>
+  models.User.findOne({
     where: { email },
     attributes: { exclude: ["createdAt", "updatedAt"] },
   });
-};
 
 export default findUserByEmail;

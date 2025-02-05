@@ -3,10 +3,10 @@ import models from "../../models";
 
 const router = Router();
 
-router.delete("/:id", async (request: Request, response: Response) => {
+router.delete("/:id", (request: Request, response: Response) => {
   const id = request.params.id;
 
-  await models.Expense.destroy({ where: { id } })
+  models.Expense.destroy({ where: { id } })
     .then((result) => {
       if (result === 0)
         return response.status(404).json({ message: "Expense not found" });

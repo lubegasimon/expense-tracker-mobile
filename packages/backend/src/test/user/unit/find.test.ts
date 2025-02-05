@@ -13,10 +13,10 @@ const user = {
 };
 
 describe("Find by email", () => {
-  afterEach(async () => await models.User.destroy({ truncate: true }));
+  afterEach(() => models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return user if email exists", async () => {

@@ -10,15 +10,11 @@ const category = {
 };
 
 describe("Create category", () => {
-  afterAll(
-    async () =>
-      await models.Category.destroy({ truncate: true, cascade: true }),
-  );
+  afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
 
-  it("create category if name doesn't exist", async () => {
-    return await create(category).then((category) =>
+  it("create category if name doesn't exist", () =>
+    create(category).then((category) =>
       expect(category).toHaveProperty("name", "Furnishings and Appliances"),
-    );
-  });
+    ));
 });

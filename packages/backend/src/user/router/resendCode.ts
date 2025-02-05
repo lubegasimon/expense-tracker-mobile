@@ -2,9 +2,9 @@ import { Router, Request, Response } from "express";
 import sendCodeToEmail from "./sendCode";
 const router = Router();
 
-router.post("/", async (request: Request, response: Response) => {
+router.post("/", (request: Request, response: Response) => {
   const { email } = request.body;
-  await sendCodeToEmail(email);
+  sendCodeToEmail(email);
 
   response
     .status(200)

@@ -8,7 +8,7 @@ router.post("/", async (request: Request, response: Response) => {
   const { name, amount, details, date, categoryId } = request.body;
 
   const category = await findCategoryById(categoryId);
-  await create({ name, amount, details, createdAt: date, categoryId })
+  create({ name, amount, details, createdAt: date, categoryId })
     .then((expense) =>
       response.status(201).json({
         message: `Expense successfully created`,

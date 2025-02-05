@@ -16,7 +16,7 @@ const expense = {
 };
 
 describe("DELETE expense", () => {
-  afterAll(async () => await models.Expense.destroy({ truncate: true }));
+  afterAll(() => models.Expense.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
 
   it("should delete expense", async () => {

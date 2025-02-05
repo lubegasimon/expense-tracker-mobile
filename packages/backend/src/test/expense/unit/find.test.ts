@@ -15,7 +15,7 @@ const expense = {
 };
 
 describe("find expense", () => {
-  afterEach(async () => await models.Expense.destroy({ truncate: true }));
+  afterEach(() => models.Expense.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
 
   it("should return expense if it exists", async () => {

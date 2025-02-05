@@ -4,8 +4,8 @@ import findUserByEmail from "../../../user/operations/find";
 import { closeRedisClient } from "../../../middleware/session";
 
 describe("password edge case", () => {
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 400 if password contains fewer than 5 characters", async () => {

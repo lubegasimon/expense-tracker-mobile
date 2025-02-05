@@ -13,13 +13,12 @@ const expense = {
 };
 
 describe("Create expense", () => {
-  afterAll(async () => await models.Expense.destroy({ truncate: true }));
+  afterAll(() => models.Expense.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
 
-  it("create expense", async () => {
-    return await create(expense).then(async (expense) => {
+  it("create expense", () =>
+    create(expense).then((expense) => {
       expect(expense).toHaveProperty("name", "Water bill");
       expect(expense).toHaveProperty("amount", 20);
-    });
-  });
+    }));
 });

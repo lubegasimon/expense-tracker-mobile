@@ -14,7 +14,7 @@ router.post(
     if (category)
       response.status(409).json({ message: `${name} already exists` });
     else
-      await create({ name, description })
+      create({ name, description })
         .then((category) => {
           return response.status(201).json({
             message: `${name} successfully created`,

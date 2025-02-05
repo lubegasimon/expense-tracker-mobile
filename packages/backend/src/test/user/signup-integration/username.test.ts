@@ -3,14 +3,13 @@ import app from "../../app";
 import { redisStore, closeRedisClient } from "../../../middleware/session";
 
 describe("username edge cases", () => {
-  afterAll(
-    async () =>
-      await redisStore.client
-        .del(["signup:john@example.com", "verification:john@example.com"])
-        .catch(console.error),
+  afterAll(() =>
+    redisStore.client
+      .del(["signup:john@example.com", "verification:john@example.com"])
+      .catch(console.error),
   );
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 200 for valid user data", async () => {

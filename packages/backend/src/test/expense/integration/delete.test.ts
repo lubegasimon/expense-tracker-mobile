@@ -14,10 +14,10 @@ const expense = {
 };
 
 describe("DELETE /expense/:id", () => {
-  afterAll(async () => await models.Expense.destroy({ truncate: true }));
+  afterAll(() => models.Expense.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
-  afterAll(async () => {
-    await closeRedisClient();
+  afterAll(() => {
+    closeRedisClient();
   });
 
   it("should return 200 when expense is successfully deleted", async () => {
