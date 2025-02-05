@@ -4,14 +4,21 @@ on:
   push:
     branches:
       - main
-  pull_request:
+    paths:
+      - .github/workflows/**  # Trigger on changes to GitHub Actions files
+      - packages/backend/**   # Trigger backend jobs for backend changes
+      - packages/mobile/**  
 
+  pull_request:
+    paths:
+      - .github/workflows/**  # Trigger on changes to GitHub Actions file
 jobs:
   backend:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./packages/backend
+    if: ${{ contains(github.event.pull_request.changed_files, 'packages/backend') || contains(github.event.pull_request.changed_files, '.github/**')}}
 
     services:
       postgres:
@@ -71,6 +78,7 @@ jobs:
     defaults:
       run:
         working-directory: ./packages/mobile
+    if: ${{ contains(github.event.pull_request.changed_files, 'packages/mobile') || contains(github.event.pull_request.changed_files, '.github/**')}}
 
     steps:
       - uses: actions/checkout@v4
