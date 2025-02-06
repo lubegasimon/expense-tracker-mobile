@@ -9,9 +9,7 @@ describe("POST /expense/create", () => {
   afterAll(() => models.Expense.destroy({ truncate: true }));
   afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 201 when expense is created", async () => {
     const category = await createCategory({ name: "Utility" });
@@ -20,7 +18,8 @@ describe("POST /expense/create", () => {
       .send({
         name: "Water bill",
         amount: 20,
-        categoryId: category.id,
+        category: category.name,
+        createdAt: "06/02/2025",
       })
       .expect(201);
     expect(response.body.message).toBe("Expense successfully created");
@@ -28,5 +27,18 @@ describe("POST /expense/create", () => {
     expect(response.body.expense).toHaveProperty("amount", 20);
     expect(response.body.expense).toHaveProperty("id");
     expect(response.body.expense).toHaveProperty("category", category.name);
+    expect(response.body.expense).toHaveProperty("categoryId", category.id);
+    expect(response.body.expense).toHaveProperty("createdAt", "06/02/2025");
+  });
+
+  it("should return 201 when expense is created and category is null", async () => {
+    const response = await request(app)
+      .post("/expense/create")
+      .send({
+        name: "Water bill",
+        amount: 20,
+      })
+      .expect(201);
+    expect(response.body.expense).toHaveProperty("categoryId", null);
   });
 });

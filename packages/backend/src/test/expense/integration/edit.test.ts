@@ -1,7 +1,6 @@
 import request from "supertest";
 import { v4 as uuidv4 } from "uuid";
 import app from "../../app";
-import { parse } from "date-fns";
 import { sequelize } from "../../../../db/db";
 import models from "../../../models";
 import createExpense from "../../../expense/operations/create";
@@ -14,15 +13,14 @@ const expense = {
   name: "Netflix",
   amount: 10,
   details: "January subscription",
+  createdAt: new Date("2025-01-05T21:00:00.000Z"),
 };
 
 describe("PUT /expense/:id", () => {
   afterAll(() => models.Expense.destroy({ truncate: true }));
   afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 200 when expense update is successful", async () => {
     await createExpense(expense);
@@ -33,8 +31,7 @@ describe("PUT /expense/:id", () => {
         "Costs for hobbies, leisure activities, gym memberships, streaming subscriptions et cetera",
     });
 
-    const date = "17/01/2025";
-    const parsedDate = parse(date, "dd/MM/yyyy", new Date());
+    const DATE = "17/01/2025";
 
     const response = await request(app)
       .put(`/expense/${id}`)
@@ -42,8 +39,8 @@ describe("PUT /expense/:id", () => {
         name: "Apple music",
         amount: 10,
         details: "February subscription",
-        categoryId: category.id,
-        createdAt: date,
+        category: category.name,
+        createdAt: DATE,
       })
       .expect(200);
     expect(response.body.message).toBe("Expense successfully updated");
@@ -54,13 +51,12 @@ describe("PUT /expense/:id", () => {
     );
     expect(response.body.expense).toHaveProperty("amount", 10);
     expect(response.body.expense).toHaveProperty("id", `${id}`);
-    expect(response.body.expense).toHaveProperty(
-      "createdAt",
-      parsedDate.toISOString(),
-    );
+    expect(response.body.expense).toHaveProperty("categoryId", category.id);
+    expect(response.body.expense).toHaveProperty("category", category.name);
+    expect(response.body.expense).toHaveProperty("createdAt", DATE);
   });
 
-  it("should return 200 when expense details and categoryId are not provided", async () => {
+  it("should return 200 when expense details and category are not provided", async () => {
     const response = await request(app)
       .put(`/expense/${id}`)
       .send({
