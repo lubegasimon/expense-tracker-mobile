@@ -1,23 +1,24 @@
 import { Router, Request, Response } from "express";
-import { parse } from "date-fns";
 import updateExpense from "../operations/update";
+import { findCategory } from "../../category/operations/find";
+import { formatClientDate, formatServerDate } from "../formatDate";
 
 const router = Router();
 
-router.put("/:id", (request: Request, response: Response) => {
+router.put("/:id", async (request: Request, response: Response) => {
   const id = request.params.id;
-  const { name, amount, details, categoryId, createdAt } = request.body;
-  const parsedDate = createdAt
-    ? parse(createdAt, "dd/MM/yyyy", new Date())
-    : undefined;
+  const { name, amount, details, category, createdAt } = request.body;
+
+  const categoryData =
+    category === undefined ? null : await findCategory(category);
 
   const expense = {
     id,
     name,
     amount,
     details,
-    categoryId,
-    createdAt: parsedDate,
+    categoryId: categoryData?.id,
+    createdAt: formatClientDate(createdAt),
   };
 
   if (!name) response.status(400).json({ message: "Name is required" });
@@ -32,7 +33,11 @@ router.put("/:id", (request: Request, response: Response) => {
           });
         return response.status(200).json({
           message: "Expense successfully updated",
-          expense,
+          expense: {
+            ...expense,
+            createdAt: formatServerDate(expense?.createdAt),
+            category,
+          },
         });
       })
       .catch((error) => {

@@ -1,24 +1,30 @@
 import { Request, Response, Router } from "express";
 import create from "../operations/create";
-import { findCategoryById } from "../../category/operations/find";
+import { findCategory } from "../../category/operations/find";
+import { formatClientDate, formatServerDate } from "../formatDate";
 
 const router = Router();
 
 router.post("/", async (request: Request, response: Response) => {
-  const { name, amount, details, date, categoryId } = request.body;
+  const { name, amount, details, createdAt, category } = request.body;
 
-  const category = await findCategoryById(categoryId);
-  create({ name, amount, details, createdAt: date, categoryId })
+  const categoryData =
+    category === undefined ? null : await findCategory(category);
+
+  create({
+    name,
+    amount,
+    details,
+    createdAt: formatClientDate(createdAt),
+    categoryId: categoryData?.id,
+  })
     .then((expense) =>
       response.status(201).json({
         message: `Expense successfully created`,
         expense: {
-          id: expense.id,
-          name,
-          amount,
-          details,
-          date,
-          category: category ? category.name : "",
+          ...expense.dataValues,
+          createdAt: formatServerDate(expense?.createdAt),
+          category,
         },
       }),
     )
