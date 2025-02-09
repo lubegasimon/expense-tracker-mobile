@@ -47,11 +47,9 @@ function SignupFormScreen() {
         setPassword("");
         setConfirmPassword("");
         navigation.navigate("verifyCode", { email });
-        setLoading(false);
         setErrors({});
       })
       .catch((error) => {
-        setLoading(false);
         if (!error.response || !error.response.data) {
           console.error("No response data received from the server:", error);
           setErrors({
@@ -61,7 +59,8 @@ function SignupFormScreen() {
           return;
         }
         setErrors(error.response.data.error);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   if (loading) return <Loader />;

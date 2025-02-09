@@ -32,9 +32,9 @@ function OtpScreen() {
         setError("");
       })
       .catch((error) => {
-        setLoading(false);
         setError(error.response.data.error);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   function handleResendCode() {
@@ -43,13 +43,12 @@ function OtpScreen() {
       .post(resendCode, { email })
       .then(() => {
         setResentCode(true);
-        setLoading(false);
         setError("");
       })
       .catch((error) => {
-        setLoading(false);
         setError(error.response.data.error);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   if (loading) return <Loader />;
