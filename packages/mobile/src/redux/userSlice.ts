@@ -17,12 +17,12 @@ const userSlice = createSlice({
     storedEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
-    clearEmail: (state) => {
+    clearedEmail: (state) => {
       state.email = "";
     },
   },
 });
 
-export const { storedEmail, clearEmail } = userSlice.actions;
+export const { storedEmail, clearedEmail } = userSlice.actions;
 export default userSlice.reducer;
 export const selectEmail = (state: RootState) => state.user.email;

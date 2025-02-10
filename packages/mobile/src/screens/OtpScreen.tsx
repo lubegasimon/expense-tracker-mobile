@@ -11,6 +11,8 @@ import Loader from "../components/Loader/loader";
 import Error from "../components/Error/Error";
 import { useAppSelector } from "../redux/hooks";
 import { selectEmail } from "../redux/userSlice";
+import { clearedEmail } from "../redux/userSlice";
+import { useAppDispatch } from "../redux/hooks";
 
 function OtpScreen() {
   const [code, setCode] = useState("");
@@ -18,12 +20,14 @@ function OtpScreen() {
   const [error, setError] = useState("");
   const [resentCode, setResentCode] = useState(false);
   const email = useAppSelector(selectEmail);
+  const dispatch = useAppDispatch();
 
   function handleSubmit(code: string) {
     setLoading(true);
     axiosInstance
       .post(verifyCode, { code, email })
       .then(() => {
+        dispatch(clearedEmail());
         setLoading(false);
         setError("");
       })

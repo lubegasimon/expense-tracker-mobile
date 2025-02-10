@@ -15,7 +15,7 @@ import Loader from "../components/Loader/loader";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Error from "../components/Error/Error";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { clearEmail, selectEmail, storedEmail } from "../redux/userSlice";
+import { selectEmail, storedEmail } from "../redux/userSlice";
 
 type VerifyCodeNavigationProp = StackNavigationProp<
   RouteNavigationStack,
@@ -45,7 +45,6 @@ function SignupForm() {
       })
       .then((_response: AxiosResponse) => {
         dispatch(storedEmail(email));
-        dispatch(clearEmail());
         setUsername("");
         setPassword("");
         setConfirmPassword("");
