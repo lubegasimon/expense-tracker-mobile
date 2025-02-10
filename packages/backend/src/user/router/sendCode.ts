@@ -37,7 +37,7 @@ async function sendCodeToEmail(email: string) {
       if (response[0].statusCode) return "Email sent";
     })
     .catch((error) => {
-      console.error(error);
+      console.error("Error response body: ", error.response.body)
       throw new Error("Something went wrong while sending code to the email");
     });
 }
