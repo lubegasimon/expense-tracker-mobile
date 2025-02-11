@@ -8,6 +8,7 @@ exports[`<SignupForm/> should contain signup form text inputs 1`] = `
       {
         "alignItems": "center",
         "flex": 1,
+        "justifyContent": "center",
       },
       {
         "paddingBottom": 0,
