@@ -1,24 +1,26 @@
 import { render, screen } from "@testing-library/react-native";
 import { NavigationContainer } from "@react-navigation/native";
-
-import SignupForm from "../SignupScreen";
 import { Provider } from "react-redux";
 import { store } from "@/src/redux/store";
+import SignupFormScreen from "../SignupScreen";
+
+/* Hack: Supress React Native animation helpers that scedule timers that conflict with jest */
+jest.useFakeTimers();
 
 describe("<SignupForm/>", () => {
-  test("Signup form contains username text input", () => {
+  test("should contain signup form text inputs", () => {
     const tree = render(
       <Provider store={store}>
         <NavigationContainer>
-          <SignupForm />
+          <SignupFormScreen />
         </NavigationContainer>
       </Provider>,
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-    expect(screen.getByPlaceholderText("Username")).toBeTruthy();
-    expect(screen.getByPlaceholderText("Email")).toBeTruthy();
-    expect(screen.getByPlaceholderText("Password")).toBeTruthy();
-    expect(screen.getByPlaceholderText("Confirm Password")).toBeTruthy();
+    expect(screen.getAllByText("Username")).toBeTruthy();
+    expect(screen.getAllByText("Email")).toBeTruthy();
+    expect(screen.getAllByText("Password")).toBeTruthy();
+    expect(screen.getAllByText("Confirm password")).toBeTruthy();
   });
 });

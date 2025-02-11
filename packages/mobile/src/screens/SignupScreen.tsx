@@ -6,23 +6,21 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteNavigationStack } from "@/src/types";
 import { axiosInstance } from "../api/axios";
 import { signupApi } from "../api/endpoints";
-import Username from "../components/Signup/Username";
-import Email from "../components/Signup/Email";
-import Password from "../components/Signup/Password";
-import ConfirmPassword from "../components/Signup/ConfirmPassword";
-import SignupButton from "../components/Signup/SignupButton";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectEmail, storedEmail } from "../redux/userSlice";
+import SignupButton from "../components/SignupButton";
+import Input from "../components/TextInput";
+import PasswordInput from "../components/TextInput/passwordInput";
 import Loader from "../components/Loader/loader";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Error from "../components/Error/Error";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectEmail, storedEmail } from "../redux/userSlice";
 
 type VerifyCodeNavigationProp = StackNavigationProp<
   RouteNavigationStack,
   "verifyCode"
 >;
 
-function SignupForm() {
+function SignupFormScreen() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -75,35 +73,36 @@ function SignupForm() {
           style={styles.container}
         >
           <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-            {" "}
-            Create your account{" "}
+            Create your account
           </Text>
           <Error error={errors.emailExists} />
-          <Username
+          <Input
+            label="Username"
             value={username}
-            onChange={setUsername}
+            onChangeText={setUsername}
             error={errors.username}
           />
-          <Email
+          <Input
+            label="Email"
             value={email}
-            onChange={(text) => dispatch(storedEmail(text))}
+            onChangeText={(text) => dispatch(storedEmail(text))}
             error={errors.email}
           />
-          <Password
+          <PasswordInput
+            label="Password"
             value={password}
-            onChange={setPassword}
+            onChangeText={setPassword}
             error={errors.password}
             isShowPassword={showPassword}
             setShowPassword={() => setShowPassword(!showPassword)}
           />
-          <ConfirmPassword
+          <PasswordInput
+            label="Confirm password"
             value={confirmPassword}
-            onChange={setConfirmPassword}
+            onChangeText={setConfirmPassword}
             error={errors.confirmPassword}
-            isShowConfirmPassword={showConfirmPassword}
-            setShowConfirmPassword={() =>
-              setConfirmShowPassword(!showConfirmPassword)
-            }
+            isShowPassword={showConfirmPassword}
+            setShowPassword={() => setConfirmShowPassword(!showConfirmPassword)}
           />
           <SignupButton onPress={handleSubmit} disabled={loading} />
         </KeyboardAvoidingView>
@@ -119,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignupForm;
+export default SignupFormScreen;
