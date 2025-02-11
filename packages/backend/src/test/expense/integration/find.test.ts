@@ -12,6 +12,7 @@ const expense = {
   name: "Netflix",
   amount: 10,
   details: "January subscription",
+  createdAt: new Date("2025-01-05T21:00:00.000Z"),
 };
 
 describe("GET /expense/:id", () => {
@@ -32,7 +33,7 @@ describe("GET /expense/:id", () => {
     );
     expect(response.body.expense).toHaveProperty("amount", 10);
     expect(response.body.expense).toHaveProperty("id", `${id}`);
-    expect(response.body.expense).toHaveProperty("createdAt");
+    expect(response.body.expense).toHaveProperty("createdAt", "05/01/2025");
   });
 
   it("should return 404 if a expense is not found", async () => {
