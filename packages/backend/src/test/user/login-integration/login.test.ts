@@ -47,4 +47,11 @@ describe("POST /login", () => {
     expect(response.status).toBe(401);
     expect(response.body.error).toContain("No account found with this email");
   });
+
+  it("should return 400 if email and password are not provided", async () => {
+    const response = await request(app).post("/login").send({});
+    expect(response.status).toBe(400);
+    expect(response.body.error.email).toBe("email is required");
+    expect(response.body.error.password).toBe("password is required");
+  });
 });
