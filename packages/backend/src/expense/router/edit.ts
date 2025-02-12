@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import editExpense from "../operations/update";
 import { findCategory } from "../../category/operations/find";
-import { formatClientDate, formatServerDate } from "../formatDate";
+import { formatClientDate } from "../formatDate";
 
 const router = Router();
 
@@ -33,11 +33,6 @@ router.put("/:id", async (request: Request, response: Response) => {
           });
         return response.status(200).json({
           message: "Expense successfully updated",
-          expense: {
-            ...expense,
-            createdAt: formatServerDate(expense?.createdAt),
-            category,
-          },
         });
       })
       .catch((error) => {
