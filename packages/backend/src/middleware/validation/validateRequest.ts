@@ -50,8 +50,8 @@ const validateRequest = (
       }
       return next({ status: 400, message: errors });
     }
-    return next();
   }
+  return next();
 };
 
 export default validateRequest;
