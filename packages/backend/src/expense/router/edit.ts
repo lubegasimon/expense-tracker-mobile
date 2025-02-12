@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import updateExpense from "../operations/update";
+import editExpense from "../operations/update";
 import { findCategory } from "../../category/operations/find";
 import { formatClientDate, formatServerDate } from "../formatDate";
 
@@ -25,7 +25,7 @@ router.put("/:id", async (request: Request, response: Response) => {
   else if (!amount)
     response.status(400).json({ message: "Amount is required" });
   else
-    updateExpense(expense)
+    editExpense(expense)
       .then(([result]) => {
         if (result !== 1)
           return response.status(404).json({
