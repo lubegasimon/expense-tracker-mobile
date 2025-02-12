@@ -13,11 +13,11 @@ const checkEmailExists = () => {
       .then(async (user) => {
         if (!user)
           return next({
-            status: 409,
+            status: 401,
             message: "No account found with this email",
           });
         if (user.email !== email || !(await isPassword(user.password)))
-          return next({ status: 409, message: "Invalid email or password" });
+          return next({ status: 401, message: "Invalid email or password" });
         return next();
       })
       .catch(next);

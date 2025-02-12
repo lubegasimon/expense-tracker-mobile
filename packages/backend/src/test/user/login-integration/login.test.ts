@@ -30,21 +30,21 @@ describe("POST /login", () => {
     expect(response.body.message).toBe("Successfully signed in");
   });
 
-  it("should return 409 if password is invalid", async () => {
+  it("should return 401 if password is invalid", async () => {
     const response = await request(app).post("/login").send({
       email: "john@doe.com",
       password: "johndoe123",
     });
-    expect(response.status).toBe(409);
+    expect(response.status).toBe(401);
     expect(response.body.error).toBe("Invalid email or password");
   });
 
-  it("should return 409 if email is unknown", async () => {
+  it("should return 401 if email is unknown", async () => {
     const response = await request(app).post("/login").send({
       email: "john@doe123.com",
       password: "johndoe",
     });
-    expect(response.status).toBe(409);
+    expect(response.status).toBe(401);
     expect(response.body.error).toContain("No account found with this email");
   });
 });
