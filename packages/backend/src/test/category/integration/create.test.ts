@@ -7,9 +7,7 @@ import { closeRedisClient } from "../../../middleware/session";
 describe("POST /category/create", () => {
   afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 201 when category is created", async () => {
     const response = await request(app)

@@ -15,9 +15,7 @@ const user = {
 describe("Find by email", () => {
   afterEach(() => models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return user if email exists", async () => {
     await create(user);

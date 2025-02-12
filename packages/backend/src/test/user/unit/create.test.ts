@@ -14,9 +14,7 @@ const user = {
 describe("User CRUD operation", () => {
   afterEach(() => models.User.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("create user", () =>
     create(user).then((user) =>

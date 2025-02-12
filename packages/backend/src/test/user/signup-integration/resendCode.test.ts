@@ -6,9 +6,7 @@ describe("POST /signup/resend-code", () => {
   afterEach(() =>
     redisStore.client.del([`verification:john@doe.com`]).catch(console.error),
   );
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 200 if code is sent to email", async () => {
     const response = await request(app)

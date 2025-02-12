@@ -21,9 +21,7 @@ describe("Redis operations", () => {
       .catch(console.error),
   );
   afterAll(() => sequelize.close());
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 201 and create user account if code is valid and email is not taken", async () => {
     const data = JSON.stringify(user);

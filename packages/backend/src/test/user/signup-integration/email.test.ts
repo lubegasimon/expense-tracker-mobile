@@ -6,9 +6,7 @@ import models from "../../../models";
 import { closeRedisClient } from "../../../middleware/session";
 
 describe("email edge cases", () => {
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 400 for invalid email format", async () => {
     const response = await request(app)

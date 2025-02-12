@@ -16,9 +16,7 @@ const expense = {
 describe("DELETE /expense/:id", () => {
   afterAll(() => models.Expense.destroy({ truncate: true }));
   afterAll(() => sequelize.close());
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 200 when expense is successfully deleted", async () => {
     await create(expense);

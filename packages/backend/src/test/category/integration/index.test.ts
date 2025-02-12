@@ -17,9 +17,7 @@ const category = {
 describe("GET /category", () => {
   afterAll(() => models.Category.destroy({ truncate: true, cascade: true }));
   afterAll(() => sequelize.close());
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 200 and fetch categories", async () => {
     await create(category);

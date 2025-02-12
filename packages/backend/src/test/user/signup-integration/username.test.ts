@@ -8,9 +8,7 @@ describe("username edge cases", () => {
       .del(["signup:john@example.com", "verification:john@example.com"])
       .catch(console.error),
   );
-  afterAll(() => {
-    closeRedisClient();
-  });
+  afterAll(() => closeRedisClient());
 
   it("should return 200 for valid user data", async () => {
     const response = await request(app)
