@@ -4,6 +4,7 @@ import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";
 import loginBodySchema from "./schemas/user/loginSchema";
 import signupBodySchema from "./schemas/user/signupSchema";
+import categoryBodySchema from "./schemas/category/categorySchema";
 
 const ajv = new Ajv({ allErrors: true, $data: true });
 addFormats(ajv);
@@ -21,6 +22,7 @@ ajv.addFormat("username", /^[0-9a-zA-Z_]{5,10}$/);
 */
 ajv.addSchema(loginBodySchema, "loginBodySchema");
 ajv.addSchema(signupBodySchema, "signupBodySchema");
+ajv.addSchema(categoryBodySchema, "categoryBodySchema");
 
 const validateRequest = (
   schema: string,
@@ -45,8 +47,13 @@ const validateRequest = (
     let errors: { [key: string]: string | undefined } = {};
     if (validate?.errors) {
       for (const error of validate?.errors) {
-        const errorName = error.instancePath.slice(1);
-        errors[errorName] = error.message;
+        if (error.instancePath.length === 0 && error.keyword === "required") {
+          const errorName: string = error.params.missingProperty;
+          errors[errorName] = `${errorName} is required`;
+        } else {
+          const errorName = error.instancePath.slice(1);
+          errors[errorName] = error.message;
+        }
       }
       return next({ status: 400, message: errors });
     }
