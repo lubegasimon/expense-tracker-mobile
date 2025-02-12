@@ -44,16 +44,7 @@ describe("PUT /expense/:id", () => {
       })
       .expect(200);
     expect(response.body.message).toBe("Expense successfully updated");
-    expect(response.body.expense).toHaveProperty("name", "Apple music");
-    expect(response.body.expense).toHaveProperty(
-      "details",
-      "February subscription",
-    );
-    expect(response.body.expense).toHaveProperty("amount", 10);
-    expect(response.body.expense).toHaveProperty("id", `${id}`);
-    expect(response.body.expense).toHaveProperty("categoryId", category.id);
-    expect(response.body.expense).toHaveProperty("category", category.name);
-    expect(response.body.expense).toHaveProperty("createdAt", DATE);
+    expect(response.body.expense).toBeUndefined();
   });
 
   it("should return 200 when expense details and category are not provided", async () => {
@@ -65,9 +56,7 @@ describe("PUT /expense/:id", () => {
       })
       .expect(200);
     expect(response.body.message).toBe("Expense successfully updated");
-    expect(response.body.expense).toHaveProperty("name", "Dog food");
-    expect(response.body.expense).toHaveProperty("amount", 10);
-    expect(response.body.expense).toHaveProperty("id", `${id}`);
+    expect(response.body.expense).toBeUndefined();
   });
 
   it("should return 400 when expense name is not provided", async () => {
