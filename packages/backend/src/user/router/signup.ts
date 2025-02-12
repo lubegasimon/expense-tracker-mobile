@@ -4,6 +4,7 @@ import validate from "../../middleware/validation/signup/validate";
 import { redisStore } from "../../middleware/session";
 import { redisError } from "./error";
 import sendCodeToEmail from "./sendCode";
+import checkEmailExists from "../../middleware/validation/signup/checkEmailExists";
 
 const router = Router();
 
@@ -21,15 +22,20 @@ function saveCandidateData(
     .catch(redisError);
 }
 
-router.post("/", validate(), async (request: Request, response: Response) => {
-  const { username, email, password } = request.body;
+router.post(
+  "/",
+  validate(),
+  checkEmailExists(),
+  async (request: Request, response: Response) => {
+    const { username, email, password } = request.body;
 
-  await saveCandidateData(username, email, password, redisStore);
-  sendCodeToEmail(email);
+    await saveCandidateData(username, email, password, redisStore);
+    sendCodeToEmail(email);
 
-  response.status(200).json({
-    message: "Valid user data",
-  });
-});
+    response.status(200).json({
+      message: "Valid user data",
+    });
+  },
+);
 
 export default router;
