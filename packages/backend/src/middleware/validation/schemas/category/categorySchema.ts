@@ -15,7 +15,7 @@ const categoryBodySchema: JSONSchemaType<CategoryBody> = {
   additionalProperties: false,
   errorMessage: {
     properties: {
-      description: "Password must NOT have more than 256 characters",
+      description: "Description must NOT have more than 256 characters",
     },
   },
 };

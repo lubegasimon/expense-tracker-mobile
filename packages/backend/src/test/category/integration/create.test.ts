@@ -23,6 +23,19 @@ describe("POST /category/create", () => {
     expect(response.body.category).toHaveProperty("id");
   });
 
+  it("should return 400 when category name in not provided", async () => {
+    const response = await request(app)
+      .post("/category/create")
+      .send({
+        description:
+          "Payments for water, electricity, gas, garbage, sewage, et cetera",
+      })
+      .expect(400);
+    console.log("Response body ->", response.body);
+    expect(response.body.error.name).toBe("name is required");
+    expect(response.body.category).toBeUndefined();
+  });
+
   it("should return 409 for a category name that exists", async () => {
     const category = {
       name: "Utilities",
