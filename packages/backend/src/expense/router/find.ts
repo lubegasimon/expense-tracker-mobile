@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import { findExpenseById } from "../operations/find";
+import { formatServerDate } from "../formatDate";
 
 const router = Router();
 
@@ -9,7 +10,13 @@ router.get("/:id", (request: Request, response: Response) => {
     .then((expense) => {
       if (!expense)
         return response.status(404).json({ message: "Expense not found" });
-      else return response.status(200).json({ expense });
+      else
+        return response.status(200).json({
+          expense: {
+            ...expense.dataValues,
+            createdAt: formatServerDate(expense.createdAt),
+          },
+        });
     })
     .catch((error) => {
       console.error(`Error occurred while fetching expense by Id: ${error}`);

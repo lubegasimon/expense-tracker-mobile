@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
-import updateExpense from "../operations/update";
+import editExpense from "../operations/update";
 import { findCategory } from "../../category/operations/find";
-import { formatClientDate, formatServerDate } from "../formatDate";
+import { formatClientDate } from "../formatDate";
 
 const router = Router();
 
@@ -25,7 +25,7 @@ router.put("/:id", async (request: Request, response: Response) => {
   else if (!amount)
     response.status(400).json({ message: "Amount is required" });
   else
-    updateExpense(expense)
+    editExpense(expense)
       .then(([result]) => {
         if (result !== 1)
           return response.status(404).json({
@@ -33,11 +33,6 @@ router.put("/:id", async (request: Request, response: Response) => {
           });
         return response.status(200).json({
           message: "Expense successfully updated",
-          expense: {
-            ...expense,
-            createdAt: formatServerDate(expense?.createdAt),
-            category,
-          },
         });
       })
       .catch((error) => {
