@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import create from "../operations/create";
 import { findCategory } from "../../category/operations/find";
-import { formatClientDate, formatServerDate } from "../formatDate";
+import { formatClientDate } from "../formatDate";
 import validateCreateExpenseRequest from "../../middleware/validation/expense/validate";
 
 const router = Router();
@@ -22,14 +22,9 @@ router.post(
       createdAt: formatClientDate(createdAt),
       categoryId: categoryData?.id,
     })
-      .then((expense) =>
+      .then(() =>
         response.status(201).json({
           message: `Expense successfully created`,
-          expense: {
-            ...expense.dataValues,
-            createdAt: formatServerDate(expense?.createdAt),
-            category,
-          },
         }),
       )
       .catch((error) => {
