@@ -5,12 +5,17 @@ import addErrors from "ajv-errors";
 import loginBodySchema from "./schemas/user/loginSchema";
 import signupBodySchema from "./schemas/user/signupSchema";
 import categoryBodySchema from "./schemas/category/categorySchema";
+import expenseBodySchema from "./schemas/expense/expenseSchema";
 
 const ajv = new Ajv({ allErrors: true, $data: true });
 addFormats(ajv);
 addErrors(ajv);
 
-ajv.addFormat("username", /^[0-9a-zA-Z_]{5,10}$/);
+const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+const usernameRegex = /^[0-9a-zA-Z_]{5,10}$/;
+
+ajv.addFormat("username", usernameRegex);
+ajv.addFormat("date", dateRegex);
 
 /*
   By using ajv.addSchema, we ensure that schema compilations happen only once,
@@ -23,6 +28,7 @@ ajv.addFormat("username", /^[0-9a-zA-Z_]{5,10}$/);
 ajv.addSchema(loginBodySchema, "loginBodySchema");
 ajv.addSchema(signupBodySchema, "signupBodySchema");
 ajv.addSchema(categoryBodySchema, "categoryBodySchema");
+ajv.addSchema(expenseBodySchema, "expenseBodySchema");
 
 const validateRequest = (
   schema: string,
