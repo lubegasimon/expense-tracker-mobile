@@ -31,7 +31,6 @@ describe("POST /category/create", () => {
           "Payments for water, electricity, gas, garbage, sewage, et cetera",
       })
       .expect(400);
-    console.log("Response body ->", response.body);
     expect(response.body.error.name).toBe("name is required");
     expect(response.body.category).toBeUndefined();
   });
