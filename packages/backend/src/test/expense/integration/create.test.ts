@@ -23,12 +23,7 @@ describe("POST /expense/create", () => {
       })
       .expect(201);
     expect(response.body.message).toBe("Expense successfully created");
-    expect(response.body.expense).toHaveProperty("name", "Water bill");
-    expect(response.body.expense).toHaveProperty("amount", 20);
-    expect(response.body.expense).toHaveProperty("id");
-    expect(response.body.expense).toHaveProperty("category", category.name);
-    expect(response.body.expense).toHaveProperty("categoryId", category.id);
-    expect(response.body.expense).toHaveProperty("createdAt", "06/02/2025");
+    expect(response.body.expense).toBeUndefined();
   });
 
   it("should return 201 when details, category, and createdAt are not provided", async () => {
@@ -39,10 +34,8 @@ describe("POST /expense/create", () => {
         amount: 20,
       })
       .expect(201);
-    expect(response.body.expense.name).toBe("Water bill");
-    expect(response.body.expense.amount).toBe(20);
-    expect(response.body.expense.details).toBeNull();
-    expect(response.body.expense.categoryId).toBeNull();
+    expect(response.body.message).toBe("Expense successfully created");
+    expect(response.body.expense).toBeUndefined();
   });
 
   it("should return 400 when expense name and amount are missing", async () => {
