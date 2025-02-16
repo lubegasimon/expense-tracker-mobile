@@ -11,7 +11,6 @@ router.post(
   validateExpenseRequestBody(),
   async (request: Request, response: Response) => {
     const { name, amount, details, createdAt, category } = request.body;
-
     const categoryData =
       category === undefined ? null : await findCategory(category);
 
@@ -19,12 +18,14 @@ router.post(
       name,
       amount,
       details,
-      createdAt: formatClientDate(createdAt),
+      createdAt:
+        createdAt === undefined ? new Date() : formatClientDate(createdAt),
       categoryId: categoryData?.id,
     })
-      .then(() =>
+      .then((expense) =>
         response.status(201).json({
           message: `Expense successfully created`,
+          expense,
         }),
       )
       .catch((error) => {
