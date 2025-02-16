@@ -3,7 +3,7 @@ import { sequelize } from "../../../../db/db";
 import models from "../../../models";
 import create from "../../../expense/operations/create";
 import createCategory from "../../../category/operations/create";
-import editExpense from "../../../expense/operations/update";
+import editExpense from "../../../expense/operations/edit";
 import { findExpenseById } from "../../../expense/operations/find";
 
 const id = uuidv4();
