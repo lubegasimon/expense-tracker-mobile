@@ -1,18 +1,19 @@
 import { format, parse } from "date-fns";
 
-export const formatClientDate = (date: string | undefined) =>
-  date
-    ? new Date(
-        Date.UTC(
-          parse(date, "dd/MM/yyyy", new Date()).getFullYear(),
-          parse(date, "dd/MM/yyyy", new Date()).getMonth(),
-          parse(date, "dd/MM/yyyy", new Date()).getDate(),
-        ),
-      )
-    : undefined;
+export const formatClientDate = (date: string) => {
+  return new Date(
+    Date.UTC(
+      parse(date, "dd/MM/yyyy", new Date()).getFullYear(),
+      parse(date, "dd/MM/yyyy", new Date()).getMonth(),
+      parse(date, "dd/MM/yyyy", new Date()).getDate(),
+    ),
+  );
+};
 
-export const formatServerDate = (date: Date | undefined | null) =>
-  !(date instanceof Date) || !date
+export const formatServerDate = (date: Date | undefined) =>
+  /* But we don't expect Date to be undefined since createdAt is
+automatically created on expense creation */
+  !(date instanceof Date) || date === undefined
     ? undefined
     : format(
         new Date(

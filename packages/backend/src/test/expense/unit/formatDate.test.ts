@@ -9,11 +9,6 @@ describe("Format Date", () => {
     expect(date!.toISOString()).toBe("2025-02-06T00:00:00.000Z");
   });
 
-  it("should convert undefined client date to undefined server Date", () => {
-    const date = formatClientDate(undefined);
-    expect(date).toBeUndefined();
-  });
-
   it("should server Date to client date string", () => {
     const date = formatServerDate(new Date("2025-02-05T21:00:00.000Z"));
     expect(date).toBe("05/02/2025");
