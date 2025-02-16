@@ -31,7 +31,7 @@ router.put(
       .then(([result, row]) => {
         if (result !== 1)
           return response.status(404).json({
-            message: "Expense not found",
+            error: "Expense not found",
           });
         return response.status(200).json({
           message: "Expense successfully updated",
@@ -41,7 +41,7 @@ router.put(
       .catch((error) => {
         console.error(`An error occurred while updating expense: ${error}`);
         return response.status(500).send({
-          message: "An error occurred while updating expense. Please try again",
+          error: "An error occurred while updating expense. Please try again",
         });
       });
   },

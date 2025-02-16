@@ -43,6 +43,6 @@ describe("POST /category/create", () => {
       .post("/category/create")
       .send(category)
       .expect(409);
-    expect(response.body.message).toBe("Utilities already exists");
+    expect(response.body.error).toBe("Utilities already exists");
   });
 });

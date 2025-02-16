@@ -9,7 +9,7 @@ router.delete("/:id", (request: Request, response: Response) => {
   models.Expense.destroy({ where: { id } })
     .then((result) => {
       if (result === 0)
-        return response.status(404).json({ message: "Expense not found" });
+        return response.status(404).json({ error: "Expense not found" });
       return response
         .status(200)
         .json({ message: "Expense successfully deleted" });
@@ -17,7 +17,7 @@ router.delete("/:id", (request: Request, response: Response) => {
     .catch((error) => {
       console.error(`An error occured while deleting expense: ${error}`);
       return response.status(500).json({
-        message: "An error occurred while deleting expense. Please try again",
+        error: "An error occurred while deleting expense. Please try again",
       });
     });
 });

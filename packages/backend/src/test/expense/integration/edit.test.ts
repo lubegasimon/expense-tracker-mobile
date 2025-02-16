@@ -102,7 +102,7 @@ describe("PUT /expense/:id", () => {
       .put(`/expense/${invalidId}`)
       .send({ name: "Prime", amount: 10 })
       .expect(404);
-    expect(response.body.message).toBe("Expense not found");
+    expect(response.body.error).toBe("Expense not found");
   });
 
   describe("Should return 400 if createdAt format is invalid", () => {

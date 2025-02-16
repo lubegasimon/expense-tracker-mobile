@@ -31,7 +31,7 @@ router.post(
       .catch((error) => {
         console.error(`An error occurred while creating expense: ${error}`);
         response.status(500).send({
-          message: "An error occurred while creating expense. Please try again",
+          error: "An error occurred while creating expense. Please try again",
         });
       });
   },

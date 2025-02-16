@@ -39,6 +39,6 @@ describe("GET /expense/:id", () => {
     const response = await request(app)
       .get(`/expense/${invalidId}`)
       .expect(404);
-    expect(response.body.message).toBe("Expense not found");
+    expect(response.body.error).toBe("Expense not found");
   });
 });

@@ -36,6 +36,6 @@ describe("GET /category/:id", () => {
     const response = await request(app)
       .get(`/category/${invalidId}`)
       .expect(404);
-    expect(response.body.message).toBe("Category not found");
+    expect(response.body.error).toBe("Category not found");
   });
 });

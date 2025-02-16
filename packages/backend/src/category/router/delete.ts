@@ -7,13 +7,13 @@ const router = Router();
 router.delete("/:id", async (request: Request, response: Response) => {
   const id = request.params.id;
   const category = await findCategoryById(id);
-  if (!category) response.status(404).json({ message: "Category not found" });
+  if (!category) response.status(404).json({ error: "Category not found" });
   else {
     deleteCategory(id)
       .then((result) => {
         if (result !== 1)
           return response.status(500).json({
-            message: `Failed to delete the ${category.name}. Please try again`,
+            error: `Failed to delete the ${category.name}. Please try again`,
           });
         return response
           .status(200)
@@ -22,8 +22,7 @@ router.delete("/:id", async (request: Request, response: Response) => {
       .catch((error) => {
         console.error(`An error occured while deleting category: ${error}`);
         return response.status(500).json({
-          message:
-            "An error occurred while deleting category. Please try again",
+          error: "An error occurred while deleting category. Please try again",
         });
       });
   }

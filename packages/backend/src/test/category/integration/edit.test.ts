@@ -59,7 +59,7 @@ describe("PUT /category/:id", () => {
         description: "Others bills",
       })
       .expect(400);
-    expect(response.body.message).toBe("Name is required");
+    expect(response.body.error).toBe("Name is required");
   });
 
   it("should return 404 if a category ID is invalid", async () => {
@@ -68,6 +68,6 @@ describe("PUT /category/:id", () => {
       .put(`/category/${invalidId}`)
       .send({ name: "Housing" })
       .expect(404);
-    expect(response.body.message).toBe("Category not found");
+    expect(response.body.error).toBe("Category not found");
   });
 });

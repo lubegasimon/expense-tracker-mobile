@@ -8,13 +8,13 @@ router.get("/:id", (request: Request, response: Response) => {
   findCategoryById(id)
     .then((category) => {
       if (!category)
-        return response.status(404).json({ message: "Category not found" });
+        return response.status(404).json({ error: "Category not found" });
       else return response.status(200).json({ category });
     })
     .catch((error) => {
       console.error(`Error occurred while fetching category by Id: ${error}`);
       return response.status(500).json({
-        message: "An error occurred while updating category. Please try again",
+        error: "An error occurred while updating category. Please try again",
       });
     });
 });

@@ -12,7 +12,7 @@ router.post(
     const { name, description } = request.body;
     const category = await findCategory(name);
     if (category)
-      response.status(409).json({ message: `${name} already exists` });
+      response.status(409).json({ error: `${name} already exists` });
     else
       create({ name, description })
         .then((category) => {
@@ -28,7 +28,7 @@ router.post(
         .catch((error) => {
           console.error(`An error occurred while creating category: ${error}`);
           return response.status(500).json({
-            message:
+            error:
               "An error occurred while creating category. Please try again",
           });
         });
