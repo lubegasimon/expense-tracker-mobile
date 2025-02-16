@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import updateCategory from "../operations/update";
+import editCategory from "../operations/edit";
 
 const router = Router();
 
@@ -8,7 +8,7 @@ router.put("/:id", (request: Request, response: Response) => {
   const { name, description } = request.body;
   if (!name) response.status(400).json({ message: "Name is required" });
   else
-    updateCategory({ id, name, description })
+    editCategory({ id, name, description })
       .then(([result]) => {
         if (result !== 1)
           return response.status(404).json({ message: "Category not found" });
