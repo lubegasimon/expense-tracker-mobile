@@ -2,13 +2,13 @@ import { Request, Response, Router } from "express";
 import create from "../operations/create";
 import { findCategory } from "../../category/operations/find";
 import { formatClientDate } from "../formatDate";
-import validateCreateExpenseRequest from "../../middleware/validation/expense/validate";
+import validateExpenseRequestBody from "../../middleware/validation/expense/validate";
 
 const router = Router();
 
 router.post(
   "/",
-  validateCreateExpenseRequest(),
+  validateExpenseRequestBody(),
   async (request: Request, response: Response) => {
     const { name, amount, details, createdAt, category } = request.body;
 
