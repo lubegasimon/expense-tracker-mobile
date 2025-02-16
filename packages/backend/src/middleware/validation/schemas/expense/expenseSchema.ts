@@ -21,6 +21,7 @@ const expenseBodySchema: JSONSchemaType<ExpenseBody> = {
   additionalProperties: false,
   errorMessage: {
     properties: {
+      createdAt: "Invalid date format. Expected for example 01/12/2025",
       Details: "Details must NOT have more than 256 characters",
     },
   },
