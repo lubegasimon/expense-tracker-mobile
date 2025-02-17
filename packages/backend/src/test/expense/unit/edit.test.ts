@@ -46,7 +46,7 @@ describe("Update expense", () => {
       "details",
       "Pledge fullfulment for Doe's wedding",
     );
-    expect(editedExpense).toHaveProperty("amount", 30);
+    expect(editedExpense).toHaveProperty("amount", "30.00");
   });
 
   it("should change expense category", async () => {
