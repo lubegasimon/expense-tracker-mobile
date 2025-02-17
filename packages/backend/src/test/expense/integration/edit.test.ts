@@ -47,7 +47,7 @@ describe("PUT /expense/:id", () => {
       "details",
       "February subscription",
     );
-    expect(response.body.expense).toHaveProperty("amount", 10);
+    expect(response.body.expense).toHaveProperty("amount", "10.00");
     expect(response.body.expense).toHaveProperty("id", `${id}`);
     expect(response.body.expense).toHaveProperty("categoryId", category.id);
     expect(response.body.expense).toHaveProperty(
@@ -66,7 +66,7 @@ describe("PUT /expense/:id", () => {
       .expect(200);
     expect(response.body.message).toBe("Expense successfully updated");
     expect(response.body.expense).toHaveProperty("name", "Dog food");
-    expect(response.body.expense).toHaveProperty("amount", 10);
+    expect(response.body.expense).toHaveProperty("amount", "10.00");
     expect(response.body.expense).toHaveProperty("id", `${id}`);
     expect(response.body.expense).toHaveProperty(
       "createdAt",

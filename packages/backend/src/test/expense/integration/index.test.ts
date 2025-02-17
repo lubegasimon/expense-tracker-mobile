@@ -23,7 +23,7 @@ describe("GET /expense", () => {
     await create(expense);
     const response = await request(app).get("/expense").expect(200);
     expect(response.body.message).toStrictEqual([
-      { ...expense, details: null, categoryId: null },
+      { ...expense, amount: "10.00", details: null, categoryId: null },
     ]);
   });
 });

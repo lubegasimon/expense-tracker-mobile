@@ -19,6 +19,6 @@ describe("Create expense", () => {
   it("create expense", () =>
     create(expense).then((expense) => {
       expect(expense).toHaveProperty("name", "Water bill");
-      expect(expense).toHaveProperty("amount", 20);
+      expect(expense).toHaveProperty("amount", "20.00");
     }));
 });

@@ -17,14 +17,14 @@ describe("POST /expense/create", () => {
       .post("/expense/create")
       .send({
         name: "Water bill",
-        amount: 20,
+        amount: 20.99,
         category: category.name,
         createdAt: "06/02/2025",
       })
       .expect(201);
     expect(response.body.message).toBe("Expense successfully created");
     expect(response.body.expense).toHaveProperty("name", "Water bill");
-    expect(response.body.expense).toHaveProperty("amount", 20);
+    expect(response.body.expense).toHaveProperty("amount", "20.99");
     expect(response.body.expense).toHaveProperty("id");
     expect(response.body.expense).toHaveProperty("categoryId", category.id);
     expect(response.body.expense).toHaveProperty(
@@ -43,7 +43,7 @@ describe("POST /expense/create", () => {
       .expect(201);
     expect(response.body.message).toBe("Expense successfully created");
     expect(response.body.expense).toHaveProperty("name", "Water bill");
-    expect(response.body.expense).toHaveProperty("amount", 20);
+    expect(response.body.expense).toHaveProperty("amount", "20.00");
     expect(response.body.expense).toHaveProperty("id");
     expect(response.body.expense).toHaveProperty("createdAt");
     expect(response.body.expense.details).toBeNull();

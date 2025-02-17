@@ -29,7 +29,7 @@ describe("GET /expense/:id", () => {
       "details",
       "January subscription",
     );
-    expect(response.body.expense).toHaveProperty("amount", 10);
+    expect(response.body.expense).toHaveProperty("amount", "10.00");
     expect(response.body.expense).toHaveProperty("id", `${id}`);
     expect(response.body.expense).toHaveProperty("createdAt", "05/01/2025");
   });

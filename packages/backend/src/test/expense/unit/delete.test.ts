@@ -22,7 +22,7 @@ describe("DELETE expense", () => {
   it("should delete expense", async () => {
     const createdExpense = await create(expense);
     expect(createdExpense).toHaveProperty("name", "Gym membership");
-    expect(createdExpense).toHaveProperty("amount", 20);
+    expect(createdExpense).toHaveProperty("amount", "20.00");
 
     const result = await deleteExpense(id);
     expect(result).toEqual(1);
