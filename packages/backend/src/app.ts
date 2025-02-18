@@ -4,6 +4,7 @@ import app from "./server";
 import { sessionManager } from "./middleware/session";
 import { logger } from "./middleware/logger";
 import handleError from "./middleware/errorHandler";
+import trimRequestBodyContent from "./middleware/trimReqBodyContent";
 import routers from "./routers";
 
 const port = 3000;
@@ -12,6 +13,7 @@ app.use(cookieParser());
 app.use(sessionManager);
 app.use(logger);
 app.use(express.json());
+app.use(trimRequestBodyContent);
 app.use(express.urlencoded({ extended: true }));
 
 app.use(routers);
