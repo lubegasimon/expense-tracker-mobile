@@ -38,7 +38,7 @@ describe("PUT /expense/:id", () => {
         amount: 10,
         details: "February subscription",
         category: category.name,
-        createdAt: "17/01/2025",
+        createdAt: "01/17/2025",
       })
       .expect(200);
     expect(response.body.message).toBe("Expense successfully updated");
@@ -62,6 +62,7 @@ describe("PUT /expense/:id", () => {
       .send({
         name: "Dog food",
         amount: 10,
+        createdAt: "01/17/2025",
       })
       .expect(200);
     expect(response.body.message).toBe("Expense successfully updated");
@@ -74,25 +75,29 @@ describe("PUT /expense/:id", () => {
     );
   });
 
-  it("should return 400 when expense name is not provided", async () => {
+  it("should return 400 when expense name, amount, and createdAt are not provided", async () => {
     const response = await request(app)
       .put(`/expense/${id}`)
-      .send({
-        amount: 20,
-      })
+      .send({})
       .expect(400);
     expect(response.body.error.name).toBe("name is required");
+    expect(response.body.error.amount).toBe("amount is required");
+    expect(response.body.error.createdAt).toBe("date is required");
     expect(response.body.expense).toBeUndefined();
   });
 
-  it("should return 400 when expense amount is not provided", async () => {
+  it("should return 400 when createdAt is empty string", async () => {
     const response = await request(app)
       .put(`/expense/${id}`)
       .send({
-        name: "Spotify",
+        name: "Dog food",
+        amount: 10,
+        createdAt: "",
       })
       .expect(400);
-    expect(response.body.error.amount).toBe("amount is required");
+    expect(response.body.error.createdAt).toBe(
+      "Invalid date format. Expected for example MM/DD/YYYY",
+    );
     expect(response.body.expense).toBeUndefined();
   });
 
@@ -100,25 +105,9 @@ describe("PUT /expense/:id", () => {
     const invalidId = uuidv4();
     const response = await request(app)
       .put(`/expense/${invalidId}`)
-      .send({ name: "Prime", amount: 10 })
+      .send({ name: "Prime", amount: 10, createdAt: "01/17/2025" })
       .expect(404);
     expect(response.body.error).toBe("Expense not found");
-  });
-
-  describe("Should return 400 if createdAt format is invalid", () => {
-    it("should return 400 when createdAt is empty string", async () => {
-      const response = await request(app)
-        .put(`/expense/${id}`)
-        .send({
-          name: "Dog food",
-          amount: 10,
-          createdAt: "",
-        })
-        .expect(400);
-      expect(response.body.error.createdAt).toBe(
-        "Invalid date format. Expected for example 01/12/2025",
-      );
-      expect(response.body.expense).toBeUndefined();
-    });
+    expect(response.body.expense).toBeUndefined();
   });
 });

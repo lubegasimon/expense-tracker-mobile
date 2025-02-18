@@ -19,7 +19,7 @@ describe("POST /expense/create", () => {
         name: "Water bill",
         amount: 20.99,
         category: category.name,
-        createdAt: "06/02/2025",
+        createdAt: "02/06/2025",
       })
       .expect(201);
     expect(response.body.message).toBe("Expense successfully created");
@@ -33,30 +33,35 @@ describe("POST /expense/create", () => {
     );
   });
 
-  it("should return 201 when details, category, and createdAt are not provided", async () => {
+  it("should return 201 when details and category are not provided", async () => {
     const response = await request(app)
       .post("/expense/create")
       .send({
         name: "Water bill",
         amount: 20,
+        createdAt: "02/06/2025",
       })
       .expect(201);
     expect(response.body.message).toBe("Expense successfully created");
     expect(response.body.expense).toHaveProperty("name", "Water bill");
     expect(response.body.expense).toHaveProperty("amount", "20.00");
     expect(response.body.expense).toHaveProperty("id");
-    expect(response.body.expense).toHaveProperty("createdAt");
+    expect(response.body.expense).toHaveProperty(
+      "createdAt",
+      "2025-02-06T00:00:00.000Z",
+    );
     expect(response.body.expense.details).toBeNull();
     expect(response.body.expense.categoryId).toBeNull();
   });
 
-  it("should return 400 when expense name and amount are missing", async () => {
+  it("should return 400 when expense name, amount, and creeatedAt are missing", async () => {
     const response = await request(app)
       .post("/expense/create")
       .send({})
       .expect(400);
     expect(response.body.error.name).toBe("name is required");
     expect(response.body.error.amount).toBe("amount is required");
+    expect(response.body.error.createdAt).toBe("date is required");
     expect(response.body.expense).toBeUndefined();
   });
 
@@ -71,7 +76,7 @@ describe("POST /expense/create", () => {
         })
         .expect(400);
       expect(response.body.error.createdAt).toBe(
-        "Invalid date format. Expected for example 01/12/2025",
+        "Invalid date format. Expected for example MM/DD/YYYY",
       );
       expect(response.body.expense).toBeUndefined();
     });
@@ -86,52 +91,52 @@ describe("POST /expense/create", () => {
         })
         .expect(400);
       expect(response.body.error.createdAt).toBe(
-        "Invalid date format. Expected for example 01/12/2025",
+        "Invalid date format. Expected for example MM/DD/YYYY",
       );
       expect(response.body.expense).toBeUndefined();
     });
 
-    it("should return 400 when createdAt format is dd-mm-yyyy", async () => {
+    it("should return 400 when createdAt format is MM-DD-YYYY", async () => {
       const response = await request(app)
         .post("/expense/create")
         .send({
           name: "Water bill",
           amount: 20,
-          createdAt: "01-12-2025",
+          createdAt: "12-28-2025",
         })
         .expect(400);
       expect(response.body.error.createdAt).toBe(
-        "Invalid date format. Expected for example 01/12/2025",
+        "Invalid date format. Expected for example MM/DD/YYYY",
       );
       expect(response.body.expense).toBeUndefined();
     });
 
-    it("should return 400 when createdAt format is mm/dd/yyyy", async () => {
+    it("should return 400 when createdAt format is DD/MM/YYYY", async () => {
       const response = await request(app)
         .post("/expense/create")
         .send({
           name: "Water bill",
           amount: 20,
-          createdAt: "12/31/2025",
+          createdAt: "28/12/2025",
         })
         .expect(400);
       expect(response.body.error.createdAt).toBe(
-        "Invalid date format. Expected for example 01/12/2025",
+        "Invalid date format. Expected for example MM/DD/YYYY",
       );
       expect(response.body.expense).toBeUndefined();
     });
 
-    it("should return 400 when createdAt format is yyyy/mm/dd", async () => {
+    it("should return 400 when createdAt format is YYYY/MM/DD", async () => {
       const response = await request(app)
         .post("/expense/create")
         .send({
           name: "Water bill",
           amount: 20,
-          createdAt: "2025/12/01",
+          createdAt: "2025/12/28",
         })
         .expect(400);
       expect(response.body.error.createdAt).toBe(
-        "Invalid date format. Expected for example 01/12/2025",
+        "Invalid date format. Expected for example MM/DD/YYYY",
       );
       expect(response.body.expense).toBeUndefined();
     });
