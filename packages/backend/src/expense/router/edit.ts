@@ -12,22 +12,19 @@ router.put(
   async (request: Request, response: Response) => {
     const id = request.params.id;
     const { name, amount, details, category, createdAt } = request.body;
-    const categoryData =
-      category === undefined ? null : await findCategory(category);
+    const categoryData = !category ? null : await findCategory(category);
 
+    // TODO: Efficiency, don't overwrite the table attributes that have not changed?
     const expense = {
       id,
       name,
       amount,
       details,
       categoryId: categoryData?.id,
+      createdAt: formatClientDate(createdAt),
     };
 
-    editExpense(
-      createdAt === undefined
-        ? expense
-        : { ...expense, createdAt: formatClientDate(createdAt) },
-    )
+    editExpense({ ...expense })
       .then(([result, row]) => {
         if (result !== 1)
           return response.status(404).json({

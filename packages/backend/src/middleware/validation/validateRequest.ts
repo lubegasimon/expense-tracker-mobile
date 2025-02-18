@@ -49,7 +49,8 @@ const validateRequest = (
       for (const error of validate?.errors) {
         if (error.instancePath.length === 0 && error.keyword === "required") {
           const errorName: string = error.params.missingProperty;
-          errors[errorName] = `${errorName} is required`;
+          if (errorName === "createdAt") errors[errorName] = "date is required";
+          else errors[errorName] = `${errorName} is required`;
         } else {
           const errorName = error.instancePath.slice(1);
           errors[errorName] = error.message;
