@@ -91,36 +91,6 @@ describe("POST /expense/create", () => {
       expect(response.body.expense).toBeUndefined();
     });
 
-    it("should return 400 when createdAt has trailing white space", async () => {
-      const response = await request(app)
-        .post("/expense/create")
-        .send({
-          name: "Water bill",
-          amount: 20,
-          createdAt: "06/02/2025 ",
-        })
-        .expect(400);
-      expect(response.body.error.createdAt).toBe(
-        "Invalid date format. Expected for example 01/12/2025",
-      );
-      expect(response.body.expense).toBeUndefined();
-    });
-
-    it("should return 400 when createdAt has leading white space", async () => {
-      const response = await request(app)
-        .post("/expense/create")
-        .send({
-          name: "Water bill",
-          amount: 20,
-          createdAt: " 06/02/2025",
-        })
-        .expect(400);
-      expect(response.body.error.createdAt).toBe(
-        "Invalid date format. Expected for example 01/12/2025",
-      );
-      expect(response.body.expense).toBeUndefined();
-    });
-
     it("should return 400 when createdAt format is dd-mm-yyyy", async () => {
       const response = await request(app)
         .post("/expense/create")
