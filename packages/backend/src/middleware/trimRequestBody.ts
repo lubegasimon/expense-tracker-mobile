@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-function trimRequestBodyContent(
+function trimRequestBody(
   request: Request,
   _response: Response,
   next: NextFunction,
@@ -17,4 +17,4 @@ function trimRequestBodyContent(
   next();
 }
 
-export default trimRequestBodyContent;
+export default trimRequestBody;
