@@ -12,7 +12,6 @@ router.post(
   async (request: Request, response: Response) => {
     const { name, amount, details, createdAt, category } = request.body;
     const categoryData = !category ? null : await findCategory(category);
-
     create({
       name,
       amount,
