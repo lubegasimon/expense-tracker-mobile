@@ -7,11 +7,12 @@ interface SignupBody {
   confirmPassword: string;
 }
 
+const usernameRegex = /^[0-9a-zA-Z_]{5,10}$/;
+
 const signupBodySchema: JSONSchemaType<SignupBody> = {
   type: "object",
   properties: {
-    /* Note: "username" is a custom format, see ../validateRequest.ts */
-    username: { type: "string", format: "username" },
+    username: { type: "string", pattern: usernameRegex.source },
     email: { type: "string", format: "email" },
     password: { type: "string", minLength: 5, maxLength: 256 },
     confirmPassword: {

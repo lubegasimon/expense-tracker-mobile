@@ -11,12 +11,6 @@ const ajv = new Ajv({ allErrors: true, $data: true });
 addFormats(ajv);
 addErrors(ajv);
 
-const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-const usernameRegex = /^[0-9a-zA-Z_]{5,10}$/;
-
-ajv.addFormat("username", usernameRegex);
-ajv.addFormat("date", dateRegex);
-
 /*
   By using ajv.addSchema, we ensure that schema compilations happen only once,
   but validations happen multiple times, this is best for performance
