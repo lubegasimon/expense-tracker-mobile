@@ -3,9 +3,9 @@ import { format, parse } from "date-fns";
 export const formatClientDate = (date: string) => {
   return new Date(
     Date.UTC(
-      parse(date, "dd/MM/yyyy", new Date()).getFullYear(),
-      parse(date, "dd/MM/yyyy", new Date()).getMonth(),
-      parse(date, "dd/MM/yyyy", new Date()).getDate(),
+      parse(date, "MM/dd/yyyy", new Date()).getFullYear(),
+      parse(date, "MM/dd/yyyy", new Date()).getMonth(),
+      parse(date, "MM/dd/yyyy", new Date()).getDate(),
     ),
   );
 };
@@ -23,5 +23,5 @@ automatically created on expense creation */
             date.getUTCDate(),
           ),
         ),
-        "dd/MM/yyyy",
+        "MM/dd/yyyy",
       );

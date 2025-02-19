@@ -9,9 +9,9 @@ import { closeRedisClient } from "../../../middleware/session";
 const id = uuidv4();
 
 const expense = {
+  id,
   name: "Fruits",
   amount: 10,
-  id,
 };
 
 describe("GET /expense", () => {

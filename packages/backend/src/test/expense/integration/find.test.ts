@@ -31,7 +31,7 @@ describe("GET /expense/:id", () => {
     );
     expect(response.body.expense).toHaveProperty("amount", "10.00");
     expect(response.body.expense).toHaveProperty("id", `${id}`);
-    expect(response.body.expense).toHaveProperty("createdAt", "05/01/2025");
+    expect(response.body.expense).toHaveProperty("createdAt", "01/05/2025");
   });
 
   it("should return 404 if a expense is not found", async () => {
@@ -40,5 +40,6 @@ describe("GET /expense/:id", () => {
       .get(`/expense/${invalidId}`)
       .expect(404);
     expect(response.body.error).toBe("Expense not found");
+    expect(response.body.expense).toBeUndefined();
   });
 });

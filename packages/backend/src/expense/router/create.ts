@@ -11,15 +11,13 @@ router.post(
   validateExpenseRequestBody(),
   async (request: Request, response: Response) => {
     const { name, amount, details, createdAt, category } = request.body;
-    const categoryData =
-      category === undefined ? null : await findCategory(category);
+    const categoryData = !category ? null : await findCategory(category);
 
     create({
       name,
       amount,
       details,
-      createdAt:
-        createdAt === undefined ? new Date() : formatClientDate(createdAt),
+      createdAt: formatClientDate(createdAt),
       categoryId: categoryData?.id,
     })
       .then((expense) =>

@@ -11,6 +11,7 @@ const expense = {
   name: "Fruits",
   amount: 10,
   id,
+  createdAt: new Date("2025-02-06T00:00:00.000Z"),
 };
 
 describe("DELETE /expense/:id", () => {
