@@ -5,11 +5,10 @@ const router = Router();
 
 router.get("/", async (_request: Request, response: Response) => {
   const rows = await models.Expense.findAll({
-    limit: 5,
-    offset: 0,
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
+    order: [["createdAt", "DESC"]],
   });
 
   response.status(200).send({ message: rows });
