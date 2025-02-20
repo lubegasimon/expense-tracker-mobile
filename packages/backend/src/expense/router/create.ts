@@ -1,7 +1,6 @@
 import { Request, Response, Router } from "express";
 import create from "../operations/create";
 import { findCategory } from "../../category/operations/find";
-import { formatClientDate } from "../formatDate";
 import validateExpenseRequestBody from "../../middleware/validation/expense/validate";
 
 const router = Router();
@@ -16,7 +15,7 @@ router.post(
       name,
       amount,
       details,
-      createdAt: formatClientDate(createdAt),
+      createdAt: createdAt === undefined ? new Date() : createdAt,
       categoryId: categoryData?.id,
     })
       .then((expense) =>

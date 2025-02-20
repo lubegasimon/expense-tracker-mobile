@@ -19,7 +19,7 @@ describe("POST /expense/create", () => {
         name: "Water bill",
         amount: 20.99,
         category: category.name,
-        createdAt: "02/06/2025",
+        createdAt: "2025-02-06T00:00:00.000Z",
       })
       .expect(201);
     expect(response.body.message).toBe("Expense successfully created");
@@ -39,7 +39,7 @@ describe("POST /expense/create", () => {
       .send({
         name: "Water bill",
         amount: 20,
-        createdAt: "02/06/2025",
+        createdAt: "2025-02-06T00:00:00.000Z",
       })
       .expect(201);
     expect(response.body.message).toBe("Expense successfully created");

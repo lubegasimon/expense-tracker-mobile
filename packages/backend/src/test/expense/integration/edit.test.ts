@@ -38,7 +38,7 @@ describe("PUT /expense/:id", () => {
         amount: 10,
         details: "February subscription",
         category: category.name,
-        createdAt: "01/17/2025",
+        createdAt: "2025-01-17T00:00:00.000Z",
       })
       .expect(200);
     expect(response.body.message).toBe("Expense successfully updated");
@@ -62,7 +62,7 @@ describe("PUT /expense/:id", () => {
       .send({
         name: "Dog food",
         amount: 10,
-        createdAt: "01/17/2025",
+        createdAt: "2025-01-17T00:00:00.000Z",
       })
       .expect(200);
     expect(response.body.message).toBe("Expense successfully updated");
@@ -105,7 +105,11 @@ describe("PUT /expense/:id", () => {
     const invalidId = uuidv4();
     const response = await request(app)
       .put(`/expense/${invalidId}`)
-      .send({ name: "Prime", amount: 10, createdAt: "01/17/2025" })
+      .send({
+        name: "Prime",
+        amount: 10,
+        createdAt: "2025-01-17T00:00:00.000Z",
+      })
       .expect(404);
     expect(response.body.error).toBe("Expense not found");
     expect(response.body.expense).toBeUndefined();

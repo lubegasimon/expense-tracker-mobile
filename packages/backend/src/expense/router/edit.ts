@@ -1,7 +1,6 @@
 import { Router, Request, Response } from "express";
 import editExpense from "../operations/edit";
 import { findCategory } from "../../category/operations/find";
-import { formatClientDate } from "../formatDate";
 import validateExpenseRequestBody from "../../middleware/validation/expense/validate";
 
 const router = Router();
@@ -21,7 +20,7 @@ router.put(
       amount,
       details,
       categoryId: categoryData?.id,
-      createdAt: formatClientDate(createdAt),
+      createdAt: createdAt === undefined ? new Date() : createdAt,
     };
 
     editExpense({ ...expense })

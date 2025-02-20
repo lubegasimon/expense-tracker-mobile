@@ -7,16 +7,15 @@ interface ExpenseBody {
   category: string;
   createdAt: string;
 }
-const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
 
 const expenseBodySchema: JSONSchemaType<ExpenseBody> = {
   type: "object",
   properties: {
-    name: { type: "string" },
+    name: { type: "string", minLength: 2 },
     amount: { type: "number" },
     category: { type: "string" },
     details: { type: "string", maxLength: 256 },
-    createdAt: { type: "string", pattern: dateRegex.source },
+    createdAt: { type: "string", format: "date-time" },
   },
   required: ["name", "amount", "createdAt"],
   additionalProperties: false,
