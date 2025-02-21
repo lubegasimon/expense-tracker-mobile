@@ -6075,6 +6075,13 @@ react-native-otp-entry@^1.8.1:
   resolved "https://registry.yarnpkg.com/react-native-otp-entry/-/react-native-otp-entry-1.8.2.tgz#f6ea8d05db7cdf0162901d237019f5c03e5ad19c"
   integrity sha512-Ergs1fNpyp69oSrQ3k/PoolBpuutXruwhQDnEmX4xT3RnaZyo9lvcRsj2FafHanbFvghn/v3WcFRGU/GIhIMqQ==
 
+react-native-paper-dates@^0.22.34:
+  version "0.22.34"
+  resolved "https://registry.yarnpkg.com/react-native-paper-dates/-/react-native-paper-dates-0.22.34.tgz#3b64a7b7834e15a425a1f4e759ab80c396066627"
+  integrity sha512-znn51Wfi/5zCMD+8iVheRsoWLji+83qlHXZzsoLEZit5Fl7XcxhOFW4+MjCWGjIh66NtsTE1pV1ED/1khSHznQ==
+  dependencies:
+    color "^4.2.3"
+
 react-native-paper@^5.13.1:
   version "5.13.1"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-5.13.1.tgz#50217012b2d008397296c9bfb755d603a373f48b"
