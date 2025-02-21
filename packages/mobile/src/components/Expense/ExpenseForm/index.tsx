@@ -34,10 +34,7 @@ function ExpenseForm({
       <Input
         label="Name"
         value={name}
-        onChangeText={(value) => {
-          console.log("onChangeName called with:", value);
-          onChangeName(value);
-        }}
+        onChangeText={onChangeName}
         placeholder={name}
         error={errors.name || errors.nameRequired}
       />
