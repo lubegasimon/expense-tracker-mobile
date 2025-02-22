@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Pressable, Text, Modal, View, ScrollView } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import Toast from "react-native-toast-message";
 import { axiosInstance } from "@/src/api/axios";
 import { createExpense } from "@/src/api/endpoints";
 import Loader from "../../Loader/loader";
@@ -60,7 +61,10 @@ function AddExpense() {
           }),
         )
         .then(() => {
-          // TODO: render a success message somewhere on the screen
+          Toast.show({
+            type: "success",
+            text1: "Expense successfully created",
+          });
           dispatch(incrementExpenseCount());
           setErrors({});
           resetForm();
