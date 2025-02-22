@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { axiosInstance } from "@/src/api/axios";
 import { resendCode, verifyCode } from "@/src/api/endpoints";
 import Otp from "../components/Otp/Otp";
@@ -13,6 +15,12 @@ import { useAppSelector } from "../redux/hooks";
 import { selectEmail } from "../redux/userSlice";
 import { clearedEmail } from "../redux/userSlice";
 import { useAppDispatch } from "../redux/hooks";
+import { RouteNavigationStack } from "../types";
+
+type ExpenseNavigationProp = StackNavigationProp<
+  RouteNavigationStack,
+  "expenses"
+>;
 
 function OtpScreen() {
   const [code, setCode] = useState("");
@@ -22,6 +30,8 @@ function OtpScreen() {
   const email = useAppSelector(selectEmail);
   const dispatch = useAppDispatch();
 
+  const navigation = useNavigation<ExpenseNavigationProp>();
+
   function handleSubmit(code: string) {
     setLoading(true);
     axiosInstance
@@ -30,11 +40,12 @@ function OtpScreen() {
         dispatch(clearedEmail());
         setLoading(false);
         setError("");
+        navigation.navigate("expenses");
       })
       .catch((error) => {
-        setLoading(false);
         setError(error.response.data.error);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   function handleResendCode() {
@@ -43,13 +54,12 @@ function OtpScreen() {
       .post(resendCode, { email })
       .then(() => {
         setResentCode(true);
-        setLoading(false);
         setError("");
       })
       .catch((error) => {
-        setLoading(false);
         setError(error.response.data.error);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   if (loading) return <Loader />;

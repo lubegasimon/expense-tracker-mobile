@@ -1,0 +1,652 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Expenses Component/> renders the header correctly 1`] = `
+<RCTSafeAreaView>
+  <View
+    style={
+      {
+        "height": "90%",
+        "padding": 10,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "borderBottomColor": "#ccc",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingVertical": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "flex": 1,
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Name
+      </Text>
+      <Text
+        style={
+          {
+            "flex": 1,
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Amount
+      </Text>
+    </View>
+    <RCTScrollView
+      ListEmptyComponent={[Function]}
+      data={
+        [
+          {
+            "amount": 20,
+            "category": "Utilities",
+            "categoryId": "",
+            "createdAt": "12/28/2025",
+            "details": "Water bills for Feb",
+            "id": "01",
+            "name": "Water",
+          },
+          {
+            "amount": 50,
+            "category": "Food",
+            "categoryId": "",
+            "createdAt": "12/28/2025",
+            "details": "Weekly groceries",
+            "id": "02",
+            "name": "Groceries",
+          },
+        ]
+      }
+      getItem={[Function]}
+      getItemCount={[Function]}
+      keyExtractor={[Function]}
+      onContentSizeChange={[Function]}
+      onLayout={[Function]}
+      onMomentumScrollBegin={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={0.0001}
+      stickyHeaderIndices={[]}
+      viewabilityConfigCallbackPairs={[]}
+    >
+      <View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#ccc",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              Water
+            </Text>
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              20
+            </Text>
+          </View>
+        </View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#ccc",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              Groceries
+            </Text>
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              50
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+  <RNCSafeAreaProvider
+    onInsetsChange={[Function]}
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  />
+</RCTSafeAreaView>
+`;
+
+exports[`<Expenses Component/> should render a list of expenses 1`] = `
+<RCTSafeAreaView>
+  <View
+    style={
+      {
+        "height": "90%",
+        "padding": 10,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "borderBottomColor": "#ccc",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingVertical": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "flex": 1,
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Name
+      </Text>
+      <Text
+        style={
+          {
+            "flex": 1,
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Amount
+      </Text>
+    </View>
+    <RCTScrollView
+      ListEmptyComponent={[Function]}
+      data={
+        [
+          {
+            "amount": 20,
+            "category": "Utilities",
+            "categoryId": "",
+            "createdAt": "12/28/2025",
+            "details": "Water bills for Feb",
+            "id": "01",
+            "name": "Water",
+          },
+          {
+            "amount": 50,
+            "category": "Food",
+            "categoryId": "",
+            "createdAt": "12/28/2025",
+            "details": "Weekly groceries",
+            "id": "02",
+            "name": "Groceries",
+          },
+        ]
+      }
+      getItem={[Function]}
+      getItemCount={[Function]}
+      keyExtractor={[Function]}
+      onContentSizeChange={[Function]}
+      onLayout={[Function]}
+      onMomentumScrollBegin={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={0.0001}
+      stickyHeaderIndices={[]}
+      viewabilityConfigCallbackPairs={[]}
+    >
+      <View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#ccc",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              Water
+            </Text>
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              20
+            </Text>
+          </View>
+        </View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#ccc",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              Groceries
+            </Text>
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              50
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+  <RNCSafeAreaProvider
+    onInsetsChange={[Function]}
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  />
+</RCTSafeAreaView>
+`;
+
+exports[`<Expenses Component/> should render an error message when there is an error 1`] = `
+<RCTSafeAreaView>
+  <View
+    style={
+      {
+        "height": "90%",
+        "padding": 10,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "borderBottomColor": "#ccc",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingVertical": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "flex": 1,
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Name
+      </Text>
+      <Text
+        style={
+          {
+            "flex": 1,
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Amount
+      </Text>
+    </View>
+    <Text
+      style={
+        [
+          {
+            "color": "red",
+            "margin": 5,
+            "marginTop": -5,
+            "textAlign": "left",
+            "width": 300,
+          },
+          undefined,
+        ]
+      }
+    >
+      Something went wrong
+    </Text>
+    <RCTScrollView
+      ListEmptyComponent={[Function]}
+      data={
+        [
+          {
+            "amount": 20,
+            "category": "Utilities",
+            "categoryId": "",
+            "createdAt": "12/28/2025",
+            "details": "Water bills for Feb",
+            "id": "01",
+            "name": "Water",
+          },
+          {
+            "amount": 50,
+            "category": "Food",
+            "categoryId": "",
+            "createdAt": "12/28/2025",
+            "details": "Weekly groceries",
+            "id": "02",
+            "name": "Groceries",
+          },
+        ]
+      }
+      getItem={[Function]}
+      getItemCount={[Function]}
+      keyExtractor={[Function]}
+      onContentSizeChange={[Function]}
+      onLayout={[Function]}
+      onMomentumScrollBegin={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={0.0001}
+      stickyHeaderIndices={[]}
+      viewabilityConfigCallbackPairs={[]}
+    >
+      <View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#ccc",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              Water
+            </Text>
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              20
+            </Text>
+          </View>
+        </View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#ccc",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              Groceries
+            </Text>
+            <Text
+              style={
+                {
+                  "flex": 1,
+                  "fontSize": 14,
+                }
+              }
+            >
+              50
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+  <RNCSafeAreaProvider
+    onInsetsChange={[Function]}
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  />
+</RCTSafeAreaView>
+`;
+
+exports[`<Expenses Component/> should render the empty state when there are no expenses 1`] = `
+<RCTSafeAreaView>
+  <View
+    style={
+      {
+        "height": "90%",
+        "padding": 10,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "borderBottomColor": "#ccc",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingVertical": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "flex": 1,
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Name
+      </Text>
+      <Text
+        style={
+          {
+            "flex": 1,
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Amount
+      </Text>
+    </View>
+    <RCTScrollView
+      ListEmptyComponent={[Function]}
+      data={[]}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      keyExtractor={[Function]}
+      onContentSizeChange={[Function]}
+      onLayout={[Function]}
+      onMomentumScrollBegin={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={0.0001}
+      stickyHeaderIndices={[]}
+      viewabilityConfigCallbackPairs={[]}
+    >
+      <View>
+        <View>
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "padding": 50,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "fontSize": 30,
+                }
+              }
+            >
+              No expenses yet
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+  <RNCSafeAreaProvider
+    onInsetsChange={[Function]}
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  />
+</RCTSafeAreaView>
+`;

@@ -12,6 +12,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    ".env.d.ts"
+    ".env.d.ts",
+    "src/components/DatePicker"
   ]
 }
