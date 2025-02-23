@@ -15,3 +15,20 @@ automatically created on expense creation */
         ),
         "MM/dd/yyyy",
       );
+
+export const formatClientDate = (date: Date) => {
+  const toUTC = (hh: number, mm: number, ss: number, ms: number) =>
+    new Date(
+      Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        hh,
+        mm,
+        ss,
+        ms,
+      ),
+    );
+
+  return [toUTC(0, 0, 0, 0), toUTC(23, 59, 59, 999)];
+};
