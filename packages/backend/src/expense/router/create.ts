@@ -26,7 +26,7 @@ router.post(
       )
       .catch((error) => {
         console.error(`An error occurred while creating expense: ${error}`);
-        response.status(500).send({
+        response.status(500).json({
           error: "An error occurred while creating expense. Please try again",
         });
       });

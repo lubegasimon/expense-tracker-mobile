@@ -11,7 +11,7 @@ router.get("/", async (_request: Request, response: Response) => {
     order: [["createdAt", "DESC"]],
   });
 
-  response.status(200).send({ message: rows });
+  response.status(200).json({ message: rows });
 });
 
 export default router;

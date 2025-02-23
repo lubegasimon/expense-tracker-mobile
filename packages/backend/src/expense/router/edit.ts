@@ -36,7 +36,7 @@ router.put(
       })
       .catch((error) => {
         console.error(`An error occurred while updating expense: ${error}`);
-        return response.status(500).send({
+        return response.status(500).json({
           error: "An error occurred while updating expense. Please try again",
         });
       });
