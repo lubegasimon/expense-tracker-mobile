@@ -1,10 +1,11 @@
 import { Router, Request, Response } from "express";
-import { findExpenseById } from "../operations/find";
+import { findExpenseByDate, findExpenseById } from "../operations/find";
 import { formatServerDate } from "../formatDate";
 
-const router = Router();
+export const expenseByIdRouter = Router();
+export const expensesByDateRouter = Router();
 
-router.get("/:id", (request: Request, response: Response) => {
+expenseByIdRouter.get("/:id", (request: Request, response: Response) => {
   const id = request.params.id;
   findExpenseById(id)
     .then((expense) => {
@@ -21,9 +22,25 @@ router.get("/:id", (request: Request, response: Response) => {
     .catch((error) => {
       console.error(`Error occurred while fetching expense by Id: ${error}`);
       return response.status(500).json({
-        error: "An error occurred while updating expense. Please try again",
+        error: "An error occurred while fetching expense. Please try again",
       });
     });
 });
 
-export default router;
+expensesByDateRouter.get("/", (request: Request, response: Response) => {
+  const { date } = request.query;
+  const formattedDate = date ? new Date(date as string) : new Date();
+
+  findExpenseByDate(formattedDate)
+    .then((expenses) => {
+      if (!expenses || expenses.length === 0) {
+        return response.status(404).json({ error: "Expenses not found" });
+      } else return response.status(200).json({ expenses });
+    })
+    .catch((error) => {
+      console.error(`Error occurred while fetching expenses by Date: ${error}`);
+      return response.status(500).json({
+        error: "An error occurred while fetching expenses. Please try again",
+      });
+    });
+});
