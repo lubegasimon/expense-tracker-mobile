@@ -24,7 +24,7 @@ export const sessionManager = session({
     secure: false,
     maxAge: 24 * 60 * 60 * 1000,
   },
-  genid: function (req) {
+  genid: function (_req) {
     return uuidv4();
   },
   name: "session-id-mobile",

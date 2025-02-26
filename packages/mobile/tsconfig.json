@@ -5,7 +5,9 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "outDir": "build"
+    "outDir": "build",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
   },
   "include": [
     "**/*.ts",
