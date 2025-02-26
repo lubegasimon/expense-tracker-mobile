@@ -21,7 +21,7 @@ function ExpensesScreen() {
       axiosInstance
         .get(`${getExpenses}`)
         .then((response) => {
-          setExpenses(response.data.message);
+          setExpenses(response.data.expenses);
         })
         .catch((error) => {
           if (!error.response || !error.response.data) {
