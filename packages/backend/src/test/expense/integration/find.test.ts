@@ -88,18 +88,18 @@ describe("GET /expenses?date=DATE", () => {
       }),
     ).toStrictEqual([
       {
-        ...expense,
-        amount: "10.00",
-        categoryId: null,
-        Category: null,
-        createdAt: "2025-01-05T21:00:00.000Z",
-      },
-      {
         ...anotherExpense,
         amount: "30.00",
         categoryId: null,
         Category: null,
         createdAt: "2025-01-05T00:00:00.000Z",
+      },
+      {
+        ...expense,
+        amount: "10.00",
+        categoryId: null,
+        Category: null,
+        createdAt: "2025-01-05T21:00:00.000Z",
       },
     ]);
   });

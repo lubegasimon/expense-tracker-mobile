@@ -26,6 +26,6 @@ export const findExpenseByDate = (date: Date | undefined) => {
       },
     },
     include: [{ model: models.Category, attributes: ["name"] }],
-    order: [["createdAt", "DESC"]],
+    order: [["createdAt", "ASC"]],
   });
 };

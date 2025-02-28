@@ -22,7 +22,7 @@ describe("GET /expense", () => {
   it("should return 200 and fetch categories", async () => {
     await create(expense);
     const response = await request(app).get("/expense").expect(200);
-    console.log ("Response body ->", response.body);
+    console.log("Response body ->", response.body);
     expect(response.body.expenses).toStrictEqual([
       { ...expense, amount: "10.00", details: null, categoryId: null },
     ]);
