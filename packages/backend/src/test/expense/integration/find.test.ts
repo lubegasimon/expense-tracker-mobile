@@ -12,7 +12,7 @@ const expense = {
   name: "Netflix",
   amount: 10,
   details: "January subscription",
-  createdAt: new Date("2025-01-05T21:00:00.000Z"),
+  createdAt: new Date("2025-01-05T00:00:00.000Z"),
 };
 
 describe("GET /expense/:id", () => {
@@ -49,7 +49,7 @@ describe("GET /expenses?date=DATE", () => {
     await createExpense(expense);
 
     const response = await request(app)
-      .get(`/expenses?date=2025-01-05T21:00:00.000Z`)
+      .get(`/expenses?date=2025-01-05T00:00:00.000Z`)
       .expect(200);
     expect(
       response.body.expenses.map((expense: any) => {
@@ -62,7 +62,7 @@ describe("GET /expenses?date=DATE", () => {
         amount: "10.00",
         categoryId: null,
         Category: null,
-        createdAt: "2025-01-05T21:00:00.000Z",
+        createdAt: "2025-01-05T00:00:00.000Z",
       },
     ]);
   });
@@ -74,13 +74,14 @@ describe("GET /expenses?date=DATE", () => {
       name: "Internet",
       amount: 30,
       details: "March subscription",
-      createdAt: new Date("2025-01-05T00:00:00.000Z"),
+      createdAt: new Date("2025-01-05T23:59:59.000Z"),
     };
     await createExpense(anotherExpense);
 
     const response = await request(app)
       .get(`/expenses?date=2025-01-05`)
       .expect(200);
+
     expect(
       response.body.expenses.map((expense: any) => {
         const { updatedAt, ...rest } = expense;
@@ -88,18 +89,18 @@ describe("GET /expenses?date=DATE", () => {
       }),
     ).toStrictEqual([
       {
-        ...anotherExpense,
-        amount: "30.00",
+        ...expense,
+        amount: "10.00",
         categoryId: null,
         Category: null,
         createdAt: "2025-01-05T00:00:00.000Z",
       },
       {
-        ...expense,
-        amount: "10.00",
+        ...anotherExpense,
+        amount: "30.00",
         categoryId: null,
         Category: null,
-        createdAt: "2025-01-05T21:00:00.000Z",
+        createdAt: "2025-01-05T23:59:59.000Z",
       },
     ]);
   });
