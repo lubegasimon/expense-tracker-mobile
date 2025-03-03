@@ -40,6 +40,9 @@ export const formatClientDate = (date: Date) => {
    * - Accepts hours, minutes, seconds, and milliseconds to specify
    * the exact time of day.
    *
+   * **Note:** We convert date to `UTC` because `sequelize` stores timestamps
+   * in UTC by default, so we want to query by actual timestamps.
+   *
    * @param hh hours
    * @param mm minutes
    * @param ss seconds
@@ -49,9 +52,9 @@ export const formatClientDate = (date: Date) => {
   const toUTC = (hh: number, mm: number, ss: number, ms: number) =>
     new Date(
       Date.UTC(
-        date.getUTCFullYear(),
-        date.getUTCMonth(),
-        date.getUTCDate(),
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
         hh,
         mm,
         ss,
