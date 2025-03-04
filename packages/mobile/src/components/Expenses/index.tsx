@@ -26,7 +26,7 @@ function EmptyList() {
           padding: 50,
         }}
       >
-        <Text style={{ fontSize: 30 }}>No expenses yet</Text>
+        <Text style={{ fontSize: 30 }}>No expenses yet today</Text>
       </View>
     </View>
   );
@@ -40,29 +40,34 @@ function Expenses({ expenses, error }: ExpensesProps) {
           <Text style={styles.header}>Name</Text>
           <Text style={styles.header}>Amount</Text>
         </View>
-        <Error error={error} />
-        <FlatList
-          data={expenses}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => {
-            const { name, amount } = item;
-            return (
-              <View style={styles.row}>
-                <Text style={styles.cell}>{name}</Text>
-                <Text style={styles.cell}>{amount}</Text>
-              </View>
-            );
-          }}
-          ListEmptyComponent={EmptyList}
-        />
+        {error ? (
+          <Error error={error} />
+        ) : (
+          <FlatList
+            data={expenses}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              const { name, amount } = item;
+              return (
+                <View style={styles.row}>
+                  <Text style={styles.cell}>{name}</Text>
+                  <Text style={styles.cell}>{amount}</Text>
+                </View>
+              );
+            }}
+            ListEmptyComponent={EmptyList}
+          />
+        )}
       </View>
-      <AddExpense />
+      <View style={{ paddingLeft: 10 }}>
+        <AddExpense />
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 10, height: "90%" },
+  container: { paddingLeft: 10, height: "90%" },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
