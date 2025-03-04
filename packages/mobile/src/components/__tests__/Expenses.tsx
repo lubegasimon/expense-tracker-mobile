@@ -74,7 +74,7 @@ describe("<Expenses Component/>", () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-    expect(screen.getByText("No expenses yet")).toBeTruthy();
+    expect(screen.getByText("No expenses yet today")).toBeTruthy();
   });
 
   it("should render an error message when there is an error", () => {

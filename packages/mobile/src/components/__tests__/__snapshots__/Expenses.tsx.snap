@@ -6,7 +6,7 @@ exports[`<Expenses Component/> renders the header correctly 1`] = `
     style={
       {
         "height": "90%",
-        "padding": 10,
+        "paddingLeft": 10,
       }
     }
   >
@@ -164,17 +164,25 @@ exports[`<Expenses Component/> renders the header correctly 1`] = `
       </View>
     </RCTScrollView>
   </View>
-  <RNCSafeAreaProvider
-    onInsetsChange={[Function]}
+  <View
     style={
-      [
-        {
-          "flex": 1,
-        },
-        undefined,
-      ]
+      {
+        "paddingLeft": 10,
+      }
     }
-  />
+  >
+    <RNCSafeAreaProvider
+      onInsetsChange={[Function]}
+      style={
+        [
+          {
+            "flex": 1,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
 </RCTSafeAreaView>
 `;
 
@@ -184,7 +192,7 @@ exports[`<Expenses Component/> should render a list of expenses 1`] = `
     style={
       {
         "height": "90%",
-        "padding": 10,
+        "paddingLeft": 10,
       }
     }
   >
@@ -342,17 +350,25 @@ exports[`<Expenses Component/> should render a list of expenses 1`] = `
       </View>
     </RCTScrollView>
   </View>
-  <RNCSafeAreaProvider
-    onInsetsChange={[Function]}
+  <View
     style={
-      [
-        {
-          "flex": 1,
-        },
-        undefined,
-      ]
+      {
+        "paddingLeft": 10,
+      }
     }
-  />
+  >
+    <RNCSafeAreaProvider
+      onInsetsChange={[Function]}
+      style={
+        [
+          {
+            "flex": 1,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
 </RCTSafeAreaView>
 `;
 
@@ -362,7 +378,7 @@ exports[`<Expenses Component/> should render an error message when there is an e
     style={
       {
         "height": "90%",
-        "padding": 10,
+        "paddingLeft": 10,
       }
     }
   >
@@ -416,137 +432,26 @@ exports[`<Expenses Component/> should render an error message when there is an e
     >
       Something went wrong
     </Text>
-    <RCTScrollView
-      ListEmptyComponent={[Function]}
-      data={
+  </View>
+  <View
+    style={
+      {
+        "paddingLeft": 10,
+      }
+    }
+  >
+    <RNCSafeAreaProvider
+      onInsetsChange={[Function]}
+      style={
         [
           {
-            "amount": 20,
-            "category": "Utilities",
-            "categoryId": "",
-            "createdAt": "12/28/2025",
-            "details": "Water bills for Feb",
-            "id": "01",
-            "name": "Water",
+            "flex": 1,
           },
-          {
-            "amount": 50,
-            "category": "Food",
-            "categoryId": "",
-            "createdAt": "12/28/2025",
-            "details": "Weekly groceries",
-            "id": "02",
-            "name": "Groceries",
-          },
+          undefined,
         ]
       }
-      getItem={[Function]}
-      getItemCount={[Function]}
-      keyExtractor={[Function]}
-      onContentSizeChange={[Function]}
-      onLayout={[Function]}
-      onMomentumScrollBegin={[Function]}
-      onMomentumScrollEnd={[Function]}
-      onScroll={[Function]}
-      onScrollBeginDrag={[Function]}
-      onScrollEndDrag={[Function]}
-      removeClippedSubviews={false}
-      renderItem={[Function]}
-      scrollEventThrottle={0.0001}
-      stickyHeaderIndices={[]}
-      viewabilityConfigCallbackPairs={[]}
-    >
-      <View>
-        <View
-          onFocusCapture={[Function]}
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            style={
-              {
-                "borderBottomColor": "#ccc",
-                "borderBottomWidth": 1,
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-                "paddingVertical": 8,
-              }
-            }
-          >
-            <Text
-              style={
-                {
-                  "flex": 1,
-                  "fontSize": 14,
-                }
-              }
-            >
-              Water
-            </Text>
-            <Text
-              style={
-                {
-                  "flex": 1,
-                  "fontSize": 14,
-                }
-              }
-            >
-              20
-            </Text>
-          </View>
-        </View>
-        <View
-          onFocusCapture={[Function]}
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            style={
-              {
-                "borderBottomColor": "#ccc",
-                "borderBottomWidth": 1,
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-                "paddingVertical": 8,
-              }
-            }
-          >
-            <Text
-              style={
-                {
-                  "flex": 1,
-                  "fontSize": 14,
-                }
-              }
-            >
-              Groceries
-            </Text>
-            <Text
-              style={
-                {
-                  "flex": 1,
-                  "fontSize": 14,
-                }
-              }
-            >
-              50
-            </Text>
-          </View>
-        </View>
-      </View>
-    </RCTScrollView>
+    />
   </View>
-  <RNCSafeAreaProvider
-    onInsetsChange={[Function]}
-    style={
-      [
-        {
-          "flex": 1,
-        },
-        undefined,
-      ]
-    }
-  />
 </RCTSafeAreaView>
 `;
 
@@ -556,7 +461,7 @@ exports[`<Expenses Component/> should render the empty state when there are no e
     style={
       {
         "height": "90%",
-        "padding": 10,
+        "paddingLeft": 10,
       }
     }
   >
@@ -630,23 +535,31 @@ exports[`<Expenses Component/> should render the empty state when there are no e
                 }
               }
             >
-              No expenses yet
+              No expenses yet today
             </Text>
           </View>
         </View>
       </View>
     </RCTScrollView>
   </View>
-  <RNCSafeAreaProvider
-    onInsetsChange={[Function]}
+  <View
     style={
-      [
-        {
-          "flex": 1,
-        },
-        undefined,
-      ]
+      {
+        "paddingLeft": 10,
+      }
     }
-  />
+  >
+    <RNCSafeAreaProvider
+      onInsetsChange={[Function]}
+      style={
+        [
+          {
+            "flex": 1,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
 </RCTSafeAreaView>
 `;

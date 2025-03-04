@@ -1,38 +1,43 @@
 import { View } from "react-native";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "@/src/api/axios";
-import { getExpenses } from "@/src/api/endpoints";
+import { getExpensesByDate } from "@/src/api/endpoints";
 import type { expense } from "../components/Expenses";
 import Expenses from "../components/Expenses";
 import Loader from "../components/Loader/loader";
 import { useAppSelector } from "../redux/hooks";
 import { selectExpenseCount } from "../redux/expenseCountSlice";
+import Error from "../components/Error/Error";
+import AddExpense from "../components/Expense/AddExpenseButton";
+import FilterExpensesByDate, { splitDate } from "../components/FilterExpenses";
+import { catchError } from "../util";
 
 function ExpensesScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [expenses, setExpenses] = useState<expense[]>([]);
+  const [date, setDate] = useState<Date | undefined>(undefined);
 
   const expenseAdded = useAppSelector(selectExpenseCount);
+
+  const queryDate = date
+    ? splitDate(new Date(date.getFullYear(), date.getMonth(), date.getDate()))
+    : splitDate(new Date());
 
   useEffect(() => {
     function fetchExpense() {
       setLoading(true);
+      /**
+       * Fetches expenses for the current date, otherwise fetches expenses
+       * for the specified date.
+       */
       axiosInstance
-        .get(`${getExpenses}`)
+        .get(`${getExpensesByDate}?date=${queryDate}`)
         .then((response) => {
           setExpenses(response.data.expenses);
+          setError("");
         })
-        .catch((error) => {
-          if (!error.response || !error.response.data) {
-            console.error("No response data received from the server:", error);
-            setError(
-              "Failed to connect to the server. Confirm that you are connected to the internet and try again",
-            );
-            return;
-          }
-          setError(error.response.data.error);
-        })
+        .catch((error) => catchError(error, setError))
         .finally(() => setLoading(false));
     }
     fetchExpense();
@@ -41,9 +46,25 @@ function ExpensesScreen() {
   if (loading) return <Loader />;
   else
     return (
-      <View>
-        {/* TODO: server query is made whenever expenses is pressed, can we cache the result? */}
-        <Expenses expenses={expenses} error={error} />
+      <View style={{ padding: 20 }}>
+        <View style={{ height: error ? "30%" : "10%" }}>
+          <FilterExpensesByDate
+            date={date}
+            setDate={setDate}
+            expenses={expenses}
+            setExpenses={setExpenses}
+            setLoading={setLoading}
+            setError={setError}
+          />
+        </View>
+        {error ? (
+          <View>
+            <Error error={error} />
+            <AddExpense />
+          </View>
+        ) : (
+          <Expenses expenses={expenses} error={error} />
+        )}
       </View>
     );
 }
